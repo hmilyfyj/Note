@@ -15,6 +15,7 @@ categories: Centos
     useradd -g sftp -s /bin/false mysftp
     passwd mysftp 
 
+<!--more-->
 
 #### sftp组的用户的home目录统一指定到/data/sftp下，按用户名区分，这里先新建一个mysftp目录，然后指定mysftp的home为/data/sftp/mysftp
 

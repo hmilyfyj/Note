@@ -16,7 +16,7 @@ categories: nginx
     
     vi sites-available/xxxx.conf
     
-<!-- -->
+<!--more-->
 
 ##### 写入server配置（这个是配合 CI 的配置）：
 

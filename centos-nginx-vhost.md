@@ -15,6 +15,8 @@ categories: nginx
 #### 创建配置文件
     
     vi sites-available/xxxx.conf
+    
+<!-- -->
 
 ##### 写入server配置（这个是配合 CI 的配置）：
 

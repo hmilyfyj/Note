@@ -24,6 +24,8 @@ categories: 折腾
 
 > 创建Note项目存放markdown笔记，并且设置webhooks
 
+<!--more-->
+
 ![](http://7xnocp.com1.z0.glb.clouddn.com/15-12-4/19076981.jpg)
 
 <!--more-->

@@ -1,14 +1,18 @@
 
-title: 利用github的webhooks自动部署hexo到github pages
+title: Webhooks配合shell脚本自动部署Hexo博客到Github
 date: 2015-12-3 22:27:3
 tags: [折腾,hexo,git,webhooks,vps,php]
 categories: 折腾
 ---
 
+### 前言
 
 
+> ：Hexo没有后台编辑，如果想发表文章最基本的步骤是 `hexo new`创建文章后编辑新建的`xx.md` 文件，然后`hexo d -g` 部署。这在我看来一是不能随身携带，换了电脑再部署很麻烦，而且错做繁琐，为什么不把这些重复的工作交给电脑，我只要开开心心编写笔记呢？于是有了如下的折腾。
 
-> 前言：Hexo没有后台编辑，如果想发表文章最基本的步骤是 `hexo new`创建文章后编辑新建的`xx.md` 文件，然后`hexo d -g` 部署。这在我看来一是不能随身携带，换了电脑再部署很麻烦，而且错做繁琐，为什么不把这些重复的工作交给电脑，我只要开开心心编写笔记呢？于是有了如下的折腾。
+ ### 理想中记录的正确姿势
+
+> 打开 [Stackedit](https://stackedit.io)或[Classeur](app.classeur.io)，编辑好内容，点击保存，然后就一切就Ok。
 
 ----------
 
@@ -65,10 +69,6 @@ categories: 折腾
     	hexo b
     fi
     
- ### 写文章正确姿势
-
-> 打开 [Stackedit](https://stackedit.io)或[Classeur](app.classeur.io)，编辑内容后点击Post to the Blog，选择 Github 并输入要保存的文件名后点击Ok，然后就一切就Ok了。
-
     
 ### 方案2
 

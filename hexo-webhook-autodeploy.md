@@ -65,6 +65,10 @@ categories: 折腾
     	hexo b
     fi
     
+ ### 写文章正确姿势
+
+> 打开 [Stackedit](https://stackedit.io)或[Classeur](app.classeur.io)，编辑内容后点击Post to the Blog，选择 Github 并输入要保存的文件名后点击Ok，然后就一切就Ok了。
+
     
 ### 方案2
 

@@ -106,10 +106,7 @@ categories: Centos
 
 #### 修改 /etc/selinux/config
 
-
-
     vi /etc/selinux/config  
-
 
 
 将文件中的SELINUX=enforcing 修改为 SELINUX=disabled
@@ -118,18 +115,12 @@ categories: Centos
 
 再输入命令：
 
-
-
     setenforce 0  
 
-    
+
 
 #### 重启sshd服务
-
-
-
-service sshd restart  
-
+	service sshd restart  
 
 ### Memcahced 的安装
 

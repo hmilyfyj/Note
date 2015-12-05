@@ -166,7 +166,7 @@ make install
 
 <!--more-->
 
-#### memcahced命令：
+#### 参数：
 
 > -d选项是启动一个守护进程，
 -m是分配给Memcache使用的内存数量，单位是MB，我这里是10MB，

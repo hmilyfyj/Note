@@ -22,7 +22,9 @@ categories: Centos
 
 
 
-#### 创建一个sftp用户，名为mysftp，密码为mysftp
+#### 创建一个sftp用户
+
+名为mysftp，密码为mysftp
 
 
 

@@ -124,6 +124,21 @@ categories: Centos
 
 ### Memcahced 的安装
 
+### 简单版
+
+	yum install memcached
+
+    /etc/rc.d/init.d/memcached status
+
+    //查看配置
+    cat /etc/sysconfig/memcached
+
+    //启动
+    /etc/rc.d/init.d/memcached start
+
+[卸载Memcached](http://www.ilucong.net/lulu/memcached-xiezai.html)
+
+### 麻烦版：
 #### 下载
 
 ```
@@ -140,8 +155,8 @@ wget http://www.monkey.org/~provos/libevent-1.2.tar.gz
 	yum -y install gcc-c++
 
 	//libevent
-	tar xzvf libevent-2.0.21-stable.tar.gz ##解压
-	cd libevent-2.0.21-stable
+	tar -xzvf libevent-1.2.tar.gz ##解压
+	cd libevent-1.2
 	./configure --prefix=/usr
 	make
 	make install
@@ -150,7 +165,7 @@ wget http://www.monkey.org/~provos/libevent-1.2.tar.gz
 	cd /tmp
 	tar zxvf memcached-1.2.0.tar.gz
 	cd memcached-1.2.0
-	./configure –with-libevent=/usr
+	./configure -with-libevent=/usr
 	make
 	make install
 ```

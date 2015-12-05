@@ -88,7 +88,7 @@ categories: Centos
 
 
 
-#### 建立SFTP用户登入后可写入的目录
+#### 建立可写目录
 
 
 

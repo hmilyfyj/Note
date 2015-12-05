@@ -137,31 +137,31 @@ service sshd restart
 
 ```
 cd /tmp
-# wget http://www.danga.com/memcached/dist/memcached-1.2.0.tar.gz
-# wget http://www.monkey.org/~provos/libevent-1.2.tar.gz
+wget http://www.danga.com/memcached/dist/memcached-1.2.0.tar.gz
+wget http://www.monkey.org/~provos/libevent-1.2.tar.gz
 ```
 
 #### 安装 gcc、libevent
 
 ```
-//gcc
-yum -y install gcc
-yum -y install gcc-c++
+	//gcc
+	yum -y install gcc
+	yum -y install gcc-c++
 
-//libevent
-tar xzvf libevent-2.0.21-stable.tar.gz ##解压
-cd libevent-2.0.21-stable
-./configure --prefix=/usr
-make
-make install
+	//libevent
+	tar xzvf libevent-2.0.21-stable.tar.gz ##解压
+	cd libevent-2.0.21-stable
+	./configure --prefix=/usr
+	make
+	make install
 
-//memcached
- cd /tmp
-tar zxvf memcached-1.2.0.tar.gz
-cd memcached-1.2.0
-./configure –with-libevent=/usr
-make
-make install
+	//memcached
+	cd /tmp
+	tar zxvf memcached-1.2.0.tar.gz
+	cd memcached-1.2.0
+	./configure –with-libevent=/usr
+	make
+	make install
 ```
 
 <!--more-->

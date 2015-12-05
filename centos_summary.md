@@ -131,8 +131,9 @@ categories: Centos
 service sshd restart  
 
 
+### Memcahced 的安装
 
-## 下载
+#### 下载
 
 ```
 cd /tmp
@@ -140,7 +141,7 @@ cd /tmp
 # wget http://www.monkey.org/~provos/libevent-1.2.tar.gz
 ```
 
-### 安装 gcc、libevent
+#### 安装 gcc、libevent
 
 ```
 //gcc
@@ -165,7 +166,7 @@ make install
 
 <!--more-->
 
-### memcahced命令：
+#### memcahced命令：
 
 > -d选项是启动一个守护进程，
 -m是分配给Memcache使用的内存数量，单位是MB，我这里是10MB，
@@ -177,7 +178,7 @@ make install
 
 
 
-## 启动 memcached
+#### 启动 memcached
 
     /usr/local/bin/memcached -d -m 1024 -u root -p 11211 -P /tmp/memcached.pid
 

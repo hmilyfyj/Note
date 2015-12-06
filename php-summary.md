@@ -1,7 +1,7 @@
-<p>title: PHP知识点</p>
-<p>date: 2015-12-6 14:10</p>
-<p>tags: [服务端IP,PHP,踩坑,技巧]</p>
-<p>categories: PHP</p>
+<p>title: PHP知识点<br>
+date: 2015-12-6 14:20:54<br>
+tags: [服务端IP,PHP,踩坑,技巧]<br>
+categories: PHP</p>
 <hr>
 <h3 id="踩过的坑">踩过的坑</h3>
 <h4 id="using-this-when-not-in-object-context-in"><code>Using $this when not in object context in</code></h4>

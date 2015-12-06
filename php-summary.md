@@ -1,7 +1,7 @@
-<p>title: 使用 Hexo<br>
-date: 2014-11-21 12:03:30<br>
-tags: [Hexo]<br>
-categories: 折腾</p>
+<p>title: PHP知识点<br>
+date: 2015-12-6 22:27:3<br>
+tags: [php,ip]<br>
+categories: php</p>
 <hr>
 <h3 id="踩过的坑">踩过的坑</h3>
 <h4 id="using-this-when-not-in-object-context-in"><code>Using $this when not in object context in</code></h4>

@@ -9,4 +9,13 @@ categories: python
 
 ---
 
-稍后补全。
+###  Fiddler查看Header
+正常登录一次 [知乎](http://www.zhihu.com) 并在Fiddler面板查看详细信息
+
+#### 整理POST内容
+###  模拟请求
+#### 取出隐藏提交内容 xsrt 字段
+#### 请求验证码
+####  构造post数据
+#### 尝试登陆
+#### 保存cookie方便下次登陆

@@ -30,7 +30,7 @@ categories: python
     
     _xsrf=7150c8e5d9ef17589681c80c276611ea&password=test&captcha=5SAK&remember_me=true&email=test
 
-#### 全局cookie
+#### 全局共用cookie
 
     self.cookie = cookielib.LWPCookieJar()
     #设置cookie处理器

@@ -53,8 +53,7 @@ categories: python
 	
 ####  构造post数据
 
-    post_data = {'_xsrf': xsrf, 'email': '494046250@qq.com', 'password': '8925159qz', 'remember_me': True,
-                             'captcha': captcha}
+    post_data = {'_xsrf': xsrf, 'email': '494046250@qq.com','password': '8925159qz', 'remember_me': True,'captcha': captcha}
 
 #### 尝试登陆
 #### unzip登陆结果

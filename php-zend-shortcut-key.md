@@ -1,6 +1,6 @@
 title: ZendStudio 常用快捷键
-date: 2015-12-6 22:36
-tags: []
+date: 2015-12-12 14:14
+tags: [zend]
 categories: PHP 
 ---
 

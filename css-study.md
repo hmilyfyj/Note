@@ -6,13 +6,11 @@ categories: 前端学习
 
 ### 给所有图片加点击事件
 
-     function AddAClickEvent()  
+     function AddImgClickEvent()  
       {  
-          var objs = document.getElementsByTagName("a");             
+          var objs = document.getElementsByTagName("img");             
           for(var i=0;i<objs.length;i++)  
           {  
-    						
-    		  objs[i].href="javascript:void(0)";
               objs[i].onclick=function() 
               {  
                   alert('hello');

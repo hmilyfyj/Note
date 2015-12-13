@@ -9,11 +9,17 @@ categories: php
 
 #### `Using $this when not in object context in`
 
-静态方法内无法使用$this,解决方法：
+##### 静态方法内无法使用$this,解决方法：
 
     self::method();
 
 [参考地址](http://blog.csdn.net/yageeart/article/details/6662059)
+
+##### json_decode 时 整形溢出，变为科学记数法
+
+solutions:
+1. `json_decode($arr, TRUE, 512, JSON_BIGINT_AS_STRING)`
+2. `preg_replace('/("\w+"):(\d+)/', '\\1:"\\2"', $resp)`  //适配老版PHP
 
 ### 小TIPS
 

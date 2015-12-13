@@ -9,13 +9,13 @@ categories: php
 
 #### `Using $this when not in object context in`
 
-##### 静态方法内无法使用$this,解决方法：
+ 静态方法内无法使用$this,解决方法：
 
     self::method();
 
 [参考地址](http://blog.csdn.net/yageeart/article/details/6662059)
 
-##### json_decode 时 整形溢出，变为科学记数法
+#### json_decode 时整形溢出，变为科学记数法
 
 solutions:
 1. `json_decode($arr, TRUE, 512, JSON_BIGINT_AS_STRING)`
@@ -24,7 +24,6 @@ solutions:
 ### 小TIPS
 
 #### 获取物理路径
-
     realpath();
 #### 获取服务端、客户端IP
 

@@ -26,7 +26,7 @@ solutions:
 #### 获取物理路径
     realpath();
 #### 获取服务端、客户端IP
-
+<!-- more --->
     //Server_ip
     gethostbyname($_SERVER["SERVER_NAME"]); 
 

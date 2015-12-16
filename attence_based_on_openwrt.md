@@ -1,7 +1,7 @@
 title: 基于Openwrt的手机考勤
 date: 2015-12-6 22:36
-tags: []
-categories: 
+tags: [openwrt,折腾]
+categories: 折腾
 ---
 
 设备：wndr4300
@@ -12,3 +12,4 @@ categories:
     cat /proc/net/arp | grep 0x2 > /device.txt
     curl -H "Expect:" -F "userfile=@/device.txt"  http://at.xuyu.club/attence
 
+### 

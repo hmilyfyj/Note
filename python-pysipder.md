@@ -1,5 +1,5 @@
 title: centos 下安装 pyspider
-date: 2015-12-6 22:36
+date: 2015-12-18 20:21
 tags: [python,爬虫,折腾]
 categories: python
 ---

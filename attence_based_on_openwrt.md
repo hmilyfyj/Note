@@ -1,5 +1,5 @@
 title: 基于Openwrt的手机考勤
-date: 2015-12-16 22:31
+date: 2015-12-22 22:31
 tags: [openwrt,折腾]
 categories: 折腾
 ---
@@ -12,4 +12,6 @@ categories: 折腾
     cat /proc/net/arp | grep 0x2 > /device.txt
     curl -H "Expect:" -F "userfile=@/device.txt"  http://at.xuyu.club/attence
 
-### 
+### 可能出现的问题
+
+1. 同一MAC出现两次。

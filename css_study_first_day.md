@@ -1,4 +1,4 @@
-title: CSS 学习笔记（一）
+title: CSS 学习笔记（一） ：选择器、
 date: 2015-12-24 22:29
 tags: [css,学习]
 categories: CSS
@@ -21,6 +21,7 @@ categories: CSS
 	p+h 选择 p 后面的 h 元素 //兄弟
 	a:visted //伪类
 	
+	:focus 焦点 :hover 鼠标停留：active 点击后激活
 	
 	
 

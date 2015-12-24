@@ -23,5 +23,9 @@ categories: CSS
 	
 	:focus 焦点 :hover 鼠标停留：active 点击后激活
 	
+	li:first-child //
+
+Mark : Page 63.
+	
 	
 

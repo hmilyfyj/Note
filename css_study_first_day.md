@@ -23,7 +23,7 @@ categories: CSS
 	
 	:focus 焦点 :hover 鼠标停留：active 点击后激活
 	
-	li:first-child //
+	li:first-child //选择作为第一个子元素的li元素
 
 Mark : Page 63.
 	

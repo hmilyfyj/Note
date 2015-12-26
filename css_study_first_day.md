@@ -82,7 +82,16 @@ specificity计算方法：
 
 对齐：
 vertical-align: //应用于行内元素、替换元素
-word-spacing://单词间隔
-letter-spacing://字母间隔
-text-tranform:大小写转换
+
+文本属性：
+- word-spacing://单词间隔
+- letter-spacing://字母间隔
+- text-tranform://大小写转换
+- text-decoration://修饰
+- text-shadow://阴影
+- white-space
+- direction
+- unicode-bidi
+
+> PAGE 115
 

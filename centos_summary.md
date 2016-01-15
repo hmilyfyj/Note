@@ -9,10 +9,15 @@ categories: Centos
 ---
 
 
+###  ssh证书登陆
+
+[原文链接](http://segmentfault.com/a/1190000002911599)
+
+###  异常 /bin/sh^M: bad interpreter: No such file or directory
+
+[原文链接](http://blog.csdn.net/carolzhang8406/article/details/6104361)
 
 ### 开启 sftp
-
-
 
 #### 创建sftp组
 

@@ -1,5 +1,5 @@
 title: PHP:this、self、static的区别
-date: 2015-12-6 22:36
+date: 2016-01-16 11:07
 tags: [PHP]
 categories: PHP 
 ---

@@ -37,3 +37,5 @@ categories: PHP
 > （4）、静态方法可以调用非静态方法，使用 self 关键词。php里，一个方法被self:: 后，它就自动转变为静态方法；
 
 [原文链接](http://www.jb51.net/article/60871.htm)
+[后期静态绑定: 参考资料](http://php.net/manual/zh/language.oop5.late-static-bindings.php)
+["::"是啥](http://www.golaravel.com/php/language.oop5.paamayim-nekudotayim.html)

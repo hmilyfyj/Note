@@ -1,5 +1,5 @@
 title: Chrome extension tips
-date: 2015-12-6 22:36
+date: 2016-02-08 09:12
 tags: [chrome,折腾,js]
 categories: chrome
 ---
@@ -18,7 +18,7 @@ categories: chrome
 
 # content_script
 
-content_script是植入型的，它会被植入到符合匹配的网站页面上。在页面加载完成后执行。content_script最有用的地方是操作网站页面上的DOM。一切平时做前端的一些操作它都可以做，像什么添加、修改、删除DOM，获取DOM值，监听事件等等，都可以很容易的做到。
+content_script是植入型的，它会被植入到符合匹配的网站页面上。**在页面加载完成后执行。**content_script最有用的地方是操作网站页面上的DOM。一切平时做前端的一些操作它都可以做，像什么添加、修改、删除DOM，获取DOM值，监听事件等等，都可以很容易的做到。
 
 ## 使用方式：
 
@@ -39,7 +39,7 @@ content_script是植入型的，它会被植入到符合匹配的网站页面上
 
 # background_script
 
-它在chrome扩展启动的时候就启动了，做着它的事，而且等待着你给他的指令。它没办法控制页面元素，但可以通过content_script告诉它。ajax同理，如果要在页面打开时向别的服务器请求数据，这时就可以告诉background_script，让它去请求，然后把返回的数据发送给content_script。这样就不会受到浏览器的安全限制影响。
+它在chrome扩展启动的时候就启动了，做着它的事，而且等待着你给他的指令。 **它没办法控制页面元素，但可以通过content_script告诉它。** ajax同理，如果要在页面打开时向别的服务器请求数据，这时就可以告诉background_script，让它去请求，然后把返回的数据发送给content_script。这样就不会受到浏览器的安全限制影响。
 
 ## 使用方式
 

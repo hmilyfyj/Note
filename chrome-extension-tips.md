@@ -113,3 +113,17 @@ content_script是植入型的，它会被植入到符合匹配的网站页面上
 ### Warning
 
 **content_script中的localStorage是存储在对应域名下的，所以别的域名是不能访问的。background_script中的localStorage是存储在chrome扩展下的，所以不管什么域名都可以访问它。这一点很重要，如果没有这个特性，扩展的应用场景就会少很多很多。**
+
+
+
+参考资料：
+
+http://fuweiyi.com/chrome%E6%89%A9%E5%B1%95/2014/12/18/a-chrome-extension-01.html
+
+http://blog.csdn.net/talking12391239/article/details/41114693
+
+http://www.cnblogs.com/walkingp/archive/2011/04/04/2003875.html
+
+https://developer.chrome.com/extensions/messaging
+
+http://chajian.baidu.com/developer/extensions/getstarted.html

@@ -15,7 +15,6 @@ categories: 折腾
 
 ----------
 
-
 ## 方案1
 
 ### Git
@@ -34,13 +33,26 @@ categories: 折腾
 > 实现上一步的回调接口，功能：向指定文件夹写入文件
 
     /**
-	 * 配合GIT自动部署
-	 *
-	 * @author Feng <fengit@shanjing-inc.com>
-	 */
-	public function deploy() {
-	    echo file_put_contents(APPPATH.'cache/git_update.txt', 'I made some changes.');
-	}
+    	 * 配合GIT自动部署
+    	 *
+    	 * @author Feng <fengit@shanjing-inc.com>
+    	 */
+    	public function deploy() {
+    		//导入类库
+    		$this->load->library('serverchan');
+    		
+    		//获取参数
+    		$from = $this->input->get('from');
+    		
+    		//
+    		if ($from == 'blog') {
+    			//通知用户部署成功。
+    			$this->serverchan->notify_all_admins('您好，博客部署成功。');
+    		} else {
+    			//笔记
+    			echo file_put_contents(APPPATH.'cache/git_update.txt', 'I made some changes.');
+    		}
+    	}
 
 
 ### VPS

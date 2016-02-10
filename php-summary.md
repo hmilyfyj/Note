@@ -4,7 +4,6 @@ date: 2015-12-6 22:27:3
 tags: [php,ip]
 categories: php
 ---
-
 ### 踩过的坑
 
 #### `Using $this when not in object context in`
@@ -20,6 +19,12 @@ categories: php
 solutions:
 1. `json_decode($arr, TRUE, 512, JSON_BIGINT_AS_STRING)`
 2. `preg_replace('/("\w+"):(\d+)/', '\\1:"\\2"', $resp)`  //适配老版PHP
+
+### 分割含换行和分号字符串
+
+    preg_split('/[;\r\n]+/s', $a);
+    
+[参考地址](http://www.awaimai.com/273.html)
 
 ### 小TIPS
 

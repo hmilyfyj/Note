@@ -1,4 +1,4 @@
-title: 在 Codeigniter 中使用 Composer
+title: 在 CodeIgniter 中使用 Composer
 date: 2016-02-10 15:30
 tags: [Composer,PHP,Codeigniter]
 categories: PHP

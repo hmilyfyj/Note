@@ -21,6 +21,8 @@ categories: PHP
 
     composer update
 
+<!-- more -->
+
 ## 修改配置文件
 
 ### 新版CI

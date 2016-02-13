@@ -85,7 +85,8 @@ categories: PHP
 
 >`mixed version_compare ( string $version1 , string $version2 [, string $operator ] )` 默认情况下，在第一个版本低于第二个时，version_compare() 返回 -1；如果两者相等，返回 0；第二个版本更低时则返回 1。 
 >当使用了可选参数 operator 时，如果关系是操作符所指定的那个，函数将返回 TRUE，否则返回 FALSE。 
-  
+ 
+<!-- more -->
     
     // ------------------------------------------------------------------------
     

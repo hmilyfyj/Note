@@ -64,6 +64,8 @@ categories: PHP
     
 
 > 定义了常量**ENVIRONMENT**，不同的级别显示不同的错误。
+>用到的函数：error_reporting、ini_set、header
+
     /*
      *---------------------------------------------------------------
      * ERROR REPORTING

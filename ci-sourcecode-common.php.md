@@ -4,7 +4,7 @@ tags: [CI,PHP]
 categories: PHP
 ---
 
-
+	Common.php
     <?php
     /**
      * CodeIgniter

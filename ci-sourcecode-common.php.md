@@ -6,7 +6,7 @@ categories: PHP
 
 > Common.php
 
-	
+
     /**
      * CodeIgniter
      *

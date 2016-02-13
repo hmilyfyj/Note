@@ -2,9 +2,8 @@ title: CI源码分析-index.php
 date: 2016-02-12 21:17
 tags: [CI,PHP]
 categories: PHP
+description: "一切始于此。"
 ---
-
-
     <?php
     /**
      * CodeIgniter

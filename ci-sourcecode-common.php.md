@@ -2,6 +2,7 @@ title: CI源码分析-Common.php
 date: 2016-02-13 20:08
 tags: [CI,PHP]
 categories: PHP
+description: "CodeIgniter.php 引入的第一个文件，定义了很多全局函数。"
 ---
 
 > Common.php

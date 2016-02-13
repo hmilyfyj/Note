@@ -5,7 +5,6 @@ categories: PHP
 ---
 
 	Common.php
-    <?php
     /**
      * CodeIgniter
      *
@@ -896,5 +895,4 @@ categories: PHP
     		return FALSE;
     	}
     }
-
 

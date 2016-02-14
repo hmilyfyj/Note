@@ -117,6 +117,39 @@ class CI_Config {
 		log_message('info', 'Config Class Initialized');
 	}
 
+```
+>函数：string basename ( string $path [, string $suffix ] ) 给出一个包含有指向一个文件的全路径的字符串，本函数返回基本的文件名。 
+
+>函数：mixed strpos ( string $haystack , mixed $needle [, int $offset = 0 ] ) 返回 needle 在 haystack 中首次出现的数字位置。同时注意字符串位置是从0开始，而不是从1开始的。
+
+> $_SERVER['SERVER_NAME'] gives the value of the server name as defined
+> in host configuration (i.e for Apache the Apache .conf file).
+> 
+> $_SERVER['HTTP_HOST'] gives you the domain name through which the
+> current request is being fulfilled and is more directly related to the
+> request.
+> 
+> HTTP_HOST is typically more useful in most applications in that it
+> relates directly to the request, whereas SERVER_NAME could return
+> whatever value is in the conf file and doesn't tell you anything about
+> the request at all.
+> 
+> I will give you an example of how HTTP_HOST might differ from
+> SERVER_NAME. Say you have an host defined in Apache with ServerName of
+> domain.com and an IP address of 1.2.3.4.
+> 
+> Let's look at two incoming request URL's and show the difference
+> between these variables:
+> 
+> http://www.domain.com HTTP_HOST = www.domain.com SERVER_NAME =
+> domain.com
+> 
+> http://1.2.3.4 HTTP_HOST = 1.2.3.4 SERVER_NAME = domain.com So again,
+> HTTP_HOST is tied more to the request, whereas SERVER_NAME is
+> determined by server configuration.
+
+``` PHP
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -189,7 +222,7 @@ class CI_Config {
 
 		show_error('The configuration file '.$file.'.php does not exist.');
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**

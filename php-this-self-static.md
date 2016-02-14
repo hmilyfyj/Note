@@ -1,10 +1,8 @@
-title: PHP:this、self、static的区别
+title: PHP:This、Self、Static的区别
 date: 2016-01-16 11:07
 tags: [PHP]
 categories: PHP 
 ---
-
-### this、self、static
 
     <?php
     header("content-type:text/html;charset=utf-8");

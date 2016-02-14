@@ -3,21 +3,21 @@ date: 2016-01-16 11:07
 tags: [PHP]
 categories: PHP 
 ---
-
+``` php
     <?php
     header("content-type:text/html;charset=utf-8");
     class Human{
      static public $name = "小妹";
      public $height = 180;
      static public function tell(){
-     echo self::$name;//静态方法调用静态属性，使用self关键词
-     //echo $this->height;//错。静态方法不能调用非静态属性
-    //因为 $this代表实例化对象，而这里是类，不知道 $this 代表哪个对象
+	     echo self::$name;//静态方法调用静态属性，使用self关键词
+	     //echo $this->height;//错。静态方法不能调用非静态属性
+	    //因为 $this代表实例化对象，而这里是类，不知道 $this 代表哪个对象
      }
      public function say(){
-     echo self::$name . "我说话了";
-     //普通方法调用静态属性，同样使用self关键词
-     echo $this->height;
+	     echo self::$name . "我说话了";
+	     //普通方法调用静态属性，同样使用self关键词
+	     echo $this->height;
      }
     }
     $p1 = new Human();
@@ -28,6 +28,8 @@ categories: PHP
     Human::say();//错。say()方法有$this时出错；没有$this时能出结果
     //但php5.4以上会提示
     ?>
+```
+
 #### 结论：
 
 > （1）、静态属性不需要实例化即可调用。因为静态属性存放的位置是在类里，调用方法为"类名::属性名"；

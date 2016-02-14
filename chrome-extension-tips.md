@@ -1,4 +1,4 @@
-title: Chrome extension tips
+title: Chrome 扩展开发笔记
 date: 2016-02-08 09:12
 tags: [chrome,折腾,js]
 categories: chrome

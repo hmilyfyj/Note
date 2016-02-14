@@ -4,7 +4,7 @@ title: CI源码分析-Hooks.php
 date: 2016-02-14 12:53
 tags: [CI,PHP]
 categories: PHP
-description: "CodeIgniter 的钩子特性提供了一种方法来修改框架的内部运作流程，而无需修改 核心文件。"
+description: "CodeIgniter.php 引入的第三个文件(`$EXT`)，CodeIgniter 的钩子特性提供了一种方法来修改框架的内部运作流程，而无需修改 核心文件。"
 ---
 
 ``` PHP

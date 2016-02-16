@@ -1,7 +1,7 @@
 title: Hexo 采坑集锦
-date: 2016-02-13 10:24
+date: 2016-02-16 11:21
 tags: [折腾,hexo]
-categories: 
+categories: hexo
 ---
 
 # 错误1

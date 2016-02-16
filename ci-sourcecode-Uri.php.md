@@ -9,6 +9,7 @@ categories: PHP
 
 <!-- more -->
 
+
 >等待消化的知识：PHP预定义常量、PHP运行方式(SAPI)
 
 >tips:string 中的字符可以通过一个从 0 开始的下标，用类似 array 结构中的方括号包含对应的数字来访问和修改，比如 $str[42]。可以把 string 当成字符组成的 array。函数 substr() 和 substr_replace() 可用于操作多于一个字符的情况。 这是我一直以来没注意的，所以说基础要打好。

@@ -4,7 +4,9 @@ date: 2016-02-16 16:49
 tags: [CI,PHP]
 categories: PHP
 
+
 ---
+
  CodeIgniter.php 引入的第七个核心文件（`$OUT`）。输出类是个核心类，它的功能只有一个：发送 Web 页面内容到请求的浏览器。 如果你开启缓存，它也负责 缓存 你的 Web 页面。
 
 <!-- more -->

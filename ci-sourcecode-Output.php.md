@@ -59,6 +59,13 @@ strcmp strncmp strcasecmp strncasecmp
 > 
 > 如果只给了一个数组并且该数组是数字索引的，则键名会以连续方式重新索引。
 
+    bool ob_start ([ callback $output_callback [, int $chunk_size [, bool $erase ]]] )
+
+> 此函数将打开输出缓冲。当输出缓冲激活后，脚本将不会输出内容（除http标头外），相反需要输出的内容被存储在内部缓冲区中。
+
+[参考地址](http://www.jcwcn.com/article-16878-1.html)
+
+
     string ob_gzhandler ( string $buffer , int $mode )
 
 > ob_gzhandler()目的是用在ob_start()中作回调函数，以方便将gz

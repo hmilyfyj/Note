@@ -2,8 +2,8 @@
 
 title: 路由器-折腾日志
 date: 2016-02-18 15:26
-tags: [CI,PHP]
-categories: PHP
+tags: [折腾,路由]
+categories: 路由
 
 
 ---

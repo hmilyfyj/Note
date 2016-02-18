@@ -11,6 +11,10 @@ categories: PHP
 
 <!-- more -->
 
+### 缓存机制
+
+通过源码可知，写在controller方法用的echo等输出内容是无法缓存下来的。因为Output只缓存参数 `public $final_output;` 存储的内容。而该参数只能由append_output参数（该参数在 load->view时调用。）
+
 ### zlib.output_compression
 
 >对页面尽兴Gzip压缩

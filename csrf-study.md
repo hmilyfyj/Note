@@ -1,8 +1,8 @@
 
-title: CSRF研究日志
+title: CSRF笔记
 date: 2016-02-19 16:42
-tags: [CI,PHP]
-categories: PHP
+tags: [白帽子]
+categories: 白帽子
 
 ---
 

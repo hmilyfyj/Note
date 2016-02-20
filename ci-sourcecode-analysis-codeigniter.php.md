@@ -4,7 +4,7 @@ tags: [CI,PHP]
 categories: CI
 ---
 
-这里把各个类库串联了起来。
+它讲把各个类库串联了起来，故事从这里正式开始。
 
 <!-- more -->
 
@@ -12,13 +12,13 @@ categories: CI
 # 知识点
 
 
-`$GLOBALS`  一个包含了全部变量的全局组合数组。变量的名字就是数组的键。 
+`$GLOBALS`  是一个包含了全部变量的全局组合数组，变量的名字就是数组的键。 
 
 
 # 流程
 
 1. 引入 Constants.php 定义全局变量。
-2. 引入 Common.php 定义全局函数。
+2. 引入 [Common.php](http://b.fengbl.cn/2016/02/13/ci-sourcecode-common.php/) 定义全局函数。
 3. 当 php version 小于 5.4 时，处理 register_globals 带来的安全问题。
 4. 绑定 error handler
 4.1 set_error_handler('_error_handler');
@@ -26,8 +26,8 @@ categories: CI
 4.3 register_shutdown_function('_shutdown_handler');
 5. 修改自定义类前缀`subclass_prefix`（默认MY_）
 6. 定义 comoser 的 autoloader
-7.  引入 Benchmark 类（`$BM`）
-8. 引入 Hooks 类 （`$EXT`）
+7.  引入 [Benchmark](http://b.fengbl.cn/2016/02/14/ci-sourcecode-benchmark.php/) 类（`$BM`）
+8. 引入 [Hooks](http://b.fengbl.cn/2016/02/14/ci-sourcecode-Hooks.php/) 类 （`$EXT`）
 9. 执行钩子 pre_system
 10. 引入 Config 类（`$CFG`）
 11. 设置编码 
@@ -42,12 +42,12 @@ categories: CI
 13. 引入核心类
 13.1  Utf-8 类 （`$UNI`）
 13.2  Uri 类（`$URI`）
-13.3 Router（`$RTR`）尽兴路由检测
-13.4  Outut （`$OUT`）
-14. 检测 cache_override 参数，如果不存在则检测是否有 缓存 存在。
+13.3 [Router](http://b.fengbl.cn/2016/02/15/ci-sourcecode-Router.php/)类（`$RTR`）尽兴路由检测
+13.4  [Output](http://b.fengbl.cn/2016/02/15/ci-sourcecode-Uri.php/) （`$OUT`）
+14. 检测 `cache_override` 参数，如果不存在则检测是否有 缓存 存在。
 15.  继续引入类
-15.1 Input 类（`$IN`）
-15.2 Lang 类（`$LANG`）
+15.1 [Input](http://b.fengbl.cn/2016/02/17/ci-surcecode-Input.php/) 类（`$IN`）
+15.2 [Language](http://b.fengbl.cn/2016/02/18/ci-sourcecode-analysis-language.php/) 类（`$LANG`）
 15.3 Controller 类
 15.3.4 引入重写的 Controller 类
 16. 404 检测

@@ -4,8 +4,7 @@ tags: [CI,PHP]
 categories: PHP
 ---
 
-
-CodeIgniter.php 引入的第一个文件，定义了很多全局函数。
+CodeIgniter.php 引入的第一个文件，定义了很多贯穿整个框架的函数。
 
 <!-- more -->
 

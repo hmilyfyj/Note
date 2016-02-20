@@ -2,8 +2,104 @@ title: CI源码分析-index.php
 date: 2016-02-12 21:17
 tags: [CI,PHP]
 categories: PHP
-description: "一切始于此。"
 ---
+
+
+开始的开始。
+
+<!-- more -->
+
+# 知识点：
+
+## 错误提示
+
+    ini_set('display_errors', 1);
+
+> 设置指定配置选项的值。这个选项会在脚本运行时保持新的值，并在脚本结束时恢复。
+
+    int error_reporting ([ int $level ] )
+
+> error_reporting() 函数能够在运行时设置 error_reporting 指令。 PHP 有诸多错误级别，使用该函数可以设置在脚本运行时的级别。 如果没有设置可选参数 level， error_reporting() 仅会返回当前的错误报告级别。 
+
+这里有两种错误相关的函数：
+
+    ini_set('display_errors', 0);
+    error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+
+他们的区别是：
+
+**display_errors** 是开启php错误提示，而且是**所有错误提示**， 开启错误提示，是为了方便调试修改，只有两种状态量：**On & Off**
+**error_reporting** 可以选择性的关闭或者说忽略某些不想要的错误提示。
+
+[关于 error_reporting 可选参数介绍](http://www.w3school.com.cn/php/func_error_reporting.asp)
+
+## 文件/文件夹操作
+
+    string realpath ( string $path ) 
+
+> 获取 文件（或文件夹）绝对路径
+> 
+> realpath() 扩展所有的符号连接并且处理输入的 path 中的 '/./', '/../' 以及多余的 '/' 并返回规范化后的绝对路径名。返回的路径中没有符号连接，'/./' 或 '/../' 成分。 失败时返回 FALSE，比如说文件不存在的话。 
+
+
+    string dirname ( string $path )
+
+> 给出一个包含有指向一个文件的全路径的字符串，本函数返回去掉文件名后的目录名。
+
+EG:
+
+```php
+	<?php
+		echo "1) " . dirname("/etc/passwd") . PHP_EOL; // 1) /etc
+		echo "2) " . dirname("/etc/") . PHP_EOL; // 2) / (or \ on Windows)
+		echo "3) " . dirname("."); // 3) .
+	?> 
+```
+
+    mixed pathinfo ( string $path [, int $options = PATHINFO_DIRNAME | PATHINFO_BASENAME | PATHINFO_EXTENSION | PATHINFO_FILENAME ] )
+
+> `pathinfo()` 返回一个关联数组包含有 path 的信息。返回关联数组还是字符串取决于 options。
+
+eg:
+
+    print_r(pathinfo('/a/b/c.s'));
+
+结果：
+
+    Array ( [dirname] => /a/b [basename] => c.s [extension] => s [filename] => c )
+
+
+## 字符串操作
+
+    string strrchr ( string $haystack , mixed $needle )
+
+> 该函数返回 haystack 字符串中的一部分，这部分以 needle 的最后出现位置开始，直到 haystack 末尾。
+
+EG:
+
+源码中利用此函数来获取 system folder的名字：
+
+    define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
+
+
+
+
+
+---
+
+    mixed version_compare ( string $version1 , string $version2 [, string $operator ] )
+
+
+> 默认情况下，在第一个版本低于第二个时，version_compare() 返回 -1；如果两者相等，返回 0；第二个版本更低时则返回 1。 
+> 
+> 当使用了可选参数 operator 时，如果关系是操作符所指定的那个，函数将返回 TRUE，否则返回 FALSE。
+
+---
+
+    int error_reporting ([ int $level ] )
+
+# 源码分析：
+
     <?php
     /**
      * CodeIgniter
@@ -63,7 +159,6 @@ description: "一切始于此。"
     
 
 > 定义了常量**ENVIRONMENT**，不同的级别显示不同的错误。
->用到的函数：error_reporting、ini_set、header
 
     /*
      *---------------------------------------------------------------
@@ -303,5 +398,7 @@ description: "一切始于此。"
      * And away we go...
      */
     require_once BASEPATH.'core/CodeIgniter.php';
+
+
 
 

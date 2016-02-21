@@ -11,5 +11,6 @@ categories: 日常
 
 1. 读CI源码
 2. [复习算法、数据结构。](http://zh.visualgo.net/)
-3. To be continued..
+3. 复习数据库相关
+4. To be continued..
 

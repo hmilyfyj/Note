@@ -37,25 +37,25 @@ C. R. A. Hoare
 
 
 ```javascript
-//一趟： 参数 a:数组、left 左侧index、右侧index、基准值index
-function partition(a, left, right, pivotIndex)
-     pivotValue := a[pivotIndex] // 获取基准值
-     swap(a[pivotIndex], a[right]) // 把 pivot 移到結尾
-     storeIndex := left //即将被交换的位置坐标。
-     for i from left to right-1
-         if a[i] < pivotValue //如果小于基准值
-             swap(a[storeIndex], a[i]) //交换位置
-             storeIndex := storeIndex + 1  
-     swap(a[right], a[storeIndex]) // 把 pivot 移到它最後的地方（把基准值移动到正确的位置上，即 storeindex上。）
-     return storeIndex // 返回 pivot 的最终位置
+	//一趟： 参数 a:数组、left 左侧index、右侧index、基准值index
+	function partition(a, left, right, pivotIndex)
+	     pivotValue := a[pivotIndex] // 获取基准值
+	     swap(a[pivotIndex], a[right]) // 把 pivot 移到結尾
+	     storeIndex := left //即将被交换的位置坐标。
+	     for i from left to right-1
+	         if a[i] < pivotValue //如果小于基准值
+	             swap(a[storeIndex], a[i]) //交换位置
+	             storeIndex := storeIndex + 1  
+	     swap(a[right], a[storeIndex]) // 把 pivot 移到它最後的地方（把基准值移动到正确的位置上，即 storeindex上。）
+	     return storeIndex // 返回 pivot 的最终位置
 
-//递归调用partition()
-procedure quicksort(a, left, right)
-    if right > left
-        select a pivot value a[pivotIndex]
-        pivotNewIndex := partition(a, left, right, pivotIndex)
-        quicksort(a, left, pivotNewIndex-1)
-        quicksort(a, pivotNewIndex+1, right)
+	//递归调用partition()
+	procedure quicksort(a, left, right)
+	    if right > left
+	        select a pivot value a[pivotIndex]
+	        pivotNewIndex := partition(a, left, right, pivotIndex)
+	        quicksort(a, left, pivotNewIndex-1)
+	        quicksort(a, pivotNewIndex+1, right)
 ```
 
 ## 举个栗子：

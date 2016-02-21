@@ -180,3 +180,53 @@ storeIndex   i
 
 那么 storeIndex 的值就是基准元素的最终位置，这样整个分区过程就完成了。
 
+![enter image description here](http://bubkoo.qiniudn.com/Partition_example.svg.png)
+
+
+### PHP代码实现
+
+```php
+<?php
+function quicksort(&$arr, $left, $right)
+{
+    $i = $left;
+    $j = $right;
+    
+    //设定基准值
+    $separator = $arr[$left];
+     
+    //以 $separator 进行划分
+    while ($i <= $j) {
+        while ($arr[$i] < $separator) {
+            $i++;
+        }
+         
+        while($arr[$j] > $separator) {
+            $j--;
+        }
+         
+        if ($i <= $j) {
+            $tmp = $arr[$i];
+            $arr[$i] = $arr[$j];
+            $arr[$j] = $tmp;
+            $i++;
+            $j--;
+        }
+    }
+     
+    //递归排序形式上的两组（小于 $separator 的组、大于等于 $separator 的分组。）
+    if ($left < $j) {
+        quicksort($arr, $left, $j);
+    }
+     
+    if ($right > $i) {
+        quicksort($arr, $i, $right);
+    }
+}
+ 
+// Example:
+$arr = array(1,20,12,4,13,5);
+$result = quicksort($arr, 0, (sizeof($arr)-1));
+print_r($arr);
+```
+

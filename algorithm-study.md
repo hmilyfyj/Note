@@ -92,12 +92,11 @@ storeIndex
 循环 i == 3 时，storeIndex == 1，找到一个小于基准元素的元素 4：
 
 ```javascript
-     ┌────┐                pivot
+     ┌───────┐                 pivot
      ↓       ↓                   ↓
  3   7   8   4   2   1   9   5   5
      ↑       ↑
 storeIndex   i
-
 ```
 
 交换位置后，storeIndex 自增 1，storeIndex == 2：
@@ -114,7 +113,7 @@ storeIndex   i
 循环 i == 4 时，storeIndex == 2，找到一个小于基准元素的元素 2：
 
 ```javascript
-        ┌────┐             pivot
+        ┌───────┐             pivot
         ↓       ↓               ↓
 3   4   8   7   2   1   9   5   5
         ↑       ↑
@@ -150,19 +149,10 @@ storeIndex   i
            storeIndex
 ```
 
-
-```javascript
-        ┌────┐             pivot
-        ↓       ↓               ↓
-3   4   8   7   2   1   9   5   5
-        ↑       ↑
-   storeIndex   i
-```
-
 循环 i == 7 时，storeIndex == 4，找到一个小于等于基准元素的元素 5：
 
 ```javascript
-                ┌──────┐ pivot
+                ┌───────────┐ pivot
                 ↓           ↓   ↓
 3   4   2   1   8   7   9   5   5
                 ↑           ↑

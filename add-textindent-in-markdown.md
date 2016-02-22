@@ -1,7 +1,7 @@
 
 title: Markdown中增加首行缩进
 date: 2016-02-22 12:09
-tags: [Hexo,日常,在成为最厉害最厉害最厉害的路上]
+tags: [Hexo,日常]
 categories: Hexo
 
 ---

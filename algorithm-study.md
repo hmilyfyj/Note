@@ -195,7 +195,7 @@ function quicksort(&$arr, $left, $right)
     //设定基准值
     $separator = $arr[$left];
      
-    //以 $separator 进行划分
+    //以 $separator 进行划分。结束条件：比$separator小的被分配到（形式上）左侧数组，大的分配到（形式上）右侧数组。
     while ($i <= $j) {
         while ($arr[$i] < $separator) {
             $i++;

@@ -24,7 +24,7 @@ categories: Hexo
 
 添加
 
-    p {text-indent 2em;｝
+    p {text-indent 2em;}
 
 相关文章：
 

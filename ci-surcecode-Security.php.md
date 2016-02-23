@@ -8,6 +8,8 @@ categories: PHP
 
  CodeIgniter.php 引入的第八个核心文件（`$SEC`）。
 
+ 虽然对 xss csrf 有一点了解和运用，但安全相关源码时依然有些懵，一方面说明基础不过扎实，另一方面也说明心要更加静一点。
+
 [文档地址](http://codeigniter.com/user_guide/libraries/security.html)
 
 <!-- more -->

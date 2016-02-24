@@ -311,4 +311,137 @@ print_r(merge_sort($arr));
 ```
 
 
+## 选择排序（select）
+
+### 原理
+
+> 选择排序（Selection Sort）是一种简单直观的排序算法。它的工作原理如下，首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。
+
+### 图片演示
+
+![enter image description here](http://bubkoo.qiniudn.com/selection_sort_animation.gif)
+
+### 举个栗子
+
+以数组 arr = [8, 5, 2, 6, 9, 3, 1, 4, 0, 7] 为例，先直观看一下每一步的变化，后面再介绍细节
+> 
+第一次从数组 [8, 5, 2, 6, 9, 3, 1, 4, 0, 7] 中找到最小的数 0，放到数组的最前面（与第一个元素进行交换）：
+
+```php
+                               min
+                                ↓
+8   5   2   6   9   3   1   4   0   7
+↑                               ↑
+└───────────────────────────────┘
+```
+
+交换后：
+```php
+0   5   2   6   9   3   1   4   8   7
+```
+在剩余的序列中 `[5, 2, 6, 9, 3, 1, 4, 8, 7]` 中找到最小的数 1，与该序列的第一个个元素进行位置交换：
+
+```php
+                       min
+                        ↓
+0   5   2   6   9   3   1   4   8   7
+    ↑                   ↑
+    └───────────────────┘
+```
+
+交换后：
+```php
+0   1   2   6   9   3   5   4   8   7
+```
+
+在剩余的序列中 [2, 6, 9, 3, 5, 4, 8, 7] 中找到最小的数 2，与该序列的第一个个元素进行位置交换（实际上不需要交换）：
+```php
+       min
+        ↓
+0   1   2   6   9   3   5   4   8   7
+        ↑
+
+```
+重复上述过程，直到最后一个元素就完成了排序。
+```php
+                   min
+                    ↓
+0   1   2   6   9   3   5   4   8   7
+            ↑       ↑
+            └───────┘
+
+                           min
+                            ↓
+0   1   2   3   9   6   5   4   8   7
+                ↑           ↑
+                └───────────┘
+
+                       min
+                        ↓
+0   1   2   3   4   6   5   9   8   7
+                    ↑   ↑
+                    └───┘
+
+
+                       min
+                        ↓
+0   1   2   3   4   5   6   9   8   7
+                        ↑   
+
+                                   min
+                                    ↓
+0   1   2   3   4   5   6   9   8   7
+                            ↑       ↑
+                            └───────┘  
+
+                               min
+                                ↓
+0   1   2   3   4   5   6   7   8   9
+                                ↑      
+
+                                   min
+                                    ↓
+0   1   2   3   4   5   6   7   8   9
+                                    ↑
+
+```
+
+![](http://bubkoo.qiniudn.com/Selection-Sort-Animation.gif)
+
+### PHP实现
+
+```php
+<?php
+
+//交换坐标位置
+function swap(&$arr, $index1, $index2) {
+    $temp           = $arr[$index2];
+    $arr[$index2]   = $arr[$index1];
+    $arr[$index1]   = $temp;
+}
+
+
+function select_sort($arr) {
+    $length     = count($arr);
+    $minIndex   = 0;
+    
+    for($i = 0; $i < $length - 1; $i++) {
+        $minIndex = $i;
+        
+        for ($j = $i; $j < $length; $j++) {
+            if ($arr[$j] < $arr[$minIndex]) $minIndex = $j;
+        }
+        
+        if ($i != $minIndex) {
+            swap($arr, $i, $minIndex);
+        }
+    }
+    
+    return $arr;
+}
+
+//Example
+$arr = array(1,42,12,412,124,2,1,24,12,131);
+print_r(select_sort($arr));
+```
 

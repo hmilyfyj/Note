@@ -10,7 +10,7 @@ categories: 算法
 
 # 排序
 
-## 快速排序
+## 快速排序(QUICK)
 
 ### 原理
 
@@ -228,5 +228,86 @@ function quicksort(&$arr, $left, $right)
 $arr = array(1,20,12,4,13,5);
 $result = quicksort($arr, 0, (sizeof($arr)-1));
 print_r($arr);
+```
+
+## 归并排序(MERGE)
+
+### 原理
+
+> 归并排序（Merge Sort，台湾译作：合并排序）是建立在归并操作上的一种有效的排序算法。该算法是采用**分治法**（Divide and Conquer）的一个非常典型的应用。
+> 
+> 归并操作(Merge)，也叫归并算法，指的是将两个已经排序的序列合并成一个序列的操作。归并排序算法依赖归并操作。归并排序有多路归并排序、两路归并排序 , 可用于内排序，也可以用于外排序。这里仅对内排序的两路归并方法进行讨论。
+
+
+算法思路：
+
+1. 把 n 个记录看成 n 个长度为 l 的有序子表
+2. 进行两两归并使记录关键字有序，得到 n/2 个长度为 2 的有序子表
+3. 重复第 2 步直到所有记录归并成一个长度为 n 的有序表为止。
+
+![enter image description here](http://bubkoo.qiniudn.com/merge-sort-animation.gif)
+
+
+### 实例
+
+
+
+以数组 array = [6, 5, 3, 1, 8, 7, 2, 4] 为例，首先将数组分为长度为 2 的子数组，并使每个子数组有序：
+```php
+[6, 5]  [3, 1]  [8, 7]  [2, 4]
+   ↓       ↓       ↓       ↓
+[5, 6]  [1, 3]  [7, 8]  [2, 4]
+```
+然后再两两合并：
+
+```php
+[6, 5, 3, 1]  [8, 7, 2, 4]
+      ↓             ↓
+[1, 3, 5, 6]  [2, 4, 7, 8]
+```
+最后将两个子数组合并：
+
+```php
+[6, 5, 3, 1, 8, 7, 2, 4]
+            ↓
+[1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+#### 图示
+
+![enter image description here](http://bubkoo.qiniudn.com/merge-sort-example-300px.gif)
+
+
+![enter image description here](http://bubkoo.qiniudn.com/merge-sort-example.gif)
+
+### PHP实现
+```php
+function compare_merge($arr1, $arr2) {
+    $arr = array();
+    
+    while(!empty($arr1) && !empty($arr2)) $arr[] = $arr1[0] <= $arr2[0] ? array_shift($arr1) : array_shift($arr2);
+    
+    //合并数组
+    return array_merge($arr, $arr1, $arr2);
+}
+
+function merge_sort($arr) {
+    //分成两组
+    $length = count($arr);
+    
+    //临界值
+    if ($length <= 1) return $arr;
+    
+    $mid    = floor($length/2);
+    $arr1   = array_slice($arr, 0, $mid);
+    $arr2   = array_slice($arr, $mid);
+    
+    //分别进行排序，排序后合并
+    return compare_merge(merge_sort($arr1), merge_sort($arr2));
+}
+
+
+$arr = array(12,123,23,1,1,124,5,2,23,53);
+print_r(merge_sort($arr));
 ```
 

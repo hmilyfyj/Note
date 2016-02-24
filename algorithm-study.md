@@ -248,7 +248,7 @@ print_r($arr);
 ![enter image description here](http://bubkoo.qiniudn.com/merge-sort-animation.gif)
 
 
-### 实例
+### 举个栗子
 
 
 

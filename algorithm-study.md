@@ -14,8 +14,7 @@ categories: 算法
 
 ### 原理
 
-> 快速排序是图灵奖得主 C. R. A. Hoare 于 1960
-> 年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为分治法(Divide-and-ConquerMethod)。
+> 快速排序是图灵奖得主 C. R. A. Hoare 于 1960 年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为分治法(Divide-and-ConquerMethod)。
 
 ![enter image description here](http://bubkoo.qiniudn.com/C.R.A.Hoare.jpg)
 C. R. A. Hoare

@@ -57,7 +57,7 @@ C. R. A. Hoare
 	        quicksort(a, pivotNewIndex+1, right)
 ```
 
-## 举个栗子：
+### 举个栗子：
 
 举例来说，现有数组 arr = [3,7,8,5,2,1,9,5,4]，分区可以分解成以下步骤：
 
@@ -272,7 +272,7 @@ print_r($arr);
 [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
-#### 图示
+### 图示
 
 ![enter image description here](http://bubkoo.qiniudn.com/merge-sort-example-300px.gif)
 
@@ -309,4 +309,6 @@ function merge_sort($arr) {
 $arr = array(12,123,23,1,1,124,5,2,23,53);
 print_r(merge_sort($arr));
 ```
+
+
 

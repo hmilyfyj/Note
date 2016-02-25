@@ -445,3 +445,76 @@ $arr = array(1,42,12,412,124,2,1,24,12,131);
 print_r(select_sort($arr));
 ```
 
+
+## 插入排序（Insert）
+
+### 原理
+
+> 设有一组关键字｛K1， K2，…， Kn｝；排序开始就认为 K1 是一个有序序列；让 K2 插入上述表长为 1 的有序序列，使之成为一个表长为 2 的有序序列；然后让 K3 插入上述表长为 2 的有序序列，使之成为一个表长为 3 的有序序列；依次类推，最后让 Kn 插入上述表长为 n-1 的有序序列，得一个表长为 n 的有序序列。
+
+### 举个栗子
+
+现有一组数组 arr = [5, 6, 3, 1, 8, 7, 2, 4]，共有八个记录，排序过程如下：
+
+```php
+[5]   6   3   1   8   7   2   4
+  ↑   │
+  └───┘
+
+[5, 6]   3   1   8   7   2   4
+↑        │
+└────────┘
+
+[3, 5, 6]  1   8   7   2   4
+↑          │
+└──────────┘
+
+[1, 3, 5, 6]  8   7   2   4
+           ↑  │
+           └──┘
+
+[1, 3, 5, 6, 8]  7   2   4
+            ↑    │
+            └────┘
+
+[1, 3, 5, 6, 7, 8]  2   4
+   ↑                │
+   └────────────────┘
+
+[1, 2, 3, 5, 6, 7, 8]  4
+         ↑             │
+         └─────────────┘
+
+[1, 2, 3, 4, 5, 6, 7, 8]
+
+```
+[enter link description here](http://bubkoo.qiniudn.com/Insertion-sort-example-300px.gif)
+
+### PHP实现
+```php
+<?php
+
+//交换指定坐标位置
+function swap(&$arr, $index1, $index2) {
+    $temp           = $arr[$index2];
+    $arr[$index2]   = $arr[$index1];
+    $arr[$index1]   = $temp;
+}
+
+function insert_sort($arr) {
+    $length = count($arr);
+    
+    for ($i = 1; $i < $length; $i++) {
+        for ($j = $i; $j > 0; $j--) {
+            if ($arr[$j - 1] > $arr[$j]) swap($arr, $j - 1, $j);
+        }
+    }
+    
+    return $arr;
+}
+
+//Example
+$arr = array(1,42,12,412,124,2,1,24,12,131);
+print_r(insert_sort($arr));
+```
+

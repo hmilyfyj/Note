@@ -488,7 +488,7 @@ print_r(select_sort($arr));
 [1, 2, 3, 4, 5, 6, 7, 8]
 
 ```
-[enter link description here](http://bubkoo.qiniudn.com/Insertion-sort-example-300px.gif)
+![enter image description here](http://bubkoo.qiniudn.com/Insertion-sort-example-300px.gif)
 
 ### PHP实现
 ```php
@@ -517,4 +517,5 @@ function insert_sort($arr) {
 $arr = array(1,42,12,412,124,2,1,24,12,131);
 print_r(insert_sort($arr));
 ```
+
 

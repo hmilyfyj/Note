@@ -1,6 +1,6 @@
 
 title: JavaScript笔记：原型和闭包
-date: 2016-02-21 13:46
+date: 2016-02-26 19:39
 tags: [JavaScript,在成为最厉害最厉害最厉害的路上]
 categories: JavaScript
 

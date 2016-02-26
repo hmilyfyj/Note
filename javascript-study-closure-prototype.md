@@ -36,7 +36,7 @@ show();
 以上代码列出了`typeof`输出的集中类型标识，其中上面的四种（`undefined`, `number`, `string`, `boolean`）属于简单的**值类型**，不是对象。剩下的几种情况——**函数**、**数组**、**对象**、**null**、**new Number(10)**都是**对象**。他们都是**引用类型**。
 
 
-判断一个变量是不是对象非常简单。值类型的类型判断用typeof，引用类型的类型判断用instanceof。
+所以，判断一个变量是不是对象非常简单。值类型的类型判断用typeof，引用类型的类型判断用instanceof。
 
 ```javascript
 var fn = function () { };

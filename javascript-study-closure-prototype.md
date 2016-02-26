@@ -6,7 +6,7 @@ categories: JavaScript
 
 ---
  
- 好记性不如烂笔头。
+每天进步一点点。
 
 ---
 <!-- more -->

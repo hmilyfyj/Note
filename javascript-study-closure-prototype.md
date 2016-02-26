@@ -8,8 +8,10 @@ categories: JavaScript
  
 每天进步一点点。
 
----
+
 <!-- more -->
+
+---
 
 # 对象
 

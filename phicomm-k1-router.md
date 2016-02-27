@@ -51,3 +51,17 @@ categories: 路由
 3. 网络-虚拟WAN接口，勾选启动；虚拟WAN接口数量写5；勾选断线重连；最低在线接口数写1。点击保存&应用
 
 
+# 问题
+
+## 报错解决
+
+1. `Tue Oct  7 14:15:41 2014 daemon.warn odhcpd[746]: DHCPV6 SOLICIT IA_NA from (long hex number) on br-lan: no addresses available`
+
+执行命令：
+
+    uci set dhcp.lan.dhcpv6=disabled
+	uci commit
+	uci get dhcp.lan.dhcpv6 // 返回值为 disabled
+	/etc/init.d/odhcpd restart
+
+

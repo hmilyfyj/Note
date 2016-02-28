@@ -1,9 +1,14 @@
 
 title: PHP知识点
 date: 2015-12-6 22:27:3
-tags: [php,ip]
-categories: php
+tags: [PHP,每天进步一点点]
+categories: PHP
 ---
+
+有些东西没必要令写一篇，这里总结PHP过程中遇到的问题和小技巧。
+
+<!-- more -->
+
 ### 踩过的坑
 
 #### `Using $this when not in object context in`

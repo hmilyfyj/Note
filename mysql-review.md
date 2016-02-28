@@ -234,7 +234,6 @@ categories: Mysql
 
     CREATE TABLE newadmin LIKE admin  
 
- 
 2. 拷贝数据到新表中。 注意：这个语句其实只是把select语句的结果建一个表。所以newadmin这个表不会有主键，索引。
 
     CREATE TABLE newadmin AS   

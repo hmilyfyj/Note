@@ -230,11 +230,11 @@ categories: Mysql
 - 如果你想复制表的内容，你就可以使用 INSERT INTO ... SELECT 语句来实现。
 ### 方法2
 
-1. 拷贝表结构到新表newadmin中。 （不会拷贝表中的数据）
+拷贝表结构到新表newadmin中。 （不会拷贝表中的数据）
 
     CREATE TABLE newadmin LIKE admin  
 
-2. 拷贝数据到新表中。 注意：这个语句其实只是把select语句的结果建一个表。所以newadmin这个表不会有主键，索引。
+拷贝数据到新表中。 注意：这个语句其实只是把select语句的结果建一个表。所以newadmin这个表**不会有主键，索引。**
 
     CREATE TABLE newadmin AS   
     (   
@@ -243,18 +243,19 @@ categories: Mysql
     )  
 
  
-3. 真正的复制一个表。可以用下面的语句。
+**真正的复制**一个表。可以用下面的语句。
 
-CREATE TABLE newadmin LIKE admin;   
-INSERT INTO newadmin SELECT * FROM admin;  
+    CREATE TABLE newadmin LIKE admin;   
+    INSERT INTO newadmin SELECT * FROM admin;  
+
  
-4. 可以操作不同的数据库。
+可以操作不同的数据库。
 
     CREATE TABLE newadmin LIKE shop.admin;   
     CREATE TABLE newshop.newadmin LIKE shop.admin;  
 
  
-5. 也可以拷贝一个表中其中的一些字段。
+也可以拷贝一个表中其中的一些字段。
 
     CREATE TABLE newadmin AS   
     (   
@@ -262,7 +263,7 @@ INSERT INTO newadmin SELECT * FROM admin;
     )  
 
  
-6. 将新建的表的字段改名。
+将新建的表的字段改名。
 
     CREATE TABLE newadmin AS   
     (   
@@ -270,7 +271,7 @@ INSERT INTO newadmin SELECT * FROM admin;
     )  
 
  
-7. 拷贝一部分数据。
+拷贝一部分数据。
 
     CREATE TABLE newadmin AS   
     (   
@@ -278,7 +279,7 @@ INSERT INTO newadmin SELECT * FROM admin;
     )  
 
  
-8. 在创建表的同时定义表中的字段信息。
+在创建表的同时定义表中的字段信息。
 
     CREATE TABLE newadmin   
     (   

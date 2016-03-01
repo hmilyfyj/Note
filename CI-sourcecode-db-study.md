@@ -261,7 +261,175 @@ function &DB($params = '', $query_builder_override = NULL)
 	return $DB;
 }
 ```
-引入配置文件，根据数据库配置来引入适配器：`CI_DB` 、`CI_DB_driver`、`CI_DB_query_builder`。然后实例化 CI_DB_mysqli_driver。
-类是临时生成的，它根据`$query_builder` 参数决定 `class CI_DB extends CI_DB_driver { } `  还是 `class CI_DB extends CI_DB_query_builder { }`
+- 引入配置文件，根据数据库配置来引入适配器：`CI_DB` 、`CI_DB_driver`、`CI_DB_query_builder`。然后实例化 CI_DB_mysqli_driver。
+- `CI_DB` 类是临时声明的，它根据`$query_builder` 参数决定 `class CI_DB extends CI_DB_driver { } `  还是 `class CI_DB extends CI_DB_query_builder { }`,
+- `CI_DB_query_builder ` 继承自`CI_DB`
 
+继续跟进 `$DB->initialize();`
+
+```php
+/**
+	 * Initialize Database Settings
+	 *
+	 * @return	bool
+	 */
+	public function initialize()
+	{
+		/* If an established connection is available, then there's
+		 * no need to connect and select the database.
+		 *
+		 * Depending on the database driver, conn_id can be either
+		 * boolean TRUE, a resource or an object.
+		 */
+		if ($this->conn_id)
+		{
+			return TRUE;
+		}
+
+		// ----------------------------------------------------------------
+
+		// 尝试连接数据库
+		// Connect to the database and set the connection ID
+		$this->conn_id = $this->db_connect($this->pconnect);
+
+		// No connection resource? Check if there is a failover else throw an error
+		if ( ! $this->conn_id)
+		{
+			// Check if there is a failover set 连接失败时的备用配置
+			if ( ! empty($this->failover) && is_array($this->failover))
+			{
+				// Go over all the failovers
+				foreach ($this->failover as $failover)
+				{
+					// Replace the current settings with those of the failover
+					foreach ($failover as $key => $val)
+					{
+						$this->$key = $val;
+					}
+
+					// Try to connect
+					$this->conn_id = $this->db_connect($this->pconnect);
+
+					// If a connection is made break the foreach loop
+					if ($this->conn_id)
+					{
+						break;
+					}
+				}
+			}
+
+			// We still don't have a connection?
+			// 执行完 PLAN abcdefg 仍然没连上，报错
+			if ( ! $this->conn_id)
+			{
+				log_message('error', 'Unable to connect to the database');
+
+				if ($this->db_debug)
+				{
+					$this->display_error('db_unable_to_connect');
+				}
+
+				return FALSE;
+			}
+		}
+
+		// Now we set the character set and that's all
+		// 设定编码
+		return $this->db_set_charset($this->char_set);
+	}
+```
+
+这一步进行了数据库的连接和编码的设置。
+
+继续跟进 `$this->db_connect($this->pconnect);`
+
+```php
+/**
+	 * Database connection
+	 *
+	 * @param	bool	$persistent
+	 * @return	object
+	 */
+	public function db_connect($persistent = FALSE)
+	{
+		// Do we have a socket path?
+		if ($this->hostname[0] === '/')
+		{
+			$hostname = NULL;
+			$port = NULL;
+			$socket = $this->hostname;
+		}
+		else
+		{
+			// Persistent(持久化) connection support was added in PHP 5.3.0
+			$hostname = ($persistent === TRUE && is_php('5.3'))
+				? 'p:'.$this->hostname : $this->hostname;
+			$port = empty($this->port) ? NULL : $this->port;
+			$socket = NULL;
+		}
+
+		//使用压缩协议
+		$client_flags = ($this->compress === TRUE) ? MYSQLI_CLIENT_COMPRESS : 0;
+		$mysqli = mysqli_init();
+
+		// 查询超时
+		$mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 10);
+
+		if ($this->stricton)
+		{
+			//参考地址 http://www.jb51.net/article/51900.htm
+			$mysqli->options(MYSQLI_INIT_COMMAND, 'SET SESSION sql_mode="STRICT_ALL_TABLES"');
+		}
+
+		if (is_array($this->encrypt))
+		{
+			$ssl = array();
+			empty($this->encrypt['ssl_key'])    OR $ssl['key']    = $this->encrypt['ssl_key'];
+			empty($this->encrypt['ssl_cert'])   OR $ssl['cert']   = $this->encrypt['ssl_cert'];
+			empty($this->encrypt['ssl_ca'])     OR $ssl['ca']     = $this->encrypt['ssl_ca'];
+			empty($this->encrypt['ssl_capath']) OR $ssl['capath'] = $this->encrypt['ssl_capath'];
+			empty($this->encrypt['ssl_cipher']) OR $ssl['cipher'] = $this->encrypt['ssl_cipher'];
+
+			if ( ! empty($ssl))
+			{
+				if ( ! empty($this->encrypt['ssl_verify']) && defined('MYSQLI_OPT_SSL_VERIFY_SERVER_CERT'))
+				{
+					$mysqli->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, TRUE);
+				}
+
+				$client_flags |= MYSQLI_CLIENT_SSL;
+				$mysqli->ssl_set(
+					isset($ssl['key'])    ? $ssl['key']    : NULL,
+					isset($ssl['cert'])   ? $ssl['cert']   : NULL,
+					isset($ssl['ca'])     ? $ssl['ca']     : NULL,
+					isset($ssl['capath']) ? $ssl['capath'] : NULL,
+					isset($ssl['cipher']) ? $ssl['cipher'] : NULL
+				);
+			}
+		}
+
+		if ($mysqli->real_connect($hostname, $this->username, $this->password, $this->database, $port, $socket, $client_flags))
+		{
+			// 开启了 ssl 并且 mysql 版本小于 5.7.3 时，加密传输将失效。
+			// Prior to version 5.7.3, MySQL silently downgrades to an unencrypted connection if SSL setup fails
+			if (
+				($client_flags & MYSQLI_CLIENT_SSL)
+				&& version_compare($mysqli->client_info, '5.7.3', '<=')
+				&& empty($mysqli->query("SHOW STATUS LIKE 'ssl_cipher'")->fetch_object()->Value)
+			)
+			{
+				$mysqli->close();
+				$message = 'MySQLi was configured for an SSL connection, but got an unencrypted connection instead!';
+				log_message('error', $message);
+				return ($this->db->db_debug) ? $this->db->display_error($message, '', TRUE) : FALSE;
+			}
+
+			return $mysqli;
+		}
+
+		return FALSE;
+	}
+```
+
+根据配置的参数尽兴连接，并返回连接实例或这报错。
 

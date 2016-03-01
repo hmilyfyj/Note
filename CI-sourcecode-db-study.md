@@ -17,6 +17,10 @@ SSL、compress 相关问题
 # Tips
 ## 数据库连时
 
+## 查询
+
+无条件的delete查询在mysql4.1.2 版之前mysql_affected_rows为0。
+
 # 流程总结
 
 ## 初始化
@@ -88,7 +92,7 @@ SSL、compress 相关问题
 	}
 ``` 
 
- 接着调用了DB.php 文件的 `DB()`函数，跟进`DB()`函数：
+ >接着调用了DB.php 文件的 `DB()`函数，跟进`DB()`函数：
 
 
 ```php
@@ -367,7 +371,7 @@ function &DB($params = '', $query_builder_override = NULL)
 	}
 ```
 
-这一步进行了数据库的连接和编码的设置。
+>这一步进行了数据库的连接和编码的设置。
 
 继续跟进 `$this->db_connect($this->pconnect);`
 
@@ -459,7 +463,7 @@ function &DB($params = '', $query_builder_override = NULL)
 	}
 ```
 
-根据配置的参数进行连接，并返回连接实例或这报错。
+>根据配置的参数进行连接，并返回连接实例或这报错。
 
 
 ## 执行 sql 语句
@@ -628,7 +632,8 @@ function &DB($params = '', $query_builder_override = NULL)
 		return $RES;
 	}
 ``` 
-以上代码对 sql 语句 和 要绑定的内容进行了检测、和绑定，并通过调用 的方式调用不同数据库类型所属驱动的`simple_query()`方法进行查询，这里分别跟进`compile_binds()`、`simple_query()` 函数 。
+>以上代码对 sql 语句 和 要绑定的内容进行了检测、和绑定，并通过调用 的方式调用不同数据库类型所属驱动的`simple_query()`方法进行查询，这里分别跟进`compile_binds()`、`simple_query()` 函数 。
+
 
  **compile_binds() 函数实现**：
 

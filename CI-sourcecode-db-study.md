@@ -42,6 +42,7 @@ SSL、compress 相关问题
 
 这句调用了`Loader`类的 `database()` 函数，跟进：
 
+
 ```php
 /**
 	 * Database Loader
@@ -86,7 +87,10 @@ SSL、compress 相关问题
 		return $this;
 	}
 ``` 
- 接着调用了`DB.php` 文件的 `DB()`函数，跟进`DB()`
+
+ 接着调用了DB.php 文件的 `DB()`函数，跟进`DB()`函数：
+
+
 ```php
 /**
  * Initialize the database

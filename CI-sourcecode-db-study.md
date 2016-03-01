@@ -44,7 +44,9 @@ SSL、compress 相关问题
 
     $this->load->database();
 
-这句调用了`Loader`类的 `database()` 函数，跟进：
+>这句调用了`Loader`类的 `database()` 函数，
+
+跟进：
 
 
 ```php

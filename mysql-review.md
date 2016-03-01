@@ -13,6 +13,8 @@ categories: Mysql
 
 ### Join
 
+当数据较多时做链表查询速度超慢，这时候推荐使用索引。
+
 ### Left Join
 
 ## NULL 值处理

@@ -4,7 +4,7 @@ tags: [CodeIgniter,PHP]
 categories: CodeIgniter
 ---
 
-Model层牵涉到数据的增删改查，很重要，也是较为薄弱的地方，在这里研读CI数据库相关的代码。
+Model层牵涉到数据的增删改查，很重要，也是我较为薄弱的地方，在这里研读CI数据库相关的代码。
 
 <!-- more -->
 

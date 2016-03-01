@@ -19,6 +19,8 @@ Model层牵涉到数据的增删改查，很重要，也是较为薄弱的地方
 
 # 详细代码
 
+## 初始化
+
     $this->load->database();
 
 这句调用了`Loader`类的 `database()` 函数，跟进：
@@ -439,4 +441,309 @@ function &DB($params = '', $query_builder_override = NULL)
 ```
 
 根据配置的参数尽兴连接，并返回连接实例或这报错。
+
+
+## 执行 sql 语句
+
+    $sql     = "SELECT * FROM web_admins WHERE username = ? ";
+    $query   = $this->db->query($sql, array($username));
+
+跟进 query()：
+
+
+```php
+/**
+	 * Execute the query
+	 *
+	 * Accepts an SQL string as input and returns a result object upon
+	 * successful execution of a "read" type query. Returns boolean TRUE
+	 * upon successful execution of a "write" type query. Returns boolean
+	 * FALSE upon failure, and if the $db_debug variable is set to TRUE
+	 * will raise an error.
+	 *
+	 * @param	string	$sql
+	 * @param	array	$binds = FALSE		An array of binding data
+	 * @param	bool	$return_object = NULL
+	 * @return	mixed
+	 */
+	public function query($sql, $binds = FALSE, $return_object = NULL)
+	{
+		if ($sql === '')
+		{
+			log_message('error', 'Invalid query: '.$sql);
+			return ($this->db_debug) ? $this->display_error('db_invalid_query') : FALSE;
+		}
+		elseif ( ! is_bool($return_object))
+		{
+			$return_object = ! $this->is_write_type($sql);
+		}
+
+		// Verify table prefix and replace if necessary
+		if ($this->dbprefix !== '' && $this->swap_pre !== '' && $this->dbprefix !== $this->swap_pre)
+		{
+			$sql = preg_replace('/(\W)'.$this->swap_pre.'(\S+?)/', '\\1'.$this->dbprefix.'\\2', $sql);
+		}
+
+		// Compile binds if needed
+		if ($binds !== FALSE)
+		{
+			//对要绑定的变量尽兴转义、检测
+			$sql = $this->compile_binds($sql, $binds);
+		}
+
+		// Is query caching enabled? If the query is a "read type"
+		// we will load the caching class and return the previously
+		// cached query if it exists
+		if ($this->cache_on === TRUE && $return_object === TRUE && $this->_cache_init())
+		{
+			$this->load_rdriver();
+			if (FALSE !== ($cache = $this->CACHE->read($sql)))
+			{
+				return $cache;
+			}
+		}
+
+		// Save the query for debugging
+		if ($this->save_queries === TRUE)
+		{
+			//记录执行语句
+			$this->queries[] = $sql;
+		}
+
+		// Start the Query Timer
+		$time_start = microtime(TRUE);
+
+		// Run the Query
+		if (FALSE === ($this->result_id = $this->simple_query($sql)))
+		{
+			if ($this->save_queries === TRUE)
+			{
+				$this->query_times[] = 0;
+			}
+
+			// This will trigger（引发） a rollback if transactions are being used
+			if ($this->_trans_depth !== 0)
+			{
+				$this->_trans_status = FALSE;
+			}
+
+			// Grab the error now, as we might run some additional queries before displaying the error
+			$error = $this->error();
+
+			// Log errors
+			log_message('error', 'Query error: '.$error['message'].' - Invalid query: '.$sql);
+
+			if ($this->db_debug)
+			{
+				// We call this function in order to roll-back queries
+				// if transactions are enabled. If we don't call this here
+				// the error message will trigger an exit, causing the
+				// transactions to remain in limbo.
+				if ($this->_trans_depth !== 0)
+				{
+					do
+					{
+						$this->trans_complete();
+					}
+					while ($this->_trans_depth !== 0);
+				}
+
+				// Display errors
+				return $this->display_error(array('Error Number: '.$error['code'], $error['message'], $sql));
+			}
+
+			return FALSE;
+		}
+
+		// Stop and aggregate the query time results
+		$time_end = microtime(TRUE);
+		$this->benchmark += $time_end - $time_start;
+
+		if ($this->save_queries === TRUE)
+		{
+			$this->query_times[] = $time_end - $time_start;
+		}
+
+		// Increment the query counter
+		$this->query_count++;
+
+		// Will we have a result object instantiated? If not - we'll simply return TRUE
+		if ($return_object !== TRUE)
+		{
+			// If caching is enabled we'll auto-cleanup any existing files related to this particular URI
+			if ($this->cache_on === TRUE && $this->cache_autodel === TRUE && $this->_cache_init())
+			{
+				$this->CACHE->delete();
+			}
+
+			return TRUE;
+		}
+
+		// Load and instantiate the result driver
+		// 例如：CI_DB_Mysli_result
+		$driver		= $this->load_rdriver();
+		$RES		= new $driver($this);
+
+		// Is query caching enabled? If so, we'll serialize the
+		// result object and save it to a cache file.
+		if ($this->cache_on === TRUE && $this->_cache_init())
+		{
+			// We'll create a new instance of the result object
+			// only without the platform specific driver since
+			// we can't use it with cached data (the query result
+			// resource ID won't be any good once we've cached the
+			// result object, so we'll have to compile the data
+			// and save it)
+			$CR = new CI_DB_result($this);
+			$CR->result_object	= $RES->result_object();
+			$CR->result_array	= $RES->result_array();
+			$CR->num_rows		= $RES->num_rows();
+
+			// Reset these since cached objects can not utilize resource IDs.
+			$CR->conn_id		= NULL;
+			$CR->result_id		= NULL;
+
+			$this->CACHE->write($sql, $CR);
+		}
+
+		return $RES;
+	}
+``` 
+以上代码对 sql 语句 和 要绑定的内容进行了检测、和绑定，并通过调用 的方式调用不同数据库类型所属驱动的`simple_query()`方法进行查询，这里分别跟进`compile_binds()`、`simple_query()` 函数 。
+
+ **compile_binds() 函数实现**：
+
+```php
+/**
+	 * Compile Bindings
+	 *
+	 * @param	string	the sql statement
+	 * @param	array	an array of bind data
+	 * @return	string
+	 */
+	public function compile_binds($sql, $binds)
+	{
+		//处理不同类型、格式的参数
+		if (empty($binds) OR empty($this->bind_marker) OR strpos($sql, $this->bind_marker) === FALSE)
+		{
+			// 没有要绑定的标记、参数为空则直接返回参数
+			return $sql;
+		}
+		elseif ( ! is_array($binds))
+		{
+			$binds = array($binds);
+			$bind_count = 1;
+		}
+		else
+		{
+			// Make sure we're using numeric keys
+			// 保证参数key为数字、计算参数个数
+			$binds = array_values($binds);
+			$bind_count = count($binds);
+		}
+
+		// We'll need the marker length later
+		// 我们使用 ？ ，所以这里 $ml=1;
+		$ml = strlen($this->bind_marker);
+		
+		// 防止数据被我们错误替换
+		// Make sure not to replace a chunk(数据块) inside a string that happens to match the bind marker
+		// 为了保证替换时不替换数据块，这里先处理掉 '' 包裹的 ? 后再统计了 ? 的位置
+		if ($c = preg_match_all("/'[^']*'/i", $sql, $matches))
+		{
+			$c = preg_match_all('/'.preg_quote($this->bind_marker, '/').'/i',
+				str_replace($matches[0],
+					str_replace($this->bind_marker, str_repeat(' ', $ml), $matches[0]), // bind_marker转 ' '
+					$sql, $c),
+				$matches, PREG_OFFSET_CAPTURE);
+		
+			// Bind values' count must match the count of markers in the query
+			// 数量不匹配，返回原参数。
+			if ($bind_count !== $c)
+			{
+				return $sql;
+			}
+		}
+		elseif (($c = preg_match_all('/'.preg_quote($this->bind_marker, '/').'/i', $sql, $matches, PREG_OFFSET_CAPTURE)) !== $bind_count)
+		{
+			return $sql;
+		}
+
+		do
+		{
+			$c--;
+			$escaped_value = $this->escape($binds[$c]);
+			if (is_array($escaped_value))
+			{
+				$escaped_value = '('.implode(',', $escaped_value).')';
+			}
+			$sql = substr_replace($sql, $escaped_value, $matches[0][$c][1], $ml);
+		}
+		while ($c !== 0);
+
+		return $sql;
+	}
+```
+
+ **simple_query()函数实现**：
+```php
+/**
+	 * Simple Query
+	 * This is a simplified version of the query() function. Internally
+	 * we only use it when running transaction commands since they do
+	 * not require all the features of the main query() function.
+	 *
+	 * @param	string	the sql query
+	 * @return	mixed
+	 */
+	public function simple_query($sql)
+	{
+		if ( ! $this->conn_id)
+		{
+			$this->initialize();
+		}
+		//_execute该函数由继承者各自实现
+		return $this->_execute($sql);
+	}
+```
+
+跟进 `_execute()` 函数：
+
+```php
+/**
+	 * Execute the query
+	 *
+	 * @param	string	$sql	an SQL query
+	 * @return	mixed
+	 */
+	protected function _execute($sql)
+	{
+		return $this->conn_id->query($this->_prep_query($sql));
+	}
+
+
+/**
+	 * Prep the query
+	 *
+	 * If needed, each database adapter can prep the query string
+	 *
+	 * @param	string	$sql	an SQL query
+	 * @return	string
+	 */
+	protected function _prep_query($sql)
+	{
+		// 针对这样的语句 DELETE FROM TABLE affected rows 为 0；
+		// mysqli_affected_rows() returns 0 for "DELETE FROM TABLE" queries. This hack
+		// modifies the query so that it a proper number of affected rows is returned.
+		if ($this->delete_hack === TRUE && preg_match('/^\s*DELETE\s+FROM\s+(\S+)\s*$/i', $sql))
+		{
+			return trim($sql).' WHERE 1=1';
+		}
+
+		return $sql;
+	}
+
+```
+
+
 

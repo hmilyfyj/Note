@@ -10,12 +10,29 @@ Model层牵涉到数据的增删改查，很重要，也是我较为薄弱的地
 
 ---
 
+# 未解决问题
+
+SSL、compress 相关问题
+
 # Tips
 ## 数据库连时
 
 # 流程总结
 
-待补充
+## 初始化
+1. 引入基本类 `CI_DB_driver`基类、`CI_DB_query_builder`基类
+2. 创建类`CI_DB`，且`CI_DB`根据 $query_builder 的T/F值继承 `CI_DB_driver`基类、`CI_DB_query_builder`基类。
+3. 根据数据库类型（这里指定了 mysli）引入以`CI_DB`为基类的`CI_DB_mysqli_driver`  适配器。
+4.  实例化 `CI_DB_mysqli_driver`
+
+### 实例化
+1.  调用 `db_connect()` 函数，实际上执行了：`mysqli_init();`
+2. 做一些连接前准备，如`$mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 10);`、Strit mode `$mysqli->options(MYSQLI_INIT_COMMAND, 'SET SESSION sql_mode="STRICT_ALL_TABLES"');`
+3. 创建连接`$mysqli->real_connect($hostname, $this->username, $this->password, $this->database, $port, $socket, $client_flags)`
+4. 设置编码 `set_charset($charset)`
+
+## 执行
+
 
 # 详细代码
 
@@ -69,9 +86,7 @@ Model层牵涉到数据的增删改查，很重要，也是我较为薄弱的地
 		return $this;
 	}
 ``` 
-
- 接着调用了`DB.php` 文件的 `DB()`函数，跟进
- 
+ 接着调用了`DB.php` 文件的 `DB()`函数，跟进`DB()`
 ```php
 /**
  * Initialize the database
@@ -405,7 +420,7 @@ function &DB($params = '', $query_builder_override = NULL)
 				{
 					$mysqli->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, TRUE);
 				}
-
+				//按位或
 				$client_flags |= MYSQLI_CLIENT_SSL;
 				$mysqli->ssl_set(
 					isset($ssl['key'])    ? $ssl['key']    : NULL,
@@ -440,7 +455,7 @@ function &DB($params = '', $query_builder_override = NULL)
 	}
 ```
 
-根据配置的参数尽兴连接，并返回连接实例或这报错。
+根据配置的参数进行连接，并返回连接实例或这报错。
 
 
 ## 执行 sql 语句

@@ -296,43 +296,4 @@ function &DB($params = '', $query_builder_override = NULL)
 }
 ```
 
-```
-
-跟进 `_execute()` 函数：
-
-```php
-/**
-	 * Execute the query
-	 *
-	 * @param	string	$sql	an SQL query
-	 * @return	mixed
-	 */
-	protected function _execute($sql)
-	{
-		return $this->conn_id->query($this->_prep_query($sql));
-	}
-
-
-/**
-	 * Prep the query
-	 *
-	 * If needed, each database adapter can prep the query string
-	 *
-	 * @param	string	$sql	an SQL query
-	 * @return	string
-	 */
-	protected function _prep_query($sql)
-	{
-		// 针对这样的语句 DELETE FROM TABLE affected rows 为 0；
-		// mysqli_affected_rows() returns 0 for "DELETE FROM TABLE" queries. This hack
-		// modifies the query so that it a proper number of affected rows is returned.
-		if ($this->delete_hack === TRUE && preg_match('/^\s*DELETE\s+FROM\s+(\S+)\s*$/i', $sql))
-		{
-			return trim($sql).' WHERE 1=1';
-		}
-
-		return $sql;
-	}
-
-```
 

@@ -92,7 +92,7 @@ SSL、compress 相关问题
 		$CI->db =& DB($params, $query_builder);
 		return $this;
 	}
-``` 
+```
 
 
 接着调用了DB.php 文件的 `DB()`函数，跟进`DB()`函数：

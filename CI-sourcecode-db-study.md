@@ -30,10 +30,10 @@ SSL、compress 相关问题
 4.  实例化 `CI_DB_mysqli_driver`
 
 ### 实例化
-1.  调用 `db_connect()` 函数，实际上执行了：`mysqli_init();`
-2. 做一些连接前准备，如`$mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 10);`、Strit mode `$mysqli->options(MYSQLI_INIT_COMMAND, 'SET SESSION sql_mode="STRICT_ALL_TABLES"');`
-3. 创建连接`$mysqli->real_connect($hostname, $this->username, $this->password, $this->database, $port, $socket, $client_flags)`
-4. 设置编码 `set_charset($charset)`
+1.  调用 `db_connect()` 函数，实际上执行了：`mysqli_init();`。
+2. 做一些连接前准备，如`$mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 10);`、Strit mode `$mysqli->options(MYSQLI_INIT_COMMAND, 'SET SESSION sql_mode="STRICT_ALL_TABLES"');`。
+3. 创建连接`$mysqli->real_connect($hostname, $this->username, $this->password, $this->database, $port, $socket, $client_flags)`。
+4. 设置编码 `set_charset($charset)`。
 
 ## 执行
 

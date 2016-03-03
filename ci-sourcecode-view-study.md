@@ -16,9 +16,12 @@ categories: CodeIgniter
 
 ob_系列。
 
-    int extract ( array &$var_array [, int $extract_type = EXTR_OVERWRITE [, string $prefix = NULL ]] ) //将数组的键值对转为从数组中将变量导入到当前的符号表。
+- 将数组的键值对转为从数组中将变量导入到当前的符号表。
 
-    array get_object_vars ( object $obj ) //返回由 obj 指定的对象中定义的属性组成的关联数组。 
+    int extract ( array &$var_array [, int $extract_type = EXTR_OVERWRITE [, string $prefix = NULL ]] )
+    
+- 返回由 obj 指定的对象中定义的属性组成的关联数组。 
+    array get_object_vars ( object $obj ) 
 
     参数：short_open_tag，短标签写法：<?=$xxx;?>
 

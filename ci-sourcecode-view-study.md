@@ -23,7 +23,7 @@ ob_系列。
 - 返回由 obj 指定的对象中定义的属性组成的关联数组。 
     array get_object_vars ( object $obj ) 
 
-    参数：short_open_tag，短标签写法：<?=$xxx;?>
+- 参数：short_open_tag，短标签写法：<?=$xxx;?>
 
 
 

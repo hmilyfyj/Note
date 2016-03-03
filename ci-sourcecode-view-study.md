@@ -7,6 +7,7 @@ categories: CodeIgniter
 这章研究CI如何渲染View层。
 
 <!-- more -->
+
 ---
 
 # Tips

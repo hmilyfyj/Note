@@ -30,3 +30,74 @@ categories: 算法
 ![](http://7xnocp.com1.z0.glb.clouddn.com/16-3-4/78190806.jpg)
 
 
+# PHP 实现
+
+```php
+/**
+	 * 测试
+	 *
+	 * @author Feng <fengit@shanjing-inc.com>
+	 */
+	function test() {
+		//导入类库
+		
+		//获取参数
+		
+		//校验参数
+		
+		$v = array(10, 40, 30, 50); //商品价值
+		$w = array(5, 4, 6, 3); //商品重量
+		$W = 10; //背包容量
+	
+		Knaspack($v, $w, $W);
+	}
+	
+	/**
+	 * 背包问题
+	 *
+	 * @author Feng <fengit@shanjing-inc.com>
+	 */
+	function Knaspack($v, $w, $W) {
+		//导入类库
+		
+		//获取参数
+		
+		//校验参数
+		
+		//初始化
+		$l	= count($v); //商品数量
+		$V	= array();	//二维数组
+		
+		//第0列、0行均为0
+		for($i = 0; $i <= $l; $i++)  $V[$i][0]	= 0;
+		for($i = 0; $i <= $W; $i++)  $V[0][$i]	= 0;
+		
+
+		for($i = 1; $i <= $l; $i++) {
+			for($weight = 1; $weight <= $W; $weight++) {
+				//元素小于背包容量
+				if ($w[$i - 1] < $weight) {
+					//尝试放入背包
+					$V[$i][$weight]		= max($w[$i - 1] + $V[$i - 1][$weight - $w[$i - 1]], $V[$i -1][$weight]);
+				} else {
+					//抛弃，保持 $i - 1的状态
+					$V[$i][$weight]		= $V[$i - 1][$weight];
+				}
+			}
+		}
+		
+		//输出选择方案（商品编号）
+		$j			= $W;
+		$selected	= array();
+		for($i = $l; $i > 0; $i--) {
+			if ($V[$i][$j] > $V[$i - 1][$j]) {
+				$selected[]	= $i;
+				$j			= $j - $w[$i - 1];
+			}
+		}
+		
+		//输出最大价值
+		print_r($V[$l][$W]);
+	}
+```
+

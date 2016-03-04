@@ -4,7 +4,7 @@ tags: [算法,基础不丢,在成为最厉害最厉害最厉害的路上]
 categories: 算法
 ---
 
-经典的动态规划模型
+经典的动态规划模型。
 
 <!-- more -->
 
@@ -100,4 +100,16 @@ categories: 算法
 		print_r($V[$l][$W]);
 	}
 ```
+
+# 参考地址
+
+http://www.cnblogs.com/Anker/archive/2013/05/04/3059070.html
+
+http://www.hawstein.com/posts/dp-knapsack.html
+
+http://blog.csdn.net/zs234/article/details/7487960
+
+https://www.javacodegeeks.com/2014/07/the-knapsack-problem.html
+
+http://www.importnew.com/13072.html
 

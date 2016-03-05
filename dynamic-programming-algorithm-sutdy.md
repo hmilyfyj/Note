@@ -113,3 +113,57 @@ https://www.javacodegeeks.com/2014/07/the-knapsack-problem.html
 
 http://www.importnew.com/13072.html
 
+
+# 八皇后
+每一行、列、对角线的元素个数必须小于2。
+
+# PHP 实现
+
+```php
+$solution_count = 0;
+$arr			= array();
+
+search(0);
+echo $solution_count;
+
+function search($index) {
+	global $solution_count;
+	global $arr;
+	for ($i = 0; $i < 8; $i++) {
+		$arr[$index] = $i; 
+		
+		//检查方案是否可行
+		if (is_safe($arr, $index)) {
+			//
+			if ($index == 7 ) {
+				//进行到最后一步，输出结果
+				$solution_count++;
+				echo implode(',', $arr)."\n";
+			} else {
+				//继续进行搜索
+				search($index+1);
+			}
+		} else {
+			//该方案不可行尝试其他方案
+		}
+	}
+}
+
+
+function is_safe(&$arr, $index) {
+	//
+	for ($i = 0; $i < $index; $i++) {
+		if (abs($index - $i) == abs($arr[$index] - $arr[$i]) || $arr[$i] == $arr[$index]) {
+			return FALSE;
+		}
+	}
+	
+	return TRUE;
+}
+```
+
+
+http://blog.csdn.net/zssureqh/article/details/21116883
+
+https://zh.wikipedia.org/wiki/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98
+

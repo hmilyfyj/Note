@@ -176,3 +176,7 @@ http://blog.csdn.net/zssureqh/article/details/21116883
 
 https://zh.wikipedia.org/wiki/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98
 
+http://www.cnblogs.com/gaoteng/archive/2012/04/11/2442692.html
+
+http://blog.csdn.net/zssureqh/article/details/21116883
+

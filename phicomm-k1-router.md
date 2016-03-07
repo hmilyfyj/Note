@@ -64,4 +64,16 @@ categories: 路由
 	uci get dhcp.lan.dhcpv6 // 返回值为 disabled
 	/etc/init.d/odhcpd restart
 
+# 三、中继 CMCC
+
+1. 网络 =》无线 =》搜索 
+2. 选择信号
+3. wwan端口
+4. 保存、应用。
+5. 耐心等待wwan端口获取到IP地址。
+6. 认证
+7. 一次登录，所有设备都可以上了。
+
+
+
 

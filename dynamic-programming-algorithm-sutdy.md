@@ -128,6 +128,8 @@ http://www.importnew.com/13072.html
 
 ## PHP 实现
 
+### 回溯法
+
 ```php
 $solution_count = 0;
 $arr			= array();

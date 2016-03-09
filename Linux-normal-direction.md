@@ -6,6 +6,8 @@ categories: Linux
 
 系统的过一遍命令，然后根据需求专精。
 
+[The Linux Command Line](http://www.kancloud.cn/thinkphp/linux-command-line/39431)
+
 <!-- more -->
 
 ---
@@ -24,6 +26,30 @@ categories: Linux
 - mkdir — 创建目录
 - rm — 删除文件和目录
 - ln — 创建硬链接和符号链接
+
+
+#### 关于软硬连接，这里举个栗子：
+
+    $ touch f1          #创建一个测试文件f1
+    $ ln f1 f2          #创建f1的一个硬连接文件f2
+    $ ln -s f1 f3       #创建f1的一个符号连接文件f3
+    $ ls -li            # -i参数显示文件的inode节点信息
+
+    total 0
+    9797648 -rw-r--r--  2 oracle oinstall 0 Apr 21 08:11 f1
+    9797648 -rw-r--r--  2 oracle oinstall 0 Apr 21 08:11 f2
+    9797649 lrwxrwxrwx  1 oracle oinstall 2 Apr 21 08:11 f3 -> f1
+
+从上面的结果中可以看出，硬连接文件f2与原文件f1的inode节点相同，均为9797648，然而符号连接文件的inode节点不同。
+
+通过上面的测试可以看出：当删除原始文件f1后，硬连接f2不受影响，但是符号连接f1文件无效
+
+##### 总结
+依此您可以做一些相关的测试，可以得到以下全部结论：
+1. 删除符号连接f3,对f1,f2无影响；
+2. 删除硬连接f2，对f1,f3也无影响；
+3. 删除原文件f1，对硬连接f2没有影响，导致符号连接f3失效；
+4. 同时删除原文件f1,硬连接f2，整个文件会真正的被删除。
 
 #### 查找
 - locate – 通过名字来查找文件

@@ -41,8 +41,6 @@ categories: Linux
 归档程序：
 - tar – 磁带打包工具
 - zip – 打包和压缩文件
-
-
 还有文件同步程序：
 - rsync – 同步远端文件和目录
 

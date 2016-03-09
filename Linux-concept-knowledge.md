@@ -4,12 +4,43 @@ tags: [Linux,折腾]
 categories: Linux
 ---
 
-结合上一篇[Linux命令总结](http://b.fengbl.cn/2016/03/08/Linux-normal-direction/)，做一些细化知识的记录
+结合上一篇[Linux命令总结](http://b.fengbl.cn/2016/03/08/Linux-normal-direction/)，对一些细化的知识的做记录
 
 <!-- more -->
 
 ---
 # 知识点
+
+## 重定向输出
+
+Everything is file.
+
+### > 覆盖 >> 追加
+
+#### 正常内容输出
+
+    $ ls -l /usr/bin > ls-output.txt
+
+### 控制错误内容输出
+
+    ls -l /bin/usr 2> ls-error.txt //输出
+    ls -l /bin/usr 2> /dev/null //隐藏
+
+### 同时输出错误、正常内容
+
+    $ ls -l /bin/usr > ls-output.txt 2>&1 //方法1
+    $ ls -l /bin/usr &> ls-output.txt //方法2
+
+### | 管道线
+
+#### 过滤器
+
+    ls /bin /usr/bin | sort | uniq | less //排序、去重
+    wc ls-output.txt //打印行，字和字节数
+    head -n 5 ls-output.txt //打印文件开头部分/结尾部分
+    tail -n 5 ls-output.txt
+    ls /usr/bin | tee ls.txt | grep zip //从 Stdin 读取数据，并同时输出到 Stdout 和文件
+    tail -f /var/log/messages //实时浏览
 
 ## 软硬连接
 

@@ -6,7 +6,7 @@ categories: Linux
 
 系统的过一遍命令，然后根据需求专精。
 
-[The Linux Command Line](http://www.kancloud.cn/thinkphp/linux-command-line/39431)
+参考书籍：[The Linux Command Line](http://www.kancloud.cn/thinkphp/linux-command-line/39431)
 
 <!-- more -->
 

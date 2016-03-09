@@ -40,12 +40,12 @@ categories: Linux
 
 - gzip – 压缩或者展开文件
 - bzip2 – 块排序文件压缩器
-- 归档程序：
-
+归档程序：
 - tar – 磁带打包工具
 - zip – 打包和压缩文件
-还有文件同步程序：
 
+
+还有文件同步程序：
 - rsync – 同步远端文件和目录
 
 ## 重定向
@@ -140,7 +140,9 @@ categories: Linux
 - cancel —— 取消打印任务（System V）
 
 ## 编译程序
-- make - 维护程序的工具
+- ./configure
+- make
+- make install
 
 # 快捷键
 

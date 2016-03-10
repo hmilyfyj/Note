@@ -186,10 +186,36 @@ Videos
     drwxr-xr-x 2 root root 4096 Mar 10 16:49 test
     -rw-r--r-- 1 root root    0 Mar 10 16:51 test.txt
 
+## 更换身份
 
+三种方式：
 
+1. 注销系统并以其他用户身份重新登录系统。
+2. 使用 su 命令。
+3. 使用 sudo 命令。
 
+### su
 
+    su [-[l]] [user]
+
+	#切换用户
+    [me@linuxbox ~]$ su -
+    Password:
+    [root@linuxbox ~]#
+    
+    [root@linuxbox ~]# exit
+    [me@linuxbox ~]$
+    
+    #单纯执行命令
+    su -c 'command'
+    
+    [me@linuxbox ~]$ su -c 'ls -l /root/*'
+    Password:
+    -rw------- 1 root root    754 2007-08-11 03:19 /root/anaconda-ks.cfg
+    
+    /root/Mail:
+    total 0
+    [me@linuxbox ~]$
 
 # 概念
 

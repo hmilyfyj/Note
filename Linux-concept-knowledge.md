@@ -4,7 +4,7 @@ tags: [Linux,折腾]
 categories: Linux
 ---
 
-结合上一篇[Linux命令总结](http://b.fengbl.cn/2016/03/08/Linux-normal-direction/)，对一些细化的知识的做记录
+结合上一篇[Linux命令总结](http:#b.fengbl.cn/2016/03/08/Linux-normal-direction/)，对一些细化的知识的做记录
 
 <!-- more -->
 
@@ -25,24 +25,24 @@ Everything is file.
 
 ### 控制错误内容输出
 
-    ls -l /bin/usr 2> ls-error.txt //输出
-    ls -l /bin/usr 2> /dev/null //隐藏
+    ls -l /bin/usr 2> ls-error.txt #输出
+    ls -l /bin/usr 2> /dev/null #隐藏
 
 ### 同时输出错误、正常内容
 
-    [me@linuxbox ~]$ ls -l /bin/usr > ls-output.txt 2>&1 //方法1
-    [me@linuxbox ~]$ ls -l /bin/usr &> ls-output.txt //方法2
+    [me@linuxbox ~]$ ls -l /bin/usr > ls-output.txt 2>&1 #方法1
+    [me@linuxbox ~]$ ls -l /bin/usr &> ls-output.txt #方法2
 
 ### | 管道线
 
 #### 过滤器
 
-    ls /bin /usr/bin | sort | uniq | less //排序、去重
-    wc ls-output.txt //打印行，字和字节数
-    head -n 5 ls-output.txt //打印文件开头部分/结尾部分
+    ls /bin /usr/bin | sort | uniq | less #排序、去重
+    wc ls-output.txt #打印行，字和字节数
+    head -n 5 ls-output.txt #打印文件开头部分/结尾部分
     tail -n 5 ls-output.txt
-    ls /usr/bin | tee ls.txt | grep zip //从 Stdin 读取数据，并同时输出到 Stdout 和文件
-    tail -f /var/log/messages //实时浏览
+    ls /usr/bin | tee ls.txt | grep zip #从 Stdin 读取数据，并同时输出到 Stdout 和文件
+    tail -f /var/log/messages #实时浏览
 
 ## 软硬连接
 
@@ -72,26 +72,25 @@ Everything is file.
 5. 硬链接不能跨越物理设备， 硬链接不能关联目录，只能是文件。符号链接是文件的特殊类型，它包含一个指向 目标文件或目录的文本指针。
 
 ## Echo 展开
-	//字符串展开
+	#字符串展开
     [me@linuxbox ~]$ echo this is a test
     this is a test
-    //目录展开
+    
+    #目录展开
     [me@linuxbox ~]$ echo *
     Desktop Documents ls-output.txt Music Pictures Public Templates Videos
-    
-    
     [me@linuxbox ~]$ ls
     Desktop   ls-output.txt   Pictures   Templates
-    
     echo D*
     Desktop  Documents
-    
     [me@linuxbox ~]$ echo ~
     /home/me
-    //算术表达式展开
+    
+    #算术表达式展开
     [me@linuxbox ~]$ echo [me@linuxbox ~]$((2 + 2))
     4
-    //花括号展开
+    
+    #花括号展开
     [me@linuxbox ~]$ echo Number_{1..5}
 	Number_1  Number_2  Number_3  Number_4  Number_5
 	[me@linuxbox ~]$ echo Front-{A,B,C}-Back
@@ -100,7 +99,8 @@ Everything is file.
 	Number_1  Number_2  Number_3  Number_4  Number_5
 	[me@linuxbox ~]$ echo {Z..A}
 	Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
-	//参数展开
+	
+	#参数展开
 	[me@linuxbox ~]$ echo $USER
 	me
 

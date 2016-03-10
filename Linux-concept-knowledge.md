@@ -96,6 +96,44 @@ Everything is file.
 	Number_1  Number_2  Number_3  Number_4  Number_5
 	[me@linuxbox ~]$ echo Front-{A,B,C}-Back
 	Front-A-Back Front-B-Back Front-C-Back
+	[me@linuxbox ~]$ echo Number_{1..5}
+	Number_1  Number_2  Number_3  Number_4  Number_5
+	[me@linuxbox ~]$ echo {Z..A}
+	Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+	//参数展开
+	[me@linuxbox ~]$ echo $USER
+	me
+
+## 占位标题
+
+### 命令替换
+
+[me@linuxbox ~]$ echo $(ls)
+Desktop Documents ls-output.txt Music Pictures Public Templates
+Videos
+
+[me@linuxbox ~]$ ls -l $(which cp)
+-rwxr-xr-x 1 root root 71516 2007-12-05 08:58 /bin/cp
+
+### 引用
+
+#### 双引号
+
+文本在双引号中， shell 使用的特殊字符，除了 $，\ (反斜杠），和 `（倒引号）之外， 则失去它们的特殊含义，被当作普通字符来看待。
+
+    [me@linuxbox ~]$ echo "$USER $((2+2)) $(cal)"
+    me 4    February 2008
+    Su Mo Tu We Th Fr Sa
+    ....
+#### 单引号
+禁用全部展开
+
+    [me@linuxbox ~]$ echo text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER
+    text /home/me/ls-output.txt a b foo 4 me
+    [me@linuxbox ~]$ echo "text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER"
+    text ~/*.txt   {a,b} foo 4 me
+    [me@linuxbox ~]$ echo 'text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER'
+    text ~/*.txt  {a,b} $(echo foo) $((2+2)) $USER
 
 # 概念
 
@@ -112,6 +150,7 @@ Everything is file.
 [characters]	匹配任意一个属于字符集中的字符
 [!characters]	匹配任意一个不是字符集中的字符
 [[:class:]]	匹配任意一个属于指定字符类中的字符
+
 
 
 

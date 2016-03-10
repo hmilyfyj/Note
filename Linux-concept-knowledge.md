@@ -135,6 +135,17 @@ Videos
     [me@linuxbox ~]$ echo 'text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER'
     text ~/*.txt  {a,b} $(echo foo) $((2+2)) $USER
 
+## 权限
+
+权限由 “r”，“w”，和 “x” 来指定。
+
+|  |  |
+|--|--|
+|u|	"user"的简写，意思是文件或目录的所有者。
+|g|	用户组。
+|o|	"others"的简写，意思是其他所有的人。
+|a|	"all"的简写，是"u", "g"和“o”三者的联合。
+
 # 概念
 
 ## 符号链接

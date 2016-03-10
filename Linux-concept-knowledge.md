@@ -21,7 +21,7 @@ Everything is file.
 
 ### 正常内容输出
 
-    $ ls -l /usr/bin > ls-output.txt
+    [me@linuxbox ~]$ ls -l /usr/bin > ls-output.txt
 
 ### 控制错误内容输出
 
@@ -30,8 +30,8 @@ Everything is file.
 
 ### 同时输出错误、正常内容
 
-    $ ls -l /bin/usr > ls-output.txt 2>&1 //方法1
-    $ ls -l /bin/usr &> ls-output.txt //方法2
+    [me@linuxbox ~]$ ls -l /bin/usr > ls-output.txt 2>&1 //方法1
+    [me@linuxbox ~]$ ls -l /bin/usr &> ls-output.txt //方法2
 
 ### | 管道线
 
@@ -50,10 +50,10 @@ Everything is file.
 
 ### 举个栗子：
 
-    $ touch f1          #创建一个测试文件f1
-    $ ln f1 f2          #创建f1的一个硬连接文件f2
-    $ ln -s f1 f3       #创建f1的一个符号连接文件f3
-    $ ls -li            # -i参数显示文件的inode节点信息
+    [me@linuxbox ~]$ touch f1          #创建一个测试文件f1
+    [me@linuxbox ~]$ ln f1 f2          #创建f1的一个硬连接文件f2
+    [me@linuxbox ~]$ ln -s f1 f3       #创建f1的一个符号连接文件f3
+    [me@linuxbox ~]$ ls -li            # -i参数显示文件的inode节点信息
 
     total 0
     9797648 -rw-r--r--  2 oracle oinstall 0 Apr 21 08:11 f1
@@ -70,6 +70,32 @@ Everything is file.
 3. 删除原文件f1，对硬连接f2没有影响，导致符号连接f3失效；
 4. 同时删除原文件f1,硬连接f2，整个文件会真正的被删除。
 5. 硬链接不能跨越物理设备， 硬链接不能关联目录，只能是文件。符号链接是文件的特殊类型，它包含一个指向 目标文件或目录的文本指针。
+
+## Echo 展开
+	//字符串展开
+    [me@linuxbox ~]$ echo this is a test
+    this is a test
+    //目录展开
+    [me@linuxbox ~]$ echo *
+    Desktop Documents ls-output.txt Music Pictures Public Templates Videos
+    
+    
+    [me@linuxbox ~]$ ls
+    Desktop   ls-output.txt   Pictures   Templates
+    
+    echo D*
+    Desktop  Documents
+    
+    [me@linuxbox ~]$ echo ~
+    /home/me
+    //算术表达式展开
+    [me@linuxbox ~]$ echo [me@linuxbox ~]$((2 + 2))
+    4
+    //花括号展开
+    [me@linuxbox ~]$ echo Number_{1..5}
+	Number_1  Number_2  Number_3  Number_4  Number_5
+	[me@linuxbox ~]$ echo Front-{A,B,C}-Back
+	Front-A-Back Front-B-Back Front-C-Back
 
 # 概念
 

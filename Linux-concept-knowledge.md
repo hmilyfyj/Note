@@ -344,6 +344,46 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 
     [me@linuxbox ~]$ printenv USER
     me
+当使用没有带选项和参数的 set 命令时，shell 和环境变量二者都会显示，同时也会显示定义的 shell 函数。不同于 printenv 命令，set 命令的输出结果很礼貌地按照字母顺序排列：
+
+    [me@linuxbox ~]$ set | less
+
+    [me@linuxbox ~]$ echo $HOME
+    /home/me
+
+如果 shell 环境中的一个成员既不可用 set 命令也不可用 printenv 命令显示，则这个变量是别名。 输入不带参数的 alias 命令来查看它们:
+
+    [me@linuxbox ~]$ alias
+    alias l.='ls -d .* --color=tty'
+    alias ll='ls -l --color=tty'
+    alias ls='ls --color=tty'
+    alias vi='vim'
+    alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+
+### 建立环境变量
+有两种 shell 会话类型：一个是登录 shell 会话，另一个是非登录 shell 会话。
+
+登录 shell 会话会提示用户输入用户名和密码；例如，我们启动一个虚拟控制台会话。当我们在 GUI 模式下 运行终端会话时，非登录 shell 会话会出现。
+
+登录 shell 会话的启动文件
+
+|||
+|---|---|
+|文件	内容
+|/etc/profile	|应用于所有用户的全局配置脚本。
+|~/.bash_profile	|用户私人的启动文件。可以用来扩展或重写全局配置|脚本中的设置。
+|~/.bash_login	|如果文件 ~/.bash_profile 没有找到，bash 会尝试读取这个脚本。
+|~/.profile	|如果文件 ~/.bash_profile 或文件 ~/.bash_login 都没有找到，bash 会试图读取这个文件。 这是基于 Debian 发行版的默认设置，比方说 Ubuntu。
+
+非登录 shell 会话的启动文件
+
+|||
+|---|---|
+|文件	|内容
+|/etc/bash.bashrc	|应用于所有用户的全局配置文件。
+|~/.bashrc	|用户私有的启动文件。可以用来扩展或重写全局配置脚本中的设置。
+
+非登录 shell 会话也会继承它们父进程的环境设置，通常是一个登录 shell。
 
 
 # 概念

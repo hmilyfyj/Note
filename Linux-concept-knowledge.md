@@ -326,6 +326,25 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
     [1]+ xlogo &
     [me@linuxbox ~]$
 
+### 杀死进程
+
+#### kill、killalll
+
+    kill [-signal] PID...
+    killall [-u user] [-signal] name...
+
+    [me@linuxbox ~]$ xlogo &
+    [1] 28401
+    [me@linuxbox ~]$ kill 28401
+    [1]+ Terminated               xlogo
+
+ kill 命令，并且指定我们想要终止的进程 PID。也可以用 jobspec（例如，“％1”）来代替 PID。
+
+## 环境变量
+
+    [me@linuxbox ~]$ printenv USER
+    me
+
 
 # 概念
 

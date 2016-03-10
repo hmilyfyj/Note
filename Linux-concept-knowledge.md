@@ -163,12 +163,32 @@ Videos
 
 |  |  |
 |--|--|
-|u+x	|为文件所有者添加可执行权限。|
+|u+x	|为文件所有者添加可执行权限。
 |u-x	|删除文件所有者的可执行权限。
 |+x	|为文件所有者，用户组，和其他所有人添加可执行权限。 等价于 a+x。
 |o-rw	|除了文件所有者和用户组，删除其他人的读权限和写权限。
 |go=rw	|给群组的主人和任意文件拥有者的人读写权限。如果群组的主人或全局之前已经有了执行的权限，他们将被移除。
 |u+x,go=rw	|给文件拥有者执行权限并给组和其他人读和执行的权限。多种设|定可以用逗号分开。
+
+### umask
+
+掩码：删除r、w、x属性。
+
+默认的文件权限：0666 - 掩码
+默认的文件权限：0777 - 掩码
+
+#### 举个栗子
+
+    [root@bfmbch ln_test]# umask 0022 #修改掩码
+    [root@bfmbch ln_test]# mkdir test #创建文件夹
+    [root@bfmbch ln_test]# touch test.txt #创建
+    [root@bfmbch ln_test]# ll | grep test
+    drwxr-xr-x 2 root root 4096 Mar 10 16:49 test
+    -rw-r--r-- 1 root root    0 Mar 10 16:51 test.txt
+
+
+
+
 
 
 # 概念

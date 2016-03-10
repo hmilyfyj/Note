@@ -15,9 +15,11 @@ categories: Linux
 
 Everything is file.
 
-### > 覆盖 >> 追加
+### 覆盖、追加
 
-#### 正常内容输出
+\>
+
+### 正常内容输出
 
     $ ls -l /usr/bin > ls-output.txt
 

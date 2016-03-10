@@ -217,6 +217,39 @@ Videos
     total 0
     [me@linuxbox ~]$
 
+## sudo
+
+sudo 命令在很多方面都相似于 su 命令，但是 sudo 还有一些非常重要的功能。管理员能够配置 sudo 命令，从而允许一个普通用户以不同的身份（通常是超级用户），通过一种非常可控的方式 来执行命令。尤其是，只有一个用户可以执行一个或多个特殊命令时，（更体现了 sudo 命令的方便性）。 s
+
+使用 sudo 命令时，用户使用他/她自己的密码 来认证。
+
+su 和 sudo 之间的一个重要区别是 sudo 不会重新启动一个 shell，也不会加载另一个 用户的 shell 运行环境。
+
+
+    [me@linuxbox ~]$ sudo backup_script
+    Password:
+    System Backup Starting...
+    [me@linuxbox ~]$ sudo -l
+    User me may run the following commands on this host:
+    (ALL) ALL
+
+
+>当引进 Ubuntu 的时候，它的创作者们采取了不同的策略。默认情况下，Ubuntu 不允许用户登录 到 root 帐号（因为不能为 root 帐号设置密码），而是使用 sudo 命令授予普通用户超级用户权限。 通过 sudo 命令，最初的用户可以拥有超级用户权限，也可以授予随后的用户帐号相似的权力。
+
+### chown
+
+    chown [owner][:[group]] file...
+
+#### 举个栗子
+
+|||
+|--|--|
+|参数	|结果
+|bob	|把文件所有者从当前属主更改为用户 bob。
+|bob:users	|把文件所有者改为用户 bob，文件用户组改为用户组 users。
+|:admins	|把文件用户组改为组 admins，文件所有者不变。
+|bob:	|文件所有者改为用户 bob，文件用户组改为，用户 bob 登录系统时，所属的用户组。
+
 # 概念
 
 ## 符号链接

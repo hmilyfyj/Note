@@ -18,9 +18,12 @@ top: 1
 1. 读CI源码
 2. [复习算法、数据结构。](http://zh.visualgo.net/)
 3. 复习数据库相关、学习数据库的优化
-4. Docker学习
-5. 准备毕设
-6. To be continued..
+4. 前端学习
+4.1 HTML、CSS、JS
+4.2 Bootstrap 
+5. Docker学习
+6. 准备毕设
+7. To be continued..
 
 
 # 健身

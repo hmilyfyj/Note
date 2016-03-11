@@ -401,6 +401,12 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 	#这个 export 命令告诉 shell 让这个 shell 的子进程可以使用 PATH 变量的内容。
     export PATH
 
+### source
+
+强迫 bash 重新读取修改过的 .bashrc 文件，使用下面的命令：
+
+    [me@linuxbox ~]$ source .bashrc
+
 
 
 
@@ -430,8 +436,29 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 
 >内核维护每个进程的信息，以此来保持事情有序。例如，系统分配给每个进程一个数字，这个数字叫做 进程 ID 或 PID。PID 号按升序分配，init 进程的 PID 总是1。内核也对分配给每个进程的内存进行跟踪。 像文件一样，进程也有所有者和用户 ID，有效用户 ID，等等。
 
+## 软件包管理
 
+### .deb 与 .rpm
 
+|  |  |
+|--|--|
+|包管理系统	|发行版 (部分列表)
+|Debian Style (.deb)	|Debian, Ubuntu, Xandros, Linspire
+|Red Hat Style (.rpm)	|Fedora, CentOS, Red Hat Enterprise |Linux, OpenSUSE, Mandriva, PCLinuxOS
+
+### 包文件
+
+在包管理系统中软件的基本单元是包文件。包文件是一个构成软件包的文件压缩集合。
+
+### 上层和底层软件包工具
+
+软件包管理系统通常由两种工具类型组成：底层工具用来处理这些任务，比方说安装和删除软件包文件， 和上层工具，完成元数据搜索和依赖解析。
+
+||||
+|---|---|---|
+|发行版	|底层工具|上层工具|
+|Debian-Style	|dpkg|	apt-get, aptitude
+|Fedora, Red Hat Enterprise Linux, CentOS|	rpm	|yum
 
 
 

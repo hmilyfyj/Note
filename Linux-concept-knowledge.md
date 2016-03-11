@@ -673,10 +673,20 @@ find 命令的最简单使用是，搜索一个或多个目录。如：
 	find ~ -type f -name '*.BAK' -delete #用户家目录（和它的子目录）下搜索每个以.BAK 结尾的文件名。当找到后，就删除它们。
 	find ~ -print -and -type f -and -name '*.BAK' #等价于上面的命令
 
-	#带用户定义的行为
-	find ~ -type f -name 'foo*' -ok ls -l '{}' ';' #{}代表匹配的结果
+	#带用户定义的行为 -exec rm '{}' ';'
+	find ~ -type f -name 'foo*' -ok ls -l '{}' ';' #{}代表匹配的结果。交互式地执行一个用户定义的行为。通过使用 -ok 行为来代替 -exec
 	**需要将{}用单引号、双引号或反斜杠，否则不认识。bash可以不用。建议加上。**
+
+	#提高效率：命令只执行一次
+	#方法1
+	find ~ -type f -name 'foo*' -exec ls -l '{}' + #;号改为+号
+    -rwxr-xr-x 1 me     me 224 2007-10-29 18:44 /home/me/bin/foo
+    -rw-r--r-- 1 me     me 0 2008-09-19 12:53 /home/me/foo.txt
 	
+	#方法2 xargs
+	find ~ -type f -name 'foo\*' -print | xargs ls -l # find 命令的输出被管道到 xargs 命令，反过来，xargs 会为 ls 命令构建 参数列表，然后执行 ls 命令。
+	-rwxr-xr-x 1 me     me 224 2007-10-29 18:44 /home/me/bin/foo
+	-rw-r--r-- 1 me     me 0 2008-09-19 12:53 /home/me/foo.txt
 
 find 文件类型
 

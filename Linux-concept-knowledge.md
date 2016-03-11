@@ -609,6 +609,40 @@ netstat 程序被用来检查各种各样的网络设置和统计数据。通过
 |get ubuntu-8.04-desktop-i386.iso	|告诉远端系统传送文件到本地。因为本地系统的工作目录 已经更改到了 ~/Desktop，所以文件会被下载到此目录。
 |bye	|退出远端服务器，结束 ftp 程序会话。也可以使用命令 quit 和 exit。
 
+### wget
+
+
+## 文件查找
+
+### locate
+
+    [me@linuxbox ~]$ locate bin/zip #locate 命令将会搜索它的路径名数据库，输出任一个包含字符串“bin/zip”的路径名：
+    /usr/bin/zip
+    /usr/bin/zipcloak
+    /usr/bin/zipgrep
+    /usr/bin/zipinfo
+    /usr/bin/zipnote
+    /usr/bin/zipsplit
+
+    [me@linuxbox ~]$ locate zip | grep bin
+    /bin/bunzip2
+    /bin/bzip2
+    /bin/bzip2recover
+    /bin/gunzip
+    /bin/gzip
+    /usr/bin/funzip
+    /usr/bin/gpg-zip
+    /usr/bin/preunzip
+    /usr/bin/prezip
+    /usr/bin/prezip-bin
+    /usr/bin/unzip
+    /usr/bin/unzipsfx
+    /usr/bin/zip
+    /usr/bin/zipcloak
+    /usr/bin/zipgrep
+    /usr/bin/zipinfo
+    /usr/bin/zipnote
+    /usr/bin/zipsplit
 
 
 
@@ -662,6 +696,7 @@ netstat 程序被用来检查各种各样的网络设置和统计数据。通过
 |发行版	|底层工具|上层工具|
 |Debian-Style	|dpkg|	apt-get, aptitude
 |Fedora, Red Hat Enterprise Linux, CentOS|	rpm	|yum
+
 
 
 

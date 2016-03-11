@@ -4,7 +4,7 @@ tags: [Linux,折腾]
 categories: Linux
 ---
 
-结合上一篇[Linux命令总结](http:#b.fengbl.cn/2016/03/08/Linux-normal-direction/)，对一些细化的知识的做记录
+结合上一篇[Linux命令总结](http:#b.fengbl.cn/2016/03/08/Linux-normal-direction/)，对一些细化的知识做记录
 
 <!-- more -->
 

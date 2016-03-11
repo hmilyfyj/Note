@@ -701,12 +701,12 @@ find 大小单位
 
 
 预定义的 find 命令操作
-|操作|	描述|
+|操作|描述|
 |---|---|
-|-delete	|删除当前匹配的文件。
-|-ls	|对匹配的文件执行等同的 ls -dils 命令。并将结果发送到标准输出。
-|-print	|把匹配文件的全路径名输送到标准输出。如果没有指定其它操作，这是 默认操作。
-|-quit	|一旦找到一个匹配，退出。
+|-delete	|删除当前匹配的文件。|
+|-ls	|对匹配的文件执行等同的 ls -dils 命令。并将结果发送到标准输出。|
+|-print	|把匹配文件的全路径名输送到标准输出。如果没有指定其它操作，这是 默认操作。|
+|-quit	|一旦找到一个匹配，退出。|
 
 
 
@@ -744,7 +744,7 @@ find 大小单位
 |--|--|
 |包管理系统	|发行版 (部分列表)
 |Debian Style (.deb)	|Debian, Ubuntu, Xandros, Linspire
-|Red Hat Style (.rpm)	|Fedora, CentOS, Red Hat Enterprise |Linux, OpenSUSE, Mandriva, PCLinuxOS
+|Red Hat Style (.rpm)	|Fedora, CentOS, Red Hat Enterprise Linux, OpenSUSE, Mandriva, PCLinuxOS
 
 ### 包文件
 

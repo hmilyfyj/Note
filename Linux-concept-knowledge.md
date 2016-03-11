@@ -551,7 +551,63 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 
 暂时跳过
 
-## 
+## 网络系统
+
+### tracerouter
+
+追踪跳数。
+
+### netstat
+
+netstat 程序被用来检查各种各样的网络设置和统计数据。通过此命令的许多选项，我们 可以看看网络设置中的各种特性。
+
+### ftp
+
+直接上栗子：
+
+从匿名 FTP 服务器，其名字是 fileserver， 的/pub/_images/Ubuntu-8.04的目录下，使用 ftp 程序下载一个 Ubuntu 系统映像文件。
+
+
+    [me@linuxbox ~]$ ftp fileserver
+    Connected to fileserver.localdomain.
+    220 (vsFTPd 2.0.1)
+    Name (fileserver:me): anonymous
+    331 Please specify the password.
+    Password:
+    230 Login successful.
+    Remote system type is UNIX.
+    Using binary mode to transfer files.
+    ftp> cd pub/cd\_images/Ubuntu-8.04
+    250 Directory successfully changed.
+    ftp> ls
+    200 PORT command successful. Consider using PASV.
+    150 Here comes the directory listing.
+    -rw-rw-r-- 1 500 500 733079552 Apr 25 03:53 ubuntu-8.04- desktop-i386.iso
+    226 Directory send OK.
+    ftp> lcd Desktop
+    Local directory now /home/me/Desktop
+    ftp> get ubuntu-8.04-desktop-i386.iso
+    local: ubuntu-8.04-desktop-i386.iso remote: ubuntu-8.04-desktop-
+    i386.iso
+    200 PORT command successful. Consider using PASV.
+    150 Opening BINARY mode data connection for ubuntu-8.04-desktop-
+    i386.iso (733079552 bytes).
+    226 File send OK.
+    733079552 bytes received in 68.56 secs (10441.5 kB/s)
+    ftp> bye
+
+这里是对会话期间所输入命令的解释说明：
+
+
+| 命令 |意思  |
+|--|--|
+|ftp fileserver	|唤醒 ftp 程序，让它连接到 FTP 服务器，fileserver。
+|anonymous	|登录名。输入登录名后，将出现一个密码提示。一些服务器将会接受空密码， 其它一些则会要求一个邮件地址形式的密码。如果是这种情况，试着输入 “user@example.com”。
+|cd pub/cd_images/Ubuntu-8.04	|跳转到远端系统中，要下载文件所在的目录下， 注意在大多数匿名的 FTP 服务器中，支持公共下载的文件都能在目录 pub 下找到
+|ls|	列出远端系统中的目录。
+|lcd Desktop	|跳转到本地系统中的 ~/Desktop 目录下。在实例中，ftp 程序在工作目录 ~ 下被唤醒。 这个命令把工作目录改为 ~/Desktop
+|get ubuntu-8.04-desktop-i386.iso	|告诉远端系统传送文件到本地。因为本地系统的工作目录 已经更改到了 ~/Desktop，所以文件会被下载到此目录。
+|bye	|退出远端服务器，结束 ftp 程序会话。也可以使用命令 quit 和 exit。
 
 
 

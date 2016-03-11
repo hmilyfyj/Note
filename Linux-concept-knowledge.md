@@ -407,6 +407,54 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 
     [me@linuxbox ~]$ source .bashrc
 
+## 软件包管理
+
+### 查找资源库中的软件包
+
+软件包查找工具
+|||
+|---|---|
+|风格	|命令|
+|Debian|	apt-get update; apt-cache search search_string|
+|Red Hat|	yum search search_string|
+
+栗子：
+
+    yum search emacs
+
+### 安装包
+
+#### 通过上层工具安装
+
+上层工具允许从一个资源库中下载一个软件包，并经过完全依赖解析来安装它。
+
+
+|||
+|---|---|
+|风格	|命令|
+|Debian	|apt-get update; apt-get install package_name
+|Red Hat	|yum install package_name
+
+举个栗子：
+
+    apt-get update; apt-get install emacs
+
+#### 通过安装包
+
+如果从某处而不是从资源库中下载了一个软件包文件，可以使用底层工具来直接（没有经过依赖解析）安装它。
+
+
+|||
+|---|---|
+|风格	|命令|
+|Debian|	dpkg --install package_file|
+|Red Hat	|rpm -i package_file|
+
+
+栗子：
+
+	rpm -i emacs-22.1-7.fc7-i386.rpm
+
 
 
 

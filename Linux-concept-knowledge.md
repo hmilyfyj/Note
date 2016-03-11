@@ -385,6 +385,24 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 
 非登录 shell 会话也会继承它们父进程的环境设置，通常是一个登录 shell。
 
+在普通用户看来，文件 ~/.bashrc 可能是最重要的启动文件，因为它几乎总是被读取。非登录 shell 默认 会读取它，并且大多数登录 shell 的启动文件会以能读取 ~/.bashrc 文件的方式来书写。
+
+一个启动文件的内容：
+
+    # .bash_profile
+    # Get the aliases and functions
+    if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+    fi
+    # User specific environment and startup programs
+    PATH=$PATH:$HOME/bin
+    export PATH
+
+	#这个 export 命令告诉 shell 让这个 shell 的子进程可以使用 PATH 变量的内容。
+    export PATH
+
+
+
 
 # 概念
 

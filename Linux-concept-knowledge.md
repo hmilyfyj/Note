@@ -367,9 +367,8 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 
 登录 shell 会话的启动文件
 
-|||
+|文件|内容|
 |---|---|
-|文件	内容
 |/etc/profile	|应用于所有用户的全局配置脚本。
 |~/.bash_profile	|用户私人的启动文件。可以用来扩展或重写全局配置|脚本中的设置。
 |~/.bash_login	|如果文件 ~/.bash_profile 没有找到，bash 会尝试读取这个脚本。
@@ -377,9 +376,8 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 
 非登录 shell 会话的启动文件
 
-|||
+|文件|内容|
 |---|---|
-|文件	|内容
 |/etc/bash.bashrc	|应用于所有用户的全局配置文件。
 |~/.bashrc	|用户私有的启动文件。可以用来扩展或重写全局配置脚本中的设置。
 
@@ -412,9 +410,9 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 ### 查找资源库中的软件包
 
 软件包查找工具
-|||
-|---|---|
+
 |风格	|命令|
+|---|---|
 |Debian|	apt-get update; apt-cache search search_string|
 |Red Hat|	yum search search_string|
 
@@ -429,9 +427,8 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 上层工具允许从一个资源库中下载一个软件包，并经过完全依赖解析来安装它。
 
 
-|||
-|---|---|
 |风格	|命令|
+|---|---|
 |Debian	|apt-get update; apt-get install package_name
 |Red Hat	|yum install package_name
 
@@ -444,9 +441,8 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 如果从某处而不是从资源库中下载了一个软件包文件，可以使用底层工具来直接（没有经过依赖解析）安装它。
 
 
-|||
-|---|---|
 |风格	|命令|
+|---|---|
 |Debian|	dpkg --install package_file|
 |Red Hat	|rpm -i package_file|
 
@@ -454,6 +450,103 @@ fg 命令之后，跟随着一个百分号和工作序号（叫做 jobspec）。
 栗子：
 
 	rpm -i emacs-22.1-7.fc7-i386.rpm
+
+#### 卸载
+
+
+可以使用上层或者底层工具来卸载软件。下面是可用的上层工具。
+
+
+|风格	|命令|
+|---|---|
+|Debian	apt-get |remove package_name|
+|Red Hat	|yum erase package_name|
+
+栗子：
+
+    apt-get remove emacs
+
+
+#### 经过资源库来更新软件包
+
+最常见的软件包管理任务是保持系统中的软件包都是最新的。上层工具仅需一步就能完成 这个至关重要的任务。
+
+|风格	|命令|
+|---|---|
+|Debian	|apt-get update; apt-get upgrade|
+|Red Hat	|yum update|
+
+例如：更新安装在 Debian 风格系统中的软件包：
+
+    apt-get update; apt-get upgrade
+
+#### 经过软件包文件来升级软件
+
+如果已经从一个非资源库网站下载了一个软件包的最新版本，可以安装这个版本，用它来 替代先前的版本：
+
+
+|风格	|命令|
+|---|---|
+|Debian|	dpkg --install package_file|
+|Red Hat	|rpm -U package_file|
+
+例如：把 Red Hat 系统中所安装的 emacs 的版本更新到软件包文件 emacs-22.1-7.fc7-i386.rpmz 所包含的 emacs 版本。
+
+	rpm -U emacs-22.1-7.fc7-i386.rpm
+注意：rpm 程序安装一个软件包和升级一个软件包所用的选项是不同的，而 dpkg 程序所用的选项是相同的。
+
+#### 列出所安装的软件包
+
+下表中的命令可以用来显示安装到系统中的所有软件包列表：
+
+
+|风格	|命令|
+|---|---|
+|Debian	|dpkg --list|
+|Red Hat	|rpm -qa|
+
+#### 确定是否安装了一个软件包
+
+这些底端工具可以用来显示是否安装了一个指定的软件包：
+
+
+|风格	|命令|
+|---|---|
+|Debian	|dpkg --status package_name|
+|Red Hat	|rpm -q package_name|
+
+例如：确定是否 Debian 风格的系统中安装了这个 emacs 软件包：
+
+	dpkg --status emacs
+
+#### 显示所安装软件包的信息
+
+如果知道了所安装软件包的名字，使用以下命令可以显示这个软件包的说明信息：
+
+
+|风格	|命令|
+|---|---|
+|Debian	|apt-cache show package_name|
+|Red Hat	|yum info package_name|
+
+例如：查看 Debian 风格的系统中 emacs 软件包的说明信息：
+
+	apt-cache show emacs
+
+#### 查找安装了某个文件的软件包
+
+确定哪个软件包对所安装的某个特殊文件负责，使用下表中的命令：
+
+
+|风格	|命令|
+|---|---|
+|Debian	|dpkg --search file_name|
+|Red Hat	|rpm -qf file_name|
+
+例如：在 Red Hat 系统中，查看哪个软件包安装了/usr/bin/vim 这个文件
+
+	rpm -qf /usr/bin/vim
+
 
 
 

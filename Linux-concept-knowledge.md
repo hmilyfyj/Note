@@ -776,6 +776,34 @@ find 大小单位
     [me@linuxbox ~]$ find playground -name 'file-A' -exec tar rf playground.tar '{}' '+' #这里我们使用 find 命令来匹配 playground 目录中所有名为 file-A 的文件，然后使用-exec 行为，来 唤醒带有追加模式（r）的 tar 命令，把匹配的文件添加到归档文件 playground.tar 里面。
 
 
+	#tar 命令也可以利用标准输出和输入。这里是一个完整的例子:
+
+	[me@linuxbox foo]$ cd
+	[me@linuxbox ~]$ find playground -name 'file-A' | tar cf - --files-from=-
+	   | gzip > playground.tgz
+>在这个例子里面，我们使用 find 程序产生了一个匹配文件列表，然后把它们管道到 tar 命令中。 如果指定了文件名“-”，则其被看作是标准输入或输出，正是所需（顺便说一下，使用“-”来表示 标准输入／输出的惯例，也被大量的其它程序使用）。这个 --file-from 选项（也可以用 -T 来指定） 导致 tar 命令从一个文件而不是命令行来读入它的路径名列表。最后，这个由 tar 命令产生的归档 文件被管道到 gzip 命令中，然后创建了压缩归档文件 playground.tgz。此 .tgz 扩展名是命名 由 gzip 压缩的 tar 文件的常规扩展名。有时候也会使用 .tar.gz 这个扩展名。
+
+	#对归档文件进行gzip或bzip2压缩
+    [me@linuxbox ~]$ find playground -name 'file-A' | tar czf playground.tgz -T -
+    [me@linuxbox ~]$ find playground -name 'file-A' | tar cjf playground.tbz -T -
+
+	#从远程复制
+	[me@linuxbox ~]$ mkdir remote-stuff
+	[me@linuxbox ~]$ cd remote-stuff
+	[me@linuxbox remote-stuff]$ ssh remote-sys 'tar cf - Documents' | tar xf -
+	me@remote-sys’s password:
+	[me@linuxbox remote-stuff]$ ls
+	Documents
+
+>首先，通过使用 ssh 命令在远端系统中启动 tar 程序。你可记得 ssh 允许我们 在远程联网的计算机上执行程序，并且在本地系统中看到执行结果——远端系统中产生的输出结果 被发送到本地系统中查看。我们可以利用。在本地系统中，我们执行 tar 命令.
+
+### zip
+
+对于 zip 命令（与 tar 命令相反）要注意一点，就是如果指定了一个已经存在的文件包，其被更新 而不是被替代。这意味着会保留此文件包，但是会添加新文件，同时替换匹配的文件。可
+
+    zip options zipfile file...
+
+### 同步文件目录
 
 
 

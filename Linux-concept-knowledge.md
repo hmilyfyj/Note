@@ -736,6 +736,8 @@ find 大小单位
     [me@linuxbox ~]$ ls -l foo.*
     -rw-r--r-- 1 me     me 15738 2008-10-14 07:15 foo.txt
 
+	[me@linuxbox ~]$ zcat foo.txt.gz | less #cat 查看解压后文件的内容
+
 参数
 
 |  选项| 说明 |
@@ -749,6 +751,34 @@ find 大小单位
 |-t	|测试压缩文件的完整性。也可用--test 选项来指定。
 |-v	|显示压缩过程中的信息。也可用--verbose 选项来指定。
 |-number	|设置压缩指数。number 是一个在1（最快，最小压缩）到9（最慢，最大压缩）之间的整数。 数值1和9也可以各自用--fast 和--best 选项来表示。默认值是整数6。
+
+
+### bzip2
+
+### tar
+
+    tar mode[options] pathname...
+
+部分 tar 模式
+
+|模式|	说明|
+|--|--|
+|c	|为文件和／或目录列表创建归档文件。
+|x	|抽取归档文件。
+|r	|追加具体的路径到归档文件的末尾。
+|t	|列出归档文件的内容。
+
+详细参数：[tar参数列表](http://www.cnblogs.com/xxpal/articles/816691.html)
+
+栗子：
+
+	#与find命令结合并追加结果到归档文件
+    [me@linuxbox ~]$ find playground -name 'file-A' -exec tar rf playground.tar '{}' '+' #这里我们使用 find 命令来匹配 playground 目录中所有名为 file-A 的文件，然后使用-exec 行为，来 唤醒带有追加模式（r）的 tar 命令，把匹配的文件添加到归档文件 playground.tar 里面。
+
+
+
+
+
 
 # 概念
 

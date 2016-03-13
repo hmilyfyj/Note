@@ -781,6 +781,7 @@ find 大小单位
 	[me@linuxbox foo]$ cd
 	[me@linuxbox ~]$ find playground -name 'file-A' | tar cf - --files-from=-
 	   | gzip > playground.tgz
+	   
 >在这个例子里面，我们使用 find 程序产生了一个匹配文件列表，然后把它们管道到 tar 命令中。 如果指定了文件名“-”，则其被看作是标准输入或输出，正是所需（顺便说一下，使用“-”来表示 标准输入／输出的惯例，也被大量的其它程序使用）。这个 --file-from 选项（也可以用 -T 来指定） 导致 tar 命令从一个文件而不是命令行来读入它的路径名列表。最后，这个由 tar 命令产生的归档 文件被管道到 gzip 命令中，然后创建了压缩归档文件 playground.tgz。此 .tgz 扩展名是命名 由 gzip 压缩的 tar 文件的常规扩展名。有时候也会使用 .tar.gz 这个扩展名。
 
 	#对归档文件进行gzip或bzip2压缩
@@ -803,8 +804,85 @@ find 大小单位
 
     zip options zipfile file...
 
-### 同步文件目录
+### rsync 
 
+跳过
+
+## 正则
+
+### grep
+
+“grep”这个名字 来自于短语“global regular expression print
+
+    grep [options] regex [file...]
+
+grep 选项
+
+|选项|描述 |
+|--|--|
+|-i	|忽略大小写。不会区分大小写字符。也可用--ignore-case 来指定。|
+|-v	|不匹配。通常，grep 程序会打印包含匹配项的文本行。这个选项导致 |grep |程序 只会不包含匹配项的文本行。也可用--invert-match 来指定。|
+|-c	|打印匹配的数量（或者是不匹配的数目，若指定了-v 选项），而不是文本行本身。 也可用--count 选项来指定。|
+|-l	|打印包含匹配项的文件名，而不是文本行本身，也可用--files-with-matches 选项来指定。|
+|-L	|相似于-l 选项，但是只是打印不包含匹配项的文件名。也可用--files-without-match 来指定。|
+|-n	|在每个匹配行之前打印出其位于文件中的相应行号。也可用--line-number 选项来指定。|
+|-h	|应用于多文件搜索，不输出文件名。也可用--no-filename 选项来指定。|
+
+正则表达式元字符：
+
+    ^ $ . [ ] { } - ? * + ( ) | \
+
+
+举个栗子：
+
+
+    [me@linuxbox ~]$ ls dirlist*.txt
+    dirlist-bin.txt     dirlist-sbin.txt    dirlist-usr-sbin.txt
+    dirlist-usr-bin.txt
+    
+    [me@linuxbox ~]$ grep bzip dirlist*.txt 
+    dirlist-bin.txt:bzip2
+    dirlist-bin.txt:bzip2recover
+    
+    
+    [me@linuxbox ~]$ grep -l bzip dirlist*.txt #只是对包含匹配项的文件列表
+    dirlist-bin.txt
+    
+    
+    [me@linuxbox ~]$ grep -L bzip dirlist*.txt #只想查看不包含匹配项的文件列表
+    dirlist-sbin.txt
+    dirlist-usr-bin.txt
+    dirlist-usr-sbin.txt
+
+    [me@linuxbox ~]$ grep -h '.zip' dirlist*.txt
+    bunzip2
+    bzip2
+    bzip2recover
+    gunzip
+
+[me@linuxbox ~]$ grep -i '^..j.r$' /usr/share/dict/words #在字典中查找单词
+Major
+major
+
+### POSIX
+
+POSIX 字符集
+
+|字符集	| 说明  |
+|--|--|
+|[:alnum:]	|字母数字字符。在 ASCII 中，等价于：[A-Za-z0-9]|
+|[:word:]	|与[:alnum:]相同, 但增加了下划线字符。|
+|[:alpha:]	|字母字符。在 ASCII 中，等价于：[A-Za-z]|
+|[:blank:]	|包含空格和 tab 字符。|
+|[:cntrl:]	|ASCII 的控制码。包含了0到31，和127的 ASCII 字符。|
+|[:digit:]	|数字0到9|
+|[:graph:]	|可视字符。在 ASCII 中，它包含33到126的字符。|
+|[:lower:]	|小写字母。|
+|[:punct:]	|标点符号字符。在 ASCII 中，等价于：
+|[:print:]	|可打印的字符。在[:graph:]中的所有字符，再加上空格字符。|
+|[:space:]	|空白字符，包括空格，tab，回车，换行，vertical tab, 和 form feed.在 ASCII 中， 等价于：[ \t\r\n\v\f]|
+|[:upper:]	|大写字母。|
+|[:xdigit:]	|用来表示十六进制数字的字符。在 ASCII 中，等价于：[0-9A-Fa-f]|
 
 
 

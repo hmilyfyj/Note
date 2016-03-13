@@ -919,6 +919,88 @@ POSIX 字符集
 |-o	|--output=file	|把排好序的输出结果发送到文件，而不是标准输出。
 |-t	|--field-separator=char	|定义域分隔字符。默认情况下，域由空格或制表符分隔。
 
+举例：
+
+#du 命令可以 确定最大的磁盘空间用户。通常，这个 du 命令列出的输出结果按照路径名来排序：
+
+    [me@linuxbox ~]$ du -s /usr/share/\* | head
+    252     /usr/share/aclocal
+    96      /usr/share/acpi-support
+    8       /usr/share/adduser
+    196     /usr/share/alacarte
+    344     /usr/share/alsa
+    8       /usr/share/alsa-base
+    12488   /usr/share/anthy
+    8       /usr/share/apmd
+    21440   /usr/share/app-install
+    48      /usr/share/application-registry
+
+#把结果管道到 head 命令，把输出结果限制为前 10 行。我们能够产生一个按数值排序的 列表，来显示 10 个最大的空间消费者
+
+    [me@linuxbox ~]$ du -s /usr/share/* | sort -nr | head
+    509940         /usr/share/locale-langpack
+    242660         /usr/share/doc
+    197560         /usr/share/fonts
+    179144         /usr/share/gnome
+    146764         /usr/share/myspell
+    144304         /usr/share/gimp
+    135880         /usr/share/dict
+    76508          /usr/share/icons
+    68072          /usr/share/apps
+    62844          /usr/share/foomatic
+
+	#忽略 ls 程序能按照文件大小对输出结果进行排序，我们也能够使用 sort 程序来完成此任务
+    [me@linuxbox ~]$ ls -l /usr/bin | sort -nr -k 5 | head
+    -rwxr-xr-x 1 root   root   8234216  2008-04-0717:42 inkscape
+    -rwxr-xr-x 1 root   root   8222692  2008-04-07 17:42 inkview
+
+
+    #我们指定了 1,1， 意味着“始于并且结束于第一个字段。”在第二个实例中，我们指定了 2n，意味着第二个字段是排序的键值， 并且按照数值排序。
+    [me@linuxbox ~]$ sort --key=1,1 --key=2n distros.txt
+    Fedora         5     03/20/2006
+    Fedora         6     10/24/2006
+    Fedora         7     05/31/2007
+    
+    #通过指定 -k 3.7，我们指示 sort 程序使用一个排序键值，其始于第三个字段中的第七个字符，对应于 年的开头。同样地，我们指定 -k 3.1和 -k 3.4来分离日期中的月和日。 我们也添加了 n 和 r 选项来实现一个逆向的数值排序。
+    [me@linuxbox ~]$ sort -k 3.7nbr -k 3.1nbr -k 3.4nbr distros.txt
+    Fedora         10    11/25/2008
+    Ubuntu         8.10  10/30/2008
+    SUSE           11.0  06/19/2008
+    
+    #一些文件不会使用 tabs 和空格做为字段界定符
+    #按照第七个字段（帐户的默认 shell）来排序此 passwd 文件
+    [me@linuxbox ~]$ sort -t ':' -k 7 /etc/passwd | head
+    me:x:1001:1001:Myself,,,:/home/me:/bin/bash
+    root:x:0:0:root:/root:/bin/bash
+    dhcp:x:101:102::/nonexistent:/bin/false
+    gdm:x:106:114:Gnome Display Manager:/var/lib/gdm:/bin/false
+    hplip:x:104:7:HPLIP system user,,,:/var/run/hplip:/bin/false
+    klog:x:103:104::/home/klog:/bin/false
+    messagebus:x:108:119::/var/run/dbus:/bin/false
+    polkituser:x:110:122:PolicyKit,,,:/var/run/PolicyKit:/bin/false
+    pulse:x:107:116:PulseAudio daemon,,,:/var/run/pulse:/bin/false
+
+### uniq
+
+uniq可进行排序，其输入必须是排好序的数据，因为 uniq 只会删除相邻的重复行。
+
+    [me@linuxbox ~]$ sort foo.txt | uniq
+    a
+    b
+    c
+
+常用的 uniq 选项
+
+	
+| 选项 |说明  |
+|--|--|
+|-c	|输出所有的重复行，并且每行开头显示重复的次数。
+|-d	|只输出重复行，而不是特有的文本行。
+|-f n	|忽略每行开头的 n 个字段，字段之间由空格分隔，正如 sort 程序中的空格分隔符；然而， 不同于 sort 程序，uniq 没有选项来设置备用的字段分隔符。
+|-i	|在比较文本行的时候忽略大小写。
+|-s n	|跳过（忽略）每行开头的 n 个字符。
+|-u	|只是输出独有的文本行。这是默认的。
+
 
 # 概念
 

@@ -989,6 +989,12 @@ uniq可进行排序，其输入必须是排好序的数据，因为 uniq 只会�
     b
     c
 
+	#报告文本文件中重复行的次数，使用这个-c 选项：
+	[me@linuxbox ~]$ sort foo.txt | uniq -c
+	        2 a
+	        2 b
+	        2 c
+
 常用的 uniq 选项
 
 	

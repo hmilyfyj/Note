@@ -860,9 +860,9 @@ grep 选项
     bzip2recover
     gunzip
 
-[me@linuxbox ~]$ grep -i '^..j.r$' /usr/share/dict/words #在字典中查找单词
-Major
-major
+    [me@linuxbox ~]$ grep -i '^..j.r$' /usr/share/dict/words #在字典中查找单词
+    Major
+    major
 
 ### POSIX
 
@@ -883,6 +883,12 @@ POSIX 字符集
 |[:space:]	|空白字符，包括空格，tab，回车，换行，vertical tab, 和 form feed.在 ASCII 中， 等价于：[ \t\r\n\v\f]|
 |[:upper:]	|大写字母。|
 |[:xdigit:]	|用来表示十六进制数字的字符。在 ASCII 中，等价于：[0-9A-Fa-f]|
+
+
+    [me@linuxbox ~]$ ls /usr/sbin/[[:upper:]]*
+    /usr/sbin/MAKEFLOPPIES
+    /usr/sbin/NetworkManagerDispatcher
+    /usr/sbin/NetworkManager
 
 
 

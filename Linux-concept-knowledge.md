@@ -1007,6 +1007,101 @@ uniq可进行排序，其输入必须是排好序的数据，因为 uniq 只会�
 |-s n	|跳过（忽略）每行开头的 n 个字符。
 |-u	|只是输出独有的文本行。这是默认的。
 
+### 切片和切块
+
+#### cut
+
+作用：从文本行中抽取文本，并把其输出到标准输出。它能够接受多个文件参数或者 标准输入。
+
+
+    [me@linuxbox ~]$ cat -A distros.txt
+    SUSE^I10.2^I12/07/2006$
+    Fedora^I10^I11/25/2008$
+    SUSE^I11.0^I06/19/2008$
+    Ubuntu^I8.04^I04/24/2008$  
+    [me@linuxbox ~]$ cut -f 3 distros.txt
+    12/07/2006
+    11/25/2008
+    06/19/2008
+    04/24/2008
+    [me@linuxbox ~]$ cut -f 3 distros.txt | cut -c 7-10
+	2006
+	2008
+	2007
+	2006
+
+	#从/etc/passwd 文件中 抽取第一个字段：
+	#使用-d 选项，我们能够指定冒号做为字段分隔符。
+	[me@linuxbox ~]$ cut -d ':' -f 1 /etc/passwd | head
+	root
+	daemon
+	bin
+	sys
+	sync
+	games
+	man
+	lp
+	mail
+	news
+
+cut 程序选择项
+
+|选项	|说明    |
+|--|--|
+|-c char_list	|从文本行中抽取由 char_list 定义的文本。这个列表可能由一个或多个逗号 分隔开的数值区间组成。
+|-f field_list	|从文本行中抽取一个或多个由 field_list 定义的字段。这个列表可能 包括一个或多个字段，或由逗号分隔开的字段区间。
+|-d delim_char	|当指定-f 选项之后，使用 delim_char 做为字段分隔符。默认情况下， 字段之间必须由单个 tab 字符分隔开。
+|--complement	|抽取整个文本行，除了那些由-c 和／或-f 选项指定的文本。
+
+#### paste
+
+#### join
+
+### 比较文本
+	[me@linuxbox ~]$ cat > file1.txt
+	a
+	b
+	c
+	d
+	[me@linuxbox ~]$ cat > file2.txt
+	b
+	c
+	d
+	e
+	[me@linuxbox ~]$ comm file1.txt file2.txt
+	a
+	        b
+	        c
+	        d
+	    e
+
+	#comm 命令产生了三列输出。第一列包含第一个文件独有的文本行；第二列， 文本行是第二列独有的；第三列包含两个文件共有的文本行。comm 支持 -n 形式的选项，这里 n 代表 1，2 或 3。这些选项使用的时候，指定了要隐藏的列。
+	
+	#只想输出两个文件共享的文本行， 我们将隐藏第一列和第二列的输出结果：
+	[me@linuxbox ~]$ comm -12 file1.txt file2.txt
+	b
+	c
+	d
+#### diff
+#### patch
+
+### 运行时编辑
+
+#### tr
+
+	[me@linuxbox ~]$ echo "lowercase letters" | tr a-z A-Z
+	LOWERCASE LETTERS
+
+	[me@linuxbox ~]$ echo "lowercase letters" | tr [:lower:] A
+	AAAAAAAAA AAAAAAA
+
+
+	#挤压
+	[me@linuxbox ~]$ echo "aaabbbccc" | tr -s ab
+	abccc
+
+### sed
+
 
 # 概念
 

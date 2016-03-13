@@ -890,6 +890,34 @@ POSIX 字符集
     /usr/sbin/NetworkManagerDispatcher
     /usr/sbin/NetworkManager
 
+## 文本处理
+
+### sed
+
+	#对标准输入的内容，或命令行中指定的一个或多个文件进行排序，然后把排序 结果发送到标准输出。
+    [me@linuxbox ~]$ sort > foo.txt
+    c
+    b
+    a
+    [me@linuxbox ~]$ cat foo.txt
+    a
+    b
+    c
+
+    sort file1.txt file2.txt file3.txt > final_sorted_list.txt
+
+常见的 sort 程序选项
+
+|选项|长选项	|描述|
+|--|--|--|
+|-b	|--ignore-leading-blanks	|默认情况下，对整行进行排序，从每行的第一个字符开始。这个选项导致 sort 程序忽略 每行开头的空格，从第一个非空白字符开始排序。|
+|-f	|--ignore-case	|让排序不区分大小写。|
+|-n	|--numeric-sort	|基于字符串的长度来排序。使用此选项允许根据数字值执行排序，而不是字母值。
+-r	|--reverse	|按相反顺序排序。结果按照降序排列，而不是升序。
+|-k	|--key=field1[,field2] 	|对从 field1到 field2之间的字符排序，而不是整个文本行。看下面的讨论。
+|-m	|--merge	|把每个参数看作是一个预先排好序的文件。把多个文件合并成一个排好序的文件，而没有执行额外的排序。
+|-o	|--output=file	|把排好序的输出结果发送到文件，而不是标准输出。
+|-t	|--field-separator=char	|定义域分隔字符。默认情况下，域由空格或制表符分隔。
 
 
 # 概念

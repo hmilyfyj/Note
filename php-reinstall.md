@@ -33,9 +33,11 @@ categories: 折腾
 
 # 安装 gcc & git
 
+
     yum install build-essential git gcc gcc-c++ make
 
 # 下载，编译与安装
+
 
 	# 下载最新版源码
 	# nginx 官网: 

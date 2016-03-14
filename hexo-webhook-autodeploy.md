@@ -1,7 +1,7 @@
 
 title: Webhooks配合shell脚本自动部署Hexo博客到Github
 date: 2015-12-3 22:27:3
-tags: [折腾,hexo,git,webhooks,vps,php]
+tags: [折腾,Hexo,Git,WebHooks,Vps,PHP]
 categories: 折腾
 ---
 

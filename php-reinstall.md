@@ -1,8 +1,12 @@
 title: 手动配置lnmp环境
 date: 2016-03-14 16:15
 tags: [折腾,Linux,Mysql,Nginx]
-categories: 
+categories: 折腾
 ---
+
+使用一键安装脚本的确方便，但无法自定义参数，比如我想加入gg反代，但需要的扩展功能需要手动添加，然而..我只会用一键安装...
+
+所以有了这一篇记录。
 
 <!-- more -->
 
@@ -105,6 +109,16 @@ categories:
 
 
 	vi /opt/nginx-1.7.8/conf/nginx.conf
+
+在配置文件末尾加上
+
+	include /etc/nginx/sites-enabled/*;
+
+    mkdir -p /etc/nginx/sites-enabled
+    mkdir -p /etc/nginx/sites-available
+    mkdir -p /var/log/nginx
+    mkdir -p /var/cache/nginx/cache
+    mkdir -p /var/cache/nginx/temp
 	
 其中http的配置方式
 
@@ -136,8 +150,34 @@ categories:
 	rm -rf /usr/bin/php
 	rm -rf /usr/local/php
 
-	wget http://nginx.org/download/nginx-1.6.2.tar.gz tar -xvf nginx-1.6.2.tar.gz
+## 安装
 
+	./buildconf --force
+	./configure --prefix=/apps/php/php7.0 --enable-mbstring --with-curl --with-gd --with-config-file-path=/apps/php/php7.0/etc/ --enable-fpm --enable-mysqlnd --with-pdo-mysql=mysqlnd --disable-fileinfo
+	make && make install
+### 报错
+
+错误1：
+
+	ext/iconv/.libs/iconv.o: In function `php_iconv_stream_filter_ctor':
+	/home/king/php-5.2.13/ext/iconv/iconv.c:2491: undefined reference to `libiconv_open'
+	collect2: ld returned 1 exit status
+	make: *** [sapi/cli/php] Error 1
+	[root@test php-5.2.13]# vi Makefile
+
+解决办法：
+
+	make ZEND_EXTRA_LIBS='-liconv'
+
+错误2：
+	
+	cc: Internal error: Killed (program cc1)
+
+解决办法：
+
+>先停用内存占用大的程序，重新configure，make，如果还是报错，在configure的时候添加--disable-fileinfo参数
+
+[参考地址](http://blog.sina.com.cn/s/blog_48ab118d0102v5fn.html)
 
 
 

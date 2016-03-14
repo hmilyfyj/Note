@@ -1,7 +1,7 @@
 title: Centos、nginx 手动配置 vhost
 date: 2015-12-3 21:51:55
-tags: [折腾,Centos,nginx]
-categories: nginx
+tags: [折腾,Centos,Nginx]
+categories: Nginx
 ---
 
 今天很流畅的打出了 rm -rf /*，终于成了我嘲笑过的人。。

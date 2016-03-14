@@ -1,6 +1,6 @@
 title: Nginx、Codeigniter 的结合
 date: 2015-11-29 11:24:26
-tags: [折腾,ci,nginx]
+tags: [折腾,CodeIgniter,Nginx]
 categories: nginx
 ---
 

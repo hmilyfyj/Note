@@ -1,6 +1,6 @@
 title: 在 CodeIgniter 中使用 Composer
 date: 2016-02-10 15:30
-tags: [Composer,PHP,Codeigniter]
+tags: [Composer,PHP,CodeIgniter]
 categories: PHP
 ---
 

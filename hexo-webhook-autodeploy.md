@@ -67,10 +67,10 @@ Hexo没有后台编辑，如果想发表文章最基本的步骤是
 #### 创建脚本，检测上一步骤中的创建的文件是否存在，存在则进行更新、部署。
 
     #!/bin/sh
-    update_flag="/var/www/www.fengbl.cn/application/cache/git_update.txt"
-    hexo_dir="/root/blog"
-    post_dir="/root/blog/source/_posts/"
-    log_dir="/var/www/www.fengbl.cn"
+    update_flag="/var/www/www.fengbl.cn/application/cache/git_update.txt" #产生更新的标记
+    hexo_dir="/root/blog" #博客的主目录
+    post_dir="$hexo_dir/source/_posts/" #文章存放目录
+    log_dir="/var/www/www.fengbl.cn" #用于存放更新日志的地址
     
     cur_time=`date "+%Y-%m-%d %H:%M:%S"`
     
@@ -91,7 +91,7 @@ Hexo没有后台编辑，如果想发表文章最基本的步骤是
     
   
  
-### 方案2
+### ~~方案2~~
 
 ~~省去第二部，直接由PHP执行shell脚本，不够安全，弃。~~
 

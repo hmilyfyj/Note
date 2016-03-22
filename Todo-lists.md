@@ -21,9 +21,10 @@ top: 1
 4. 前端学习
 4.1 HTML、CSS、JS
 4.2 Bootstrap 
-5. Docker学习
+5. Larvel、PHP-FIG
 6. 准备毕设
-7. To be continued..
+7. Docker学习
+8. To be continued..
 
 
 # 健身

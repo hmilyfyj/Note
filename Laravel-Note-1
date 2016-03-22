@@ -1,7 +1,7 @@
 title: Laravel 笔记
 date: 2016-03-22 18:44
-tags: []
-categories: 
+tags: [Laravel]
+categories: Laravel
 ---
 
 <!-- more -->
@@ -41,6 +41,6 @@ categories:
 
 ## 基本配置
 
-#
+### 美化链接
 
 

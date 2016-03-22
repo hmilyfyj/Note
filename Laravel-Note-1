@@ -27,3 +27,20 @@ categories:
 	}
 ```
 
+## Laravel
+
+    composer global require "laravel/installer"
+
+>请确保 PATH 环境变量已经添加了 `~/.composer/vendor/bin` 目录，这样，可执行文件 `laravel` 就能被你的系统检测到了。
+
+# 使用
+
+## 新建一个站点
+
+    laravel new blog
+
+## 基本配置
+
+#
+
+

@@ -29,6 +29,12 @@ categories: Laravel
 	}
 ```
 
+# 新知识
+
+## 待了解
+
+PSR-4
+
 ## Laravel
 
     composer global require "laravel/installer"
@@ -77,5 +83,13 @@ categories: Laravel
     $value = config('app.timezone');
     config(['app.timezone' => 'America/Chicago']);
 
+### 维护
+
+	php artisan down
+	php artisan up
+
+维护模式时响应请求的默认模板文件位于 `resources/views/errors/503.blade.php`
+
+# 
 
 

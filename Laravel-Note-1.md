@@ -10,6 +10,11 @@ categories: Laravel
 
 ---
 
+# 待了解
+
+PSR-4
+
+
 # 安装
 
 ## Composer
@@ -29,11 +34,6 @@ categories: Laravel
 	}
 ```
 
-# 新知识
-
-## 待了解
-
-PSR-4
 
 ## Laravel
 

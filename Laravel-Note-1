@@ -45,4 +45,37 @@ categories: Laravel
 
 ### 美化链接
 
+#### Apache
+
+修改`public/.htaccess`文件。
+
+	Options +FollowSymLinks
+	RewriteEngine On
+
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^ index.php [L]
+
+#### Nginx
+
+	location / {
+	    try_files $uri $uri/ /index.php?$query_string;
+	}
+
+### 环境
+
+    .env 文件中的所有变量都会被加载到 PHP 的 $_ENV 超全局变量中。
+
+### 配置缓存
+
+为了提升应用程序的执行速度，在应用正式上线后，应通过 Artisan 的 config:cache 命令将所有配置文件合并到一个文件中并缓存起来。即
+
+    php artisan config:cache
+
+### 获取、修改配置
+
+    $value = config('app.timezone');
+    config(['app.timezone' => 'America/Chicago']);
+
+
 

@@ -231,6 +231,70 @@ HTTP 内核：app/Http/Kernel.php
 如果路由规则重复，则使用先定义的。
 
 
+### CSRF
+
+>不需要自己编写代码去验证 POST、PUT 或者 DELETE 请求的 CSRF 令牌，因为 Laravel 自带的 HTTP 中间件VerifyCsrfToken 会为我们做这项工作：将请求中输入的 token 值和 Session 中的存储的 token 作对比来进行验证。
+
+
+可以使用帮助函数 csrf_field 来实现：
+
+	<?php echo csrf_field(); ?>
+
+辅助函数 csrf_field 会生成如下 HTML：
+
+	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+
+当然还可以使用 Blade 模板引擎提供的方式：
+
+	{!! csrf_field() !!}
+
+#### CSRF保护排除
+
+	<?php
+
+	namespace App\Http\Middleware;
+
+	use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
+
+	class VerifyCsrfToken extends BaseVerifier
+	{
+	    /**
+	     *从CSRF验证中排除的URL
+	     *
+	     * @var array
+	     */
+	    protected $except = [
+	        'stripe/*',
+	    ];
+	}
+
+### 路由绑定
+
+#### 隐式绑定
+
+	Route::get('api/users/{user}', function (App\User $user) {
+	    return $user->email;
+	});
+
+>在这个例子中，由于类型声明了 Eloquent 模型 App\User，对应的变量名 $user 会匹配路由片段中的{user}，这样，Laravel 会自动注入与请求 URI 中传入的 ID 对应的用户模型实例。
+
+##### 修改绑定
+
+重写 Eloquent 模型类的 getRouteKeyName 方法：
+
+	/**
+	 * Get the route key for the model.
+	 *
+	 * @return string
+	 */
+	public function getRouteKeyName()
+	{
+	    return 'slug';
+	}
+
+
+
+
 
 
 

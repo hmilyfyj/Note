@@ -155,6 +155,40 @@ HTTP 内核：app/Http/Kernel.php
 **注：注意：路由参数不能包含 - 字符，需要的话可以使用 _ 替代。**
 
 
+### 路由别名
+
+	Route::get('user/profile', ['as' => 'profile', function () {
+	    //
+	}]);
+
+	Route::get('user/profile', [
+	    'as' => 'profile', 'uses' => 'UserController@showProfile'
+	]);
+
+	Route::get('user/profile', 'UserController@showProfile')->name('profile');
+
+	//通过在路由群组的属性数组中指定 as 关键字来为群组中的路由设置一个共用的路由名前缀
+	Route::group(['as' => 'admin::'], function () {
+	    Route::get('dashboard', ['as' => 'dashboard', function () {
+	        // 路由被命名为 "admin::dashboard"
+	    }]);
+	});
+
+	//为起了别名的路由生成Url并跳转
+	$url = route('profile');
+	$redirect = redirect()->route('profile');
+
+	//给命名路由传参
+	Route::get('user/{id}/profile', ['as' => 'profile', function ($id) {
+	     //
+	}]);
+	$url = route('profile', ['id' => 1]);
+
+### 群组路由
+
+
+
+
 
 
 

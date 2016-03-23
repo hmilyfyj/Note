@@ -104,11 +104,64 @@ PSR-4
 
 HTTP 内核：app/Http/Kernel.php
 
->HTTP 内核继承自 Illuminate\Foundation\Http\Kernel 类，该类定义了一个 bootstrappers 数组，这个数组中的类在请求被执行前运行，这些 bootstrappers 配置了错误处理、日志、检测应用环境以及其它在请求被处理前需要执行的任务。
+>HTTP 内核继承自 Illuminate\Foundation\Http\Kernel 类，该类定义了一个 bootstrappers 数组，这个数组中的类在请求被执行前运行，这些 内核启动过程中最重要的动作之一就是为应用载入服务提供者，应用的所有服务提供者都被配置在 config/app.php 配置文件的  providers 数组中。首先，所有提供者的 register 方法被调用，然后，所有提供者被注册之后，boot 方法被调用。
 
+>服务提供者负责启动框架的所有各种各样的组件，比如数据库、队列、验证器，以及路由组件等，正是因为他们启动并配置了框架提供的所有特性，服务提供者是整个 Laravel 启动过程中最重要的部分。
+
+ >配置了错误处理、日志、检测应用环境以及其它在请求被处理前需要执行的任务。
+
+
+
+
+一旦应用被启动并且所有的服务提供者被注册，Request 将会被交给路由器进行分发，路由器将会分发请求到路由或控制器，同时运行所有路由指定的中间件。
 
 ### 模版
 
 存放在`resources/views`
+
+
+## 路由
+
+    Route::get($uri, $callback);
+    Route::match(['get', 'post'], '/', function () {
+    //
+	});
+
+	Route::any('foo', function () {
+	    //
+	});
+
+### 带参数
+
+	 Route::get('user/{id}', function ($id) {
+	    return 'User '.$id;
+	});
+
+
+	Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
+	    //
+	});
+
+	//可选参数
+	Route::get('user/{name?}', function ($name = null) {
+	    return $name;
+	});
+
+	Route::get('user/{name?}', function ($name = 'John') {
+	    return $name;
+	});
+
+
+**注：注意：路由参数不能包含 - 字符，需要的话可以使用 _ 替代。**
+
+
+
+
+
+
+
+
+
+
 
 

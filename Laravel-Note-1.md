@@ -90,6 +90,25 @@ PSR-4
 
 维护模式时响应请求的默认模板文件位于 `resources/views/errors/503.blade.php`
 
-# 
+# 编码
+
+## 流程
+
+把这个放在最前面，因为一头扎进文档会感觉一头雾水，被牵着鼻子走。
+
+### public/index.php  所有请求的入口
+
+>index.php 文件载入 Composer 生成的自动加载设置，然后从 bootstrap/app.php 脚本获取 Laravel 应用实例，Laravel 的第一个动作就是创建服务容器实例
+
+### HTTP/Console 内核 请求被发送至此
+
+HTTP 内核：app/Http/Kernel.php
+
+>HTTP 内核继承自 Illuminate\Foundation\Http\Kernel 类，该类定义了一个 bootstrappers 数组，这个数组中的类在请求被执行前运行，这些 bootstrappers 配置了错误处理、日志、检测应用环境以及其它在请求被处理前需要执行的任务。
+
+
+### 模版
+
+存放在`resources/views`
 
 

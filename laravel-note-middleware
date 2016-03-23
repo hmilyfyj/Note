@@ -129,6 +129,49 @@ middleware ，在我看来类似于CI的hook
 	    //
 	});
 
+### 传参
+
+	额外的中间件参数会在 $next 参数之后传入中间件：
+
+	<?php
+
+	namespace App\Http\Middleware;
+
+	use Closure;
+
+	class RoleMiddleware
+	{
+	    /**
+	     * 运行请求过滤器
+	     *
+	     * @param \Illuminate\Http\Request $request
+	     * @param \Closure $next
+	     * @param string $role
+	     * @return mixed
+	     * translator http://laravelacademy.org
+	     */
+	    public function handle($request, Closure $next, $role)
+	    {
+	        if (! $request->user()->hasRole($role)) {
+	            // Redirect...
+	        }
+
+	        return $next($request);
+	    }
+
+	}
+
+
+	中间件参数可以在定义路由时通过：分隔中间件名和参数名来指定，多个中间件参数可以通过逗号分隔：
+
+	Route::put('post/{id}', ['middleware' => 'role:editor', function ($id) {
+	    //
+	}]);
+
+### 可终止中间件
+
+
+
 
 
 

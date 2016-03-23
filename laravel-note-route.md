@@ -216,7 +216,7 @@ HTML 表单不支持 PUT、PATCH 或者 DELETE 请求方法，因此，当 PUT�
 
 	<form action="/foo/bar" method="POST">
 	    <input type="hidden" name="_method" value="PUT">
-	    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+	    <input type="hidden" name="_token" value="\{\{ csrf_token() \}\}">
 	</form>
 
 还可以使用辅助函数 method_field 来实现这一目的：

@@ -186,8 +186,49 @@ HTTP 内核：app/Http/Kernel.php
 
 ### 群组路由
 
+>路由群组允许我们在多个路由中共享路由属性，比如中间件和命名空间等。共享属性以数组的形式作为第一个参数被传递给 Route::group 方法。
+
+#### 使用中间件
+
+	Route::group(['middleware' => 'auth'], function () {
+	    Route::get('/', function () {
+	        // 使用 Auth 中间件
+	    });
+
+	    Route::get('user/profile', function () {
+	        // 使用 Auth 中间件
+	    });
+	});
 
 
+#### 命名空间
+
+	Route::group(['namespace' => 'Admin'], function(){
+	    // 控制器在 "App\Http\Controllers\Admin" 命名空间下
+
+	    Route::group(['namespace' => 'User'], function(){
+	        // 控制器在 "App\Http\Controllers\Admin\User" 命名空间下
+	    });
+	});
+
+>默认情况下，RouteServiceProvider 引入 routes.php 并指定其下所有控制器类所在的默认命名空间App\Http\Controllers，因此，我们在定义的时候只需要指定命名空间 App\Http\Controllers 之后的部分即可。
+
+#### 前缀
+
+	Route::group(['prefix' => 'admin'], function () {
+	    Route::get('users', function () {
+	        // 匹配 "/admin/users" URL
+	    });
+	});
+
+	Route::group(['prefix' => 'accounts/{account_id}'], function () {
+	    Route::get('detail', function ($account_id) {
+	        // 匹配 accounts/{account_id}/detail URL
+	    });
+	});
+
+
+如果路由规则重复，则使用先定义的。
 
 
 

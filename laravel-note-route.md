@@ -225,5 +225,5 @@ HTML 表单不支持 PUT、PATCH 或者 DELETE 请求方法，因此，当 PUT�
 
 当然，也支持 Blade 模板引擎：
 
-	{{ method_field('PUT') }}
+	\{\{ method_field('PUT') \}\}
 

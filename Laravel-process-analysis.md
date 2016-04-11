@@ -208,3 +208,90 @@ public function registerCoreContainerAliases()
     }
 ```
 
+跟进 `$this->sendRequestThroughRouter($request);` 方法：
+
+```php
+protected function sendRequestThroughRouter($request)
+    {
+    //保存 $request 实例。
+        $this->app->instance('request', $request);
+        
+        //unset(static::$resolvedInstance[$name]);
+        Facade::clearResolvedInstance('request');
+
+		//稍后跟进。
+        $this->bootstrap();
+
+		//流水线
+        return (new Pipeline($this->app))
+                    ->send($request)
+                    ->through($this->app->shouldSkipMiddleware() ? [] : $this->middleware)
+                    ->then($this->dispatchToRouter());
+    }
+```
+
+接着看`$this->bootstrap();` 代码：
+
+```php
+/**
+     * Bootstrap the application for HTTP requests.
+     *
+     * @return void
+     */
+    public function bootstrap()
+    {
+        if (! $this->app->hasBeenBootstrapped()) {
+            $this->app->bootstrapWith($this->bootstrappers());
+        }
+    }
+
+
+/**
+     * Get the bootstrap classes for the application.
+     *
+     * @return array
+     */
+    protected function bootstrappers()
+    {
+        return $this->bootstrappers;
+    }
+
+/**
+     * The bootstrap classes for the application.
+     *
+     * @var array
+     */
+    protected $bootstrappers = [
+        'Illuminate\Foundation\Bootstrap\DetectEnvironment',
+        'Illuminate\Foundation\Bootstrap\LoadConfiguration',
+        'Illuminate\Foundation\Bootstrap\ConfigureLogging',
+        'Illuminate\Foundation\Bootstrap\HandleExceptions',
+        'Illuminate\Foundation\Bootstrap\RegisterFacades',
+        'Illuminate\Foundation\Bootstrap\RegisterProviders',
+        'Illuminate\Foundation\Bootstrap\BootProviders',
+    ];
+
+```
+s`bootstrap()` 函数调用了 `$app` 实例的`bootstartpWith()` 方法，并将本类的`$this->bootstrappers` 数组作为参数传入，继续查看 `bootstartpWith()` 方法： 
+
+```php
+/**
+     * Run the given array of bootstrap classes.
+     *
+     * @param  array  $bootstrappers
+     * @return void
+     */
+    public function bootstrapWith(array $bootstrappers)
+    {
+        $this->hasBeenBootstrapped = true;
+        
+        foreach ($bootstrappers as $bootstrapper) {
+            $this['events']->fire('bootstrapping: '.$bootstrapper, [$this]);
+
+            $this->make($bootstrapper)->bootstrap($this);
+
+            $this['events']->fire('bootstrapped: '.$bootstrapper, [$this]);
+        }
+    }
+```
+

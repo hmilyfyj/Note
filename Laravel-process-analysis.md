@@ -38,7 +38,7 @@ $kernel->terminate($request, $response);
 
 ## 阶段二：实例化 Application 实例
 
-看`app.php`源码。
+看`/../bootstrap/app.php`源码。
 
 ```php
 
@@ -113,7 +113,7 @@ protected function registerBaseServiceProviders()
     }
 ```
 
-本函数分别执行了两个服务提供者的 register 函数。
+本函数分别执行了两个服务提供者的 register 函数，稍后跟进。
 
 	$this->registerCoreContainerAliases();
 
@@ -163,6 +163,7 @@ public function registerCoreContainerAliases()
         }
     }
 ```
+本函数将提前定义好的别名数组通过 `$this->alias($key, $alias);` 方式保存到容器中。
 
 
 

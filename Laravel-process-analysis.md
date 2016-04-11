@@ -4,11 +4,13 @@ tags: [Laravel,PHP]
 categories: Laravel
 ---
 
-我是不读源码会死星人，不清楚实际运行流程会缺乏掌控感，我不喜欢。
+作为不读源码会死星人，不清楚实际运行流程会缺乏掌控感，我不喜欢。
 
 <!-- more -->
 
 ---
+
+本文初衷是想理一下`Laravel` 运作流程，在下一篇文章中将对各个阶段进行更加深入的了解。
 
 # 从 index.php 看整体流程
  
@@ -322,5 +324,4 @@ protected function sendRequestThroughRouter($request)
 	                    ->then($this->dispatchToRouter());
 
 流水线的尽头是 Router，我们将最终得到的 `$response` 实例返回，调用其 `send()` 方法，返回给请求者。
-
 

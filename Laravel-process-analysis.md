@@ -312,16 +312,15 @@ protected function sendRequestThroughRouter($request)
 	        'Illuminate\Foundation\Bootstrap\BootProviders',
 	    ];
 
-根据名称我们可以看到`bootstrap()` 函数的运行流程： 检测环境=》导入配置=》配置日志=》处理异常=》注册门面类=》注册服务=》启动服务。
+根据名称我们可以看到`bootstrap()` 函数的运行流程： 检测环境=》导入配置=》配置日志=》处理异常=》注册门面类=》注册服务=》启动服务。这些东西下一次详细说。
 
-至此，程序已经运转起来，接下来就要把货`$request` 送进流水线进行加工处理了。也就是一开始看到的：
+至此，程序已经运转起来，也就是我们的各种设备已经准备就绪，接下来就要把货`$request` 送进流水线进行加工处理了。也就是一开始看到的：
 
 	(new Pipeline($this->app))
 	                    ->send($request)
 	                    ->through($this->app->shouldSkipMiddleware() ? [] : $this->middleware)
 	                    ->then($this->dispatchToRouter());
 
-
-
+流水线的尽头是 Router，我们将最终得到的 `$response` 实例返回，调用其 `send()` 方法，返回给请求者。
 
 

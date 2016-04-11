@@ -10,8 +10,8 @@ categories: Laravel
 
 ---
 
-# 开始的开始。
-
+# 从 index.php 看整体流程
+ 
 
 ```php
 //一切都从public/index.php开始
@@ -65,7 +65,7 @@ $app->singleton(
 return $app;
 ```
 
-这一阶段实例化了容器类：`Illuminate\Foundation\Application`，并创建了单例模式的 Kernel 和 Exception 实例。继续看`Illuminate\Foundation\Application` 构造函数：
+阶段二实例化了容器类：`Illuminate\Foundation\Application`，并创建了单例模式的 Kernel 和 Exception 实例。继续看`Illuminate\Foundation\Application` 构造函数：
 
 ```php
 public function __construct($basePath = null)
@@ -163,7 +163,7 @@ public function registerCoreContainerAliases()
         }
     }
 ```
-本函数将提前定义好的别名数组通过 `$this->alias($key, $alias);` 方式保存到容器中。
+本函数将提前定义好的别名数组通过 `$this->alias($key, $alias);` 方式保存到容器中，即：`$this->aliases[$alias] = $this->normalize($abstract);`。
 
 
 

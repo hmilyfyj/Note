@@ -22,7 +22,7 @@ require __DIR__ . '/../bootstrap/autoload.php';
 //阶段二：实例化 Application 实例
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-//阶段三：实例化 kernel 类，处理请求
+//阶段三：实例化 kernel 类，并把请求交给 $kernel->handle()
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
@@ -65,7 +65,7 @@ $app->singleton(
 return $app;
 ```
 
-阶段二实例化了容器类：`Illuminate\Foundation\Application`，并创建了单例模式的 Kernel 和 Exception 实例。继续看`Illuminate\Foundation\Application` 构造函数：
+阶段二首先实例化了容器类：`Illuminate\Foundation\Application`，然后创建了单例模式的 Kernel 和 Exception 实例。我们跟进看一下`Illuminate\Foundation\Application` 的构造函数：
 
 ```php
 public function __construct($basePath = null)
@@ -166,4 +166,45 @@ public function registerCoreContainerAliases()
 本函数将提前定义好的别名数组通过 `$this->alias($key, $alias);` 方式保存到容器中，即：`$this->aliases[$alias] = $this->normalize($abstract);`。
 
 
+## 阶段三：实例化 kernel 类，并把请求交给 $kernel->handle()
+
+	
+	$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+	$response = $kernel->handle(
+		$request = Illuminate\Http\Request::capture()
+	);
+
+`$kernel`为阶段二中通过 app->singleton 函数创建的`App\Http\Kernel::class` 类实例。
+
+当我们通过HTTP方式访问时，$kernel 实例是通过`App\Http\Kernel` 类实现的，这个类继承了`Illuminate\Foundation\Http\Kernel`。 request 请求将交给 kernel 实例的`handle()`方法处理。
+
+```php
+ /**
+     * Handle an incoming HTTP request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function handle($request)
+    {
+        try {
+            $request->enableHttpMethodParameterOverride();
+
+            $response = $this->sendRequestThroughRouter($request);
+        } catch (Exception $e) {
+            $this->reportException($e);
+
+            $response = $this->renderException($request, $e);
+        } catch (Throwable $e) {
+            $this->reportException($e = new FatalThrowableError($e));
+
+            $response = $this->renderException($request, $e);
+        }
+
+        $this->app['events']->fire('kernel.handled', [$request, $response]);
+
+        return $response;
+    }
+```
 

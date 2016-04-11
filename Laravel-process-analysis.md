@@ -272,7 +272,7 @@ protected function sendRequestThroughRouter($request)
     ];
 
 ```
-s`bootstrap()` 函数调用了 `$app` 实例的`bootstartpWith()` 方法，并将本类的`$this->bootstrappers` 数组作为参数传入，继续查看 `bootstartpWith()` 方法： 
+`bootstrap()` 函数调用了 `$app` 实例的`bootstartpWith()` 方法，并将本类的`$this->bootstrappers` 数组作为参数传入，继续查看 `bootstartpWith()` 方法： 
 
 ```php
 /**
@@ -294,4 +294,7 @@ s`bootstrap()` 函数调用了 `$app` 实例的`bootstartpWith()` 方法，并�
         }
     }
 ```
+
+本函数将迭代实例化传入数组中的每一个类并调用她们的 bootstrap() 方法。
+
 

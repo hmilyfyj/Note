@@ -295,6 +295,33 @@ protected function sendRequestThroughRouter($request)
     }
 ```
 
-本函数将迭代实例化传入数组中的每一个类并调用她们的 bootstrap() 方法。
+本函数将迭代实例化传入数组中的每一个类并调用她们的 bootstrap() 方法。那些类？ 阶段三最开始提到的：
+
+	/**
+	     * The bootstrap classes for the application.
+	     *
+	     * @var array
+	     */
+	    protected $bootstrappers = [
+	        'Illuminate\Foundation\Bootstrap\DetectEnvironment',
+	        'Illuminate\Foundation\Bootstrap\LoadConfiguration',
+	        'Illuminate\Foundation\Bootstrap\ConfigureLogging',
+	        'Illuminate\Foundation\Bootstrap\HandleExceptions',
+	        'Illuminate\Foundation\Bootstrap\RegisterFacades',
+	        'Illuminate\Foundation\Bootstrap\RegisterProviders',
+	        'Illuminate\Foundation\Bootstrap\BootProviders',
+	    ];
+
+根据名称我们可以看到`bootstrap()` 函数的运行流程： 检测环境=》导入配置=》配置日志=》处理异常=》注册门面类=》注册服务=》启动服务。
+
+至此，程序已经运转起来，接下来就要把货`$request` 送进流水线进行加工处理了。也就是一开始看到的：
+
+	(new Pipeline($this->app))
+	                    ->send($request)
+	                    ->through($this->app->shouldSkipMiddleware() ? [] : $this->middleware)
+	                    ->then($this->dispatchToRouter());
+
+
+
 
 

@@ -87,9 +87,10 @@ public function instance($abstract, $instance)
     {
         $abstract = $this->normalize($abstract);
 
-        // First, we will extract the alias from the abstract if it is an array so we
-        // are using the correct name when binding the type. If we get an alias it
-        // will be registered with the container so we can resolve it out later.
+        // 首先判断$abstract抽象体是否是个数组，如果是，我们就将数组
+        // 拆成键值对拿到$abstract和它的别名，并将它们通过alias函数
+        //将它们以aliases[$alias] = $abstract的形式放到aliases数组
+        // 里面方便以后查找，然后删除alias数组中以$abstract为键的项以免接下来的绑定判断出现问题
         if (is_array($abstract)) {
             list($abstract, $alias) = $this->extractAlias($abstract);
 
@@ -108,6 +109,11 @@ public function instance($abstract, $instance)
         if ($bound) {
             $this->rebound($abstract);
         }
+    }
+
+ public function bound($abstract)
+    {
+        return isset($this->bindings[$abstract]) || isset($this->instances[$abstract]) || $this->isAlias($abstract);
     }
 ```
 

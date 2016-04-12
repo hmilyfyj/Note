@@ -60,7 +60,7 @@ public function __construct($basePath = null)
 }
 ```
 
-# 1 Step
+## 1 Step
 
 我们来看第一句`$this->registerBaseBindings();` 实现：
 
@@ -121,7 +121,7 @@ public function instance($abstract, $instance)
     }
 ```
 
-# 2 Step
+## 2 Step
 
 	$this->registerBaseServiceProviders();
 
@@ -136,9 +136,9 @@ protected function registerBaseServiceProviders()
 
 
 
-得到服务实例后传入 register() 函数，看看它做了什么：
+得到服务实例后将其传入 register() 函数，看看它做了什么：
 
-## register() 函数
+#### register() 函数
 
 ```php
 public function register($provider, $options = [], $force = false)
@@ -179,7 +179,7 @@ public function register($provider, $options = [], $force = false)
 
 
 
-### 1.检测是否注册过
+##### 1.检测是否注册过
 
 
 

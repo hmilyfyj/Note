@@ -16,6 +16,8 @@ $app = new Illuminate\Foundation\Application(
 );
 ```
 
+# 构造函数
+
 一起来看下 Application 类的声明及它的构造函数：
 
 ```php
@@ -132,7 +134,11 @@ protected function registerBaseServiceProviders()
     }
 ```
 
+
+
 得到服务实例后传入 register() 函数，看看它做了什么：
+
+## register() 函数
 
 ```php
 public function register($provider, $options = [], $force = false)
@@ -171,16 +177,17 @@ public function register($provider, $options = [], $force = false)
     }
 ```
 
-### register 流程
 
-#### 1.检测是否注册过
 
-如果注册过就直接返回。
+### 1.检测是否注册过
+
+
 
 	if (($registered = $this->getProvider($provider)) && ! $force) {
 	            return $registered;
 	        }
-看看 `getProvider()` 的实现。
+	        
+如果注册过就直接返回。看看 `getProvider()` 的实现：
 
 ```php
 public function getProvider($provider)
@@ -193,7 +200,7 @@ public function getProvider($provider)
     }
 ```
 
-首先判断了传入的`provider`类型，如果是类则取其类名。然后通过自建的 `Arr::first` 方法在 `$this->serviceProviders` 查找符合条件的 provider。
+首先判断了传入的`provider`类型，如果是类则取其类名。然后通过自建的 `Arr::first` 方法在 `$this->serviceProviders` 数组中查找符合条件的 provider。
 
 `Array::first()` 的实现：
 
@@ -216,6 +223,8 @@ public static function first($array, callable $callback = null, $default = null)
 
 `first` 将迭代执行传入的闭包函数，找出`serviceProviders` 数组 中`$name` 类的实例 -- `$value` 并实例化。
 
+### 2 是否为字符串
+
 回到 `register()` 函数，执行到第二步
 
 	if (is_string($provider)) {
@@ -230,9 +239,11 @@ public function resolveProviderClass($provider)
 ```
 
 
-第三步，调用了传入 ServiceProvider 的 `register` 方法。
+### 3 调用 register() 方法
 
-第四步，将需要的参数注入当前 `application` 中。
+### 4 注入参数
+
+将需要的参数注入当前 `application` 中。
 
 ```php
 foreach ($options as $key => $value) {
@@ -240,7 +251,11 @@ foreach ($options as $key => $value) {
         }
 ```
 
-第五步，`$this->markAsRegistered($provider);` 标记该服务为已注册。
+### 5 标记该服务为已注册
+
+    $this->markAsRegistered($provider);` 
+
+`markAsRegistered()`函数的实现：
 
 ```php
 protected function markAsRegistered($provider)
@@ -253,7 +268,9 @@ protected function markAsRegistered($provider)
     }
 ```
 
-这里有个有意思的地方，它是通过`$this['events']` 方式调用 events 。它是这样实现的，`Application` 的父类继承了`ArrayAccess` ，然后在内部实现了
+这里有个有意思的地方，第一句话，它是通过`$this['events']` 方式调用 events 。
+
+它是这样实现的，`Application` 的父类继承了`ArrayAccess` ，然后在内部实现了
 
 ```php
 /**
@@ -268,8 +285,7 @@ protected function markAsRegistered($provider)
     }
 ```
 
-我们之前注册了`events` 服务。
-
+由于我们之前注册了`events` 服务：
 ```php
 $this->app->singleton('events', function ($app) {
             return (new Dispatcher($app))->setQueueResolver(function () use ($app) {
@@ -278,7 +294,9 @@ $this->app->singleton('events', function ($app) {
         });
 ```
 
-现在要 make，先看一下如何make的实现。
+现在要调用`make` 函数，先看一下如何make的实现的吧：
+
+### \$app->make() 函数
 
 ```php
 public function make($abstract, array $parameters = [])
@@ -329,7 +347,7 @@ public function make($abstract, array $parameters = [])
 
 按照流程来：
 
-·1 `$abstract` 如果有别名则改为别名，是否已经实力化过。如果存在与isntances数组中则则说明它有是单例共享型，可以直接返回。
+·1 `$abstract` 如果有别名则改为别名，是否已经实例化过。如果存在与isntances数组中则则说明它有是单例共享型，可以直接返回。
 2 通过`getConcrete($abstract)` 获取`$concrete ` 实体。来看`getConcrete` 源码。
 
 ```php
@@ -513,7 +531,7 @@ protected function resolveNonClass(ReflectionParameter $parameter)
 1 可能是通过上下文绑定的参数，如果是，返回。
 2 可能是有默认值的参数，如果是，则返回。
 
-关于什么是上下文绑定，在下一篇笔记中说。
+关于什么是上下文绑定，以后再研究。
 
 ```php
  protected function resolveClass(ReflectionParameter $parameter)
@@ -535,7 +553,7 @@ protected function resolveNonClass(ReflectionParameter $parameter)
     }
 ```
 
-`resolveClass` 函数用于处理解析出类名但不存在于自定义参数中的情况，处理方式很简单，找不到，我让 `make` 给我找。 : )
+`resolveClass()` 函数用于处理解析出类名但不存在于自定义参数中的情况，处理方式很简单，找不到，我让 `make` 给我找。 : )
 
 
 

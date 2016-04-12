@@ -162,6 +162,7 @@ public function register($provider, $options = [], $force = false)
         // If the application has already booted, we will call this boot method on
         // the provider class so it has an opportunity to do its boot logic and
         // will be ready for any usage by the developer's application logics.
+        // 调用其 boot 方法。
         if ($this->booted) {
             $this->bootProvider($provider);
         }
@@ -192,9 +193,9 @@ public function getProvider($provider)
     }
 ```
 
-首先判断了传入的`provider`类型，如果是类则取其类名。然后通过自建的 `Arr::first` 方法查找相符的 provider。
+首先判断了传入的`provider`类型，如果是类则取其类名。然后通过自建的 `Arr::first` 方法在 `$this->serviceProviders` 查找符合条件的 provider。
 
-Array::first() 的实现：
+`Array::first()` 的实现：
 
 ```php
 public static function first($array, callable $callback = null, $default = null)
@@ -213,7 +214,7 @@ public static function first($array, callable $callback = null, $default = null)
     }
 ```
 
-`first` 将迭代执行传入的闭包函数，找出`serviceProviders` 数组 中作为传入`$name` 类实例的`$value` 并实例化。
+`first` 将迭代执行传入的闭包函数，找出`serviceProviders` 数组 中`$name` 类的实例 -- `$value` 并实例化。
 
 回到 `register()` 函数，执行到第二步
 
@@ -222,10 +223,10 @@ public static function first($array, callable $callback = null, $default = null)
 	        } 
 
 ```php
-if (is_string($provider)) {
-            $provider = $this->resolveProviderClass($provider);
-        }
-
+public function resolveProviderClass($provider)
+    {
+        return new $provider($this);
+    }
 ```
 
 
@@ -485,5 +486,57 @@ protected function getDependencies(array $parameters, array $primitives = [])
     }
 ```
 
-我们需要的依赖都在传入本方法的 `$parameters` 参数中
+我们需要的依赖都在传入本方法的 `$parameters` 参数中，遍历该数组的每一项，取出对应类的全称，先从 `$primitives` 中取以该参数为 key 的 `$value` 并放入新建的 `$dependencies` 空数组中，如果没有解析出类名则调用`resolveNonClass()` ，如果解析出参名却没有在给定参数中查找到，就调用`resolveClass()` 函数。分别来看下这俩函数做啥的。
+
+
+```php
+protected function resolveNonClass(ReflectionParameter $parameter)
+    {
+        if (! is_null($concrete = $this->getContextualConcrete('$'.$parameter->name))) {
+            if ($concrete instanceof Closure) {
+                return call_user_func($concrete, $this);
+            } else {
+                return $concrete;
+            }
+        }
+        
+        if ($parameter->isDefaultValueAvailable()) {
+            return $parameter->getDefaultValue();
+        }
+
+        $message = "Unresolvable dependency resolving [$parameter] in class {$parameter->getDeclaringClass()->getName()}";
+
+        throw new BindingResolutionException($message);
+    }
+```
+`resolveNonClass` 函数是在解析不出类名时调用。
+
+1 可能是通过上下文绑定的参数，如果是，返回。
+2 可能是有默认值的参数，如果是，则返回。
+
+关于什么是上下文绑定，在下一篇笔记中说。
+
+```php
+ protected function resolveClass(ReflectionParameter $parameter)
+    {
+        try {
+            return $this->make($parameter->getClass()->name);
+        }
+
+        // If we can not resolve the class instance, we will check to see if the value
+        // is optional, and if it is we will return the optional parameter value as
+        // the value of the dependency, similarly to how we do this with scalars.
+        catch (BindingResolutionException $e) {
+            if ($parameter->isOptional()) {
+                return $parameter->getDefaultValue();
+            }
+
+            throw $e;
+        }
+    }
+```
+
+`resolveClass` 函数用于处理解析出类名但不存在于自定义参数中的情况，处理方式很简单，找不到，我让 `make` 给我找。 : )
+
+
 

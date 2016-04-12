@@ -351,9 +351,9 @@ public function make($abstract, array $parameters = [])
     }
 ```
 
-检测`$abstract` 是否存在与`$this->bindings` 数组，存在返回['concrete'] 内容，不存在则返回自身。
+检测`$this->bindings` 数组中是否存在`$abstract` ，存在返回`['concrete']` 内容，不存在则返回`$abstract`。
 
-回到`register` 函数，接下来要执行：
+回到`make()` 函数，接下来要执行：
 
 ```php
 if ($this->isBuildable($concrete, $abstract)) {
@@ -368,7 +368,7 @@ protected function isBuildable($concrete, $abstract)
         return $concrete === $abstract || $concrete instanceof Closure;
     }
 ```
-如果可实例化，则去进行实例化，否则，则说明有依赖则继续递归调用 `make` 直至没有依赖。
+如果可实例化，则进行实例化，否则，则说明有依赖，需要继续递归调用 `make` 直至没有依赖。然后们跟进 `build()` 函数。
 
 ```php
 public function build($concrete, array $parameters = [])
@@ -421,7 +421,6 @@ public function build($concrete, array $parameters = [])
         // Once we have all the constructor's parameters we can create each of the
         // dependency instances and then use the reflection instances to make a
         // new instance of this class, injecting the created dependencies in.
-        // 如果 parameters 存在数字键，删除，存入 $dependencies 中，不太懂，放置
         $parameters = $this->keyParametersByArgument(
             $dependencies, $parameters
         );
@@ -437,7 +436,7 @@ public function build($concrete, array $parameters = [])
     }
 ```
 
-对于 `$dependencies` 、 `$parameters` 参数。我的理解是 `$dependencies` 是解析出来的依赖，`$parameters` 是自定义的参数。首先看第一个步骤`keyParametersByArgument($dependencies, $parameters)` 方法的实现。
+对于 `$dependencies` 、 `$parameters` 参数。我的理解是 `$dependencies` 是解析出来的依赖（必须的），`$parameters` 是自定义的参数（可通过自定义传入来改变特定依赖）。首先看第一个步骤`keyParametersByArgument($dependencies, $parameters)` 方法的实现。
 
 ```php
 protected function keyParametersByArgument(array $dependencies, array $parameters)

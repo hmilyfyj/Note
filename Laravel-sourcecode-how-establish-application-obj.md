@@ -230,7 +230,7 @@ public function resolveProviderClass($provider)
 ```
 
 
-第三步，调用了传入 ServiceProvider 的`register` 方法。
+第三步，调用了传入 ServiceProvider 的 `register` 方法。
 
 第四步，将需要的参数注入当前 `application` 中。
 
@@ -253,7 +253,7 @@ protected function markAsRegistered($provider)
     }
 ```
 
-这里有个有意思的地方，它是通过`$this['events']` 方式调用 events 的，它是这样实现的，`Application` 的父类继承了`ArrayAccess` ，然后在内部实现了
+这里有个有意思的地方，它是通过`$this['events']` 方式调用 events 。它是这样实现的，`Application` 的父类继承了`ArrayAccess` ，然后在内部实现了
 
 ```php
 /**

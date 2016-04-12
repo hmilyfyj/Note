@@ -375,10 +375,12 @@ public function build($concrete, array $parameters = [])
         // If the concrete type is actually a Closure, we will just execute it and
         // hand back the results of the functions, which allows functions to be
         // used as resolvers for more fine-tuned resolution of these objects.
+        // 如果是闭包就直接实例化。
         if ($concrete instanceof Closure) {
             return $concrete($this, $parameters);
         }
-
+        
+		//拿到一个反射实例
         $reflector = new ReflectionClass($concrete);
 
         // If the type is not instantiable, the developer is attempting to resolve
@@ -396,28 +398,34 @@ public function build($concrete, array $parameters = [])
             throw new BindingResolutionException($message);
         }
 
+		//入栈
         $this->buildStack[] = $concrete;
 
+		//获取构造函数
         $constructor = $reflector->getConstructor();
         
         // If there are no constructors, that means there are no dependencies then
         // we can just resolve the instances of the objects right away, without
         // resolving any other types or dependencies out of these containers.
+        // 构造函数为空，无依赖直接 new。
         if (is_null($constructor)) {
             array_pop($this->buildStack);
 
             return new $concrete;
         }
 
+		//获取依赖参数 $dependencies 
         $dependencies = $constructor->getParameters();
 
         // Once we have all the constructor's parameters we can create each of the
         // dependency instances and then use the reflection instances to make a
         // new instance of this class, injecting the created dependencies in.
+        // 如果 parameters 存在数字键，删除，存入 $dependencies 中，不太懂，放置
         $parameters = $this->keyParametersByArgument(
             $dependencies, $parameters
         );
         
+        // 解析 $parameters 中的依赖
         $instances = $this->getDependencies(
             $dependencies, $parameters
         );
@@ -425,6 +433,24 @@ public function build($concrete, array $parameters = [])
         array_pop($this->buildStack);
 
         return $reflector->newInstanceArgs($instances);
+    }
+```
+
+对于 `$dependencies` 、 `$parameters` 参数。我的理解是 `$dependencies` 是解析出来的依赖，`$parameters` 是自定义的参数。首先看第一个步骤`keyParametersByArgument($dependencies, $parameters)` 方法的实现。
+
+
+```php
+protected function keyParametersByArgument(array $dependencies, array $parameters)
+    {
+        foreach ($parameters as $key => $value) {
+            if (is_numeric($key)) {
+                unset($parameters[$key]);
+
+                $parameters[$dependencies[$key]->name] = $value;
+            }
+        }
+
+        return $parameters;
     }
 ```
 

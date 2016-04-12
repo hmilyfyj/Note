@@ -438,7 +438,6 @@ public function build($concrete, array $parameters = [])
 
 对于 `$dependencies` 、 `$parameters` 参数。我的理解是 `$dependencies` 是解析出来的依赖，`$parameters` 是自定义的参数。首先看第一个步骤`keyParametersByArgument($dependencies, $parameters)` 方法的实现。
 
-
 ```php
 protected function keyParametersByArgument(array $dependencies, array $parameters)
     {
@@ -453,4 +452,38 @@ protected function keyParametersByArgument(array $dependencies, array $parameter
         return $parameters;
     }
 ```
+
+这个函数做了什么？首先 `$parameters`  里的参数应当是和`$dependencies` 一一对应的（下标），那么这个函数的作用就是把``$parameters`` 的数字`$key` 替换为对应依赖的参数的 name。
+
+由于`$parameters` 的参数可能不是全部，所以我们需要在进行一步处理，于是有了这一步
+
+	$instances = $this->getDependencies($dependencies, $parameters);
+
+具体实现：
+
+```php
+protected function getDependencies(array $parameters, array $primitives = [])
+    {
+        $dependencies = [];
+
+        foreach ($parameters as $parameter) {
+            $dependency = $parameter->getClass();
+            
+            // If the class is null, it means the dependency is a string or some other
+            // primitive type which we can not resolve since it is not a class and
+            // we will just bomb out with an error since we have no-where to go.
+            if (array_key_exists($parameter->name, $primitives)) {
+                $dependencies[] = $primitives[$parameter->name];
+            } elseif (is_null($dependency)) {
+                $dependencies[] = $this->resolveNonClass($parameter);
+            } else {
+                $dependencies[] = $this->resolveClass($parameter);
+            }
+        }
+
+        return $dependencies;
+    }
+```
+
+我们需要的依赖都在传入本方法的 `$parameters` 参数中
 

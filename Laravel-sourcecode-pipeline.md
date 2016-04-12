@@ -4,7 +4,7 @@ tags: [Laravel,PHP]
 categories: Laravel
 ---
 
-在梳理流程时遇到多次流水线操作，当时只知是用来执行中间件，现在追过去搞懂它如何实现。
+在梳理流程时多次遇到流水线操作，当时只知是用来执行中间件，现在去搞懂它如何实现。
 
 ```php
         return (new Pipeline($this->app))
@@ -17,7 +17,7 @@ categories: Laravel
 
 ---
 
-### 从构造函数开始
+### 从构造函数`new Pipeline($this->app)`开始
 
 ```php
  /**
@@ -32,7 +32,7 @@ categories: Laravel
     }
 ```
 
-传入`application` 容器实例。
+构造函数接收了`application` 容器实例并保存。
 
 ### send($request)
 
@@ -85,7 +85,7 @@ categories: Laravel
      */
     public function then(Closure $destination)
     {
-    //以`$passable`为参数的闭包，调用`$firstSlice()`将执行`call_user_func($destination, $passable);`
+	    //以`$passable`为参数的闭包，调用`$firstSlice()`将执行`call_user_func($destination, $passable);` 并返回执行结果。
         $firstSlice = $this->getInitialSlice($destination);
         
         //反转，倒序
@@ -101,11 +101,10 @@ categories: Laravel
 #### 1 Step
 
 ```php
-
 $firstSlice = $this->getInitialSlice($destination);
 ```
 
-第一句比较好理解，注释说的很明白，这里看一 `getInitialSlice($destination)` 下实现就 Ok。
+第一句比较好理解，注释说的很明白，最后执行了传入的 `$destination` 函数。这里看一下 `getInitialSlice($destination)` 的实现：
 
 
 
@@ -153,5 +152,73 @@ return call_user_func(
 
 >用回调函数迭代地将数组简化为单一的值。
 
-通俗些：迭代执行传入的函数 `$function`，每次的执行结果作为下一次迭代的一个参数。`initial ` 参数如果被传入将作为第一次被迭代时的参数。
+通俗些：迭代执行传入的函数 `$function`，每次的执行结果作为下一次迭代的参数之一。`initial ` 参数如果被传入将作为第一次被迭代时的参数。
+
+我们回到这句话来看
+
+        array_reduce($pipes, $this->getSlice(), $firstSlice)
+
+这里不明晰的只有`$this->getSlice()` 参数，看一下源码：
+
+```php
+/**
+     * Get a Closure that represents a slice of the application onion.
+     *
+     * @return \Closure
+     */
+    protected function getSlice()
+    {
+        return function ($stack, $pipe) {
+            return function ($passable) use ($stack, $pipe) {
+                // If the pipe is an instance of a Closure, we will just call it directly but
+                // otherwise we'll resolve the pipes out of the container and call it with
+                // the appropriate method and arguments, returning the results back out.
+                if ($pipe instanceof Closure) {
+                    return call_user_func($pipe, $passable, $stack);
+                } else {
+                    list($name, $parameters) = $this->parsePipeString($pipe);
+
+                    return call_user_func_array([$this->container->make($name), $this->method],
+                            array_merge([$passable, $stack], $parameters));
+                }
+            };
+        };
+    }
+```
+
+慢着，我仿佛看到无尽的闭包和`call_user_func` ，我想静静..
+
+哈哈，不着急，一点点捋，现在我们得到了要迭代的函数：`function ($stack, $pipe)` 。迭代执行一次将返回一个闭包`function ($passable) use ($stack, $pipe)`，这个闭包将作为参数`$stack` 传入下一次迭代中，当执行到最后一次迭代时，我们得到的最终函数是（我们用f（n）表示）：
+
+	function ($passable) use (f(n-1), $middleware[n-1]->handle());
+
+
+也许依然有些乱，别着急，接着往下看，以上闭包最终的迭代结果参与了`call_user_func` 的运行。
+
+```php
+return call_user_func(
+            array_reduce($pipes, $this->getSlice(), $firstSlice), 
+            $this->passable
+        );
+```
+
+通过`call_user_func` ，我们将调用迭代返回的闭包，它将执行语句：
+
+    call_user_func($pipe, $passable, $stack);
+
+我们以`$passable` 、`$stack` 为参数，调用了`$pipe` 函数，$pipe 函数是啥来着？ 是中间件的 handle() 实现：
+
+```php
+/**
+    public function handle($request, Closure $next, $guard = null)
+    {
+	    //dosomething...
+
+        return $next($request);
+    }
+```
+
+`handle()` 函数接收了`$request` 参数并进行相关处理，然后交由传进入的第二个参数尽兴后续操作。第二参数是我们刚传进来的`$stack`  ，它是我们在执行array_reduce 时倒数第二次迭代的结果。`$stack`函数将再次调用指定中间件的`handle()` 来对`$request` 处理，处理后将结果继续交给传入的`$stack` ，以此类推，直至将加工好的`$request` 交给第一次迭代时传入的初始化参数 `$firstSlice` 闭包，这个闭包是将`$request` 作为参数传递给`then()` 指定的函数，比如路由分发。
+
+至此，就实现了按照中间件的顺序对`$request` 处理，然后结果交由下家做后续处理的流程。的确有些像流水线。
 

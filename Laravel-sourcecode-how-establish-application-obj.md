@@ -223,7 +223,7 @@ public static function first($array, callable $callback = null, $default = null)
 
 `first` 将迭代执行传入的闭包函数，找出`serviceProviders` 数组 中`$name` 类的实例 -- `$value` 并实例化。
 
-### 2 是否为字符串
+##### 2 检测是否为字符串
 
 回到 `register()` 函数，执行到第二步
 
@@ -239,9 +239,9 @@ public function resolveProviderClass($provider)
 ```
 
 
-### 3 调用 register() 方法
+##### 3 调用服务提供者 register() 方法
 
-### 4 注入参数
+#### 4 注入所需参数
 
 将需要的参数注入当前 `application` 中。
 
@@ -251,7 +251,7 @@ foreach ($options as $key => $value) {
         }
 ```
 
-### 5 标记该服务为已注册
+#### 5 标记该服务为已注册
 
     $this->markAsRegistered($provider);` 
 

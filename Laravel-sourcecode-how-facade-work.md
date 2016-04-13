@@ -36,7 +36,7 @@ protected function sendRequestThroughRouter($request)
 
     $this->bootstrap();
 
-它做了什么？ 看一下：
+看它做了啥：
 
 ```php
 public function bootstrap()
@@ -167,7 +167,7 @@ public static function getInstance(array $aliases = [])
 
 这一过程，将传入的数组并入本类的静态参数`$this->aliases` 内，并根据是否被实例化过做了不同的处理，无需细说。
 
-最后，调用了`register()` 方法，这里是有趣的开始：
+回到`bootstrap()`函数 ，最后，调用了`register()` 方法，这里是有趣的开始：
 
     AliasLoader::getInstance($app->make('config')->get('app.aliases'))->register();
 
@@ -185,7 +185,7 @@ public function register()
     }
 ```
 
-未注册过时，将调用`prependToLoaderStack()` 函数，它做了什么？看源码：
+未注册过时，将调用`prependToLoaderStack()` 函数，`prependToLoaderStack()` 实现 ：
 
 ```php
 protected function prependToLoaderStack()
@@ -287,6 +287,5 @@ protected function registerRouter()
             return new Router($app['events'], $app);
         });
     }
-
 ```
 

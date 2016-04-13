@@ -16,6 +16,33 @@ $app = new Illuminate\Foundation\Application(
 
 ---
 
+# 参数说明
+
+在开始之前先对几个参数了解一下
+
+## Application 类
+
+```php
+protected static $instance; // 存放本类的实例
+protected $bindings = []; // 存放 bind()函数绑定的抽象类，别名（或抽象类名）作 key 实现和共享方式组成数组作为 value。
+protected $instances = []; // 用于存放 make() 或 instance() 函数保存的共享型实例，别名（或抽象类名）作 key， 实例作 value。
+protected $aliases = []; // 存放别名，完整类名为 key，别名为 value.
+protected $buildStack = []; // 在调用 build（） 函数时要被实现的类的类名将暂时存入次数组（压栈）。
+
+// 一知半解的
+public $contextual = []; // 用于存放上下文关系。 when() 指定类作为一级参数，need() 制定类作为二级参数，give() 指定类作为 value。 用于依赖注入。
+
+// 暂时不知道的
+protected $resolved = [];
+protected $tags = [];
+protected $reboundCallbacks = [];
+protected $globalResolvingCallbacks = [];
+protected $globalAfterResolvingCallbacks = [];
+protected $resolvingCallbacks = [];
+protected $afterResolvingCallbacks = [];
+
+```
+
 # 构造函数
 
 从 `Application` 的构造函数开始：

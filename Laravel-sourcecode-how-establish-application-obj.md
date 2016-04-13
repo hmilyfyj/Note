@@ -18,7 +18,7 @@ $app = new Illuminate\Foundation\Application(
 
 # 构造函数
 
-一起来看下 Application 类的声明及它的构造函数：
+从 `Application` 的构造函数开始：
 
 ```php
 namespace Illuminate\Foundation;
@@ -62,7 +62,7 @@ public function __construct($basePath = null)
 
 ## 1 Step
 
-我们来看第一句`$this->registerBaseBindings();` 实现：
+我们来看第一句 `$this->registerBaseBindings();` 实现：
 
 ```php
 /**
@@ -558,4 +558,9 @@ protected function resolveNonClass(ReflectionParameter $parameter)
 `resolveClass()` 函数用于处理解析出类名但不存在于自定义参数中的情况，处理方式很简单：让 `make` 帮忙。 
 
 Laravel 通过反射的方式，实现了依赖的自动注入。
+
+
+# 疑问
+
+在`build` 过程中，会将要实例化的类进行压栈出栈 `$this->buildStack` 。 为什么需要准备栈呢，暂时没有发现栈中同时出现两个需要实例化的内容。所以对栈的设定有些疑问，是否还有其他功能？
 

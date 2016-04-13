@@ -1,4 +1,4 @@
-title: Laravel 源码分析 -- Application 的搭建
+title: Laravel 源码分析 -- Application 是如何炼成的
 date: 2016-04-12 15:02
 tags: [Laravel,PHP]
 categories: Laravel
@@ -296,7 +296,7 @@ $this->app->singleton('events', function ($app) {
         });
 ```
 
-现在要调用`make` 函数，先看一下如何make的实现的吧：
+现在要调用`make` 函数，我们来看看 `make` ：
 
 ###### $app->make() 函数
 
@@ -556,4 +556,6 @@ protected function resolveNonClass(ReflectionParameter $parameter)
 ```
 
 `resolveClass()` 函数用于处理解析出类名但不存在于自定义参数中的情况，处理方式很简单：让 `make` 帮忙。 
+
+Laravel 通过反射的方式，实现了依赖的自动注入。
 

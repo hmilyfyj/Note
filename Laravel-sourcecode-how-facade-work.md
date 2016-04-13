@@ -165,7 +165,7 @@ public static function getInstance(array $aliases = [])
     }
 ```
 
-将传入的数组并入本类的静态参数`$this->aliases` 内，并根据是否被实例化过做了不同的处理，不必细说。
+这一过程，将传入的数组并入本类的静态参数`$this->aliases` 内，并根据是否被实例化过做了不同的处理，无需细说。
 
 最后，调用了`register()` 方法，这里是有趣的开始：
 

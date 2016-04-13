@@ -241,7 +241,9 @@ public function resolveProviderClass($provider)
 
 ##### 3 调用服务提供者 register() 方法
 
-#### 4 注入所需参数
+    $provider->register();
+
+##### 4 注入所需参数
 
 将需要的参数注入当前 `application` 中。
 
@@ -251,7 +253,7 @@ foreach ($options as $key => $value) {
         }
 ```
 
-#### 5 标记该服务为已注册
+##### 5 标记该服务为已注册
 
     $this->markAsRegistered($provider);` 
 
@@ -296,7 +298,7 @@ $this->app->singleton('events', function ($app) {
 
 现在要调用`make` 函数，先看一下如何make的实现的吧：
 
-### \$app->make() 函数
+###### \$app->make() 函数
 
 ```php
 public function make($abstract, array $parameters = [])
@@ -345,7 +347,7 @@ public function make($abstract, array $parameters = [])
     }
 ```
 
-按照流程来：
+按照流程捋一下make函数：
 
 ·1 `$abstract` 如果有别名则改为别名，是否已经实例化过。如果存在与isntances数组中则则说明它有是单例共享型，可以直接返回。
 2 通过`getConcrete($abstract)` 获取`$concrete ` 实体。来看`getConcrete` 源码。
@@ -473,7 +475,7 @@ protected function keyParametersByArgument(array $dependencies, array $parameter
 
 这个函数做了什么？首先 `$parameters`  里的参数应当是和`$dependencies` 一一对应的（下标），那么这个函数的作用就是把``$parameters`` 的数字`$key` 替换为对应依赖的参数的 name。
 
-由于`$parameters` 的参数可能不是全部，所以我们需要在进行一步处理，于是有了这一步
+由于`$parameters` 的参数可能不是全部，所以我们需要在进一步处理，于是有了这一步
 
 	$instances = $this->getDependencies($dependencies, $parameters);
 
@@ -503,7 +505,7 @@ protected function getDependencies(array $parameters, array $primitives = [])
     }
 ```
 
-我们需要的依赖都在传入本方法的 `$parameters` 参数中，遍历该数组的每一项，取出对应类的全称，先从 `$primitives` 中取以该参数为 key 的 `$value` 并放入新建的 `$dependencies` 空数组中，如果没有解析出类名则调用`resolveNonClass()` ，如果解析出参名却没有在给定参数中查找到，就调用`resolveClass()` 函数。分别来看下这俩函数做啥的。
+我们需要的依赖都被包含在传入本方法的 `$parameters` 参数中，这个参数是通过反射类型获取的依赖数组，本方法将遍历该数组的每一项，取出每一个依赖对应类的全称，先从 `$primitives` 中取以该参数为 key 的 `$value` 并放入新建的 `$dependencies` 空数组中，如果没有解析出类名则调用`resolveNonClass()` ，如果解析出类名却没有在给定参数中查找到，就调用`resolveClass()` 函数。分别来看下这俩函数做啥的。
 
 
 ```php
@@ -526,12 +528,12 @@ protected function resolveNonClass(ReflectionParameter $parameter)
         throw new BindingResolutionException($message);
     }
 ```
-`resolveNonClass` 函数是在解析不出类名时调用。
+`resolveNonClass()` 函数在解析不出类名时调用,他检测两种可能情况。
 
 1 可能是通过上下文绑定的参数，如果是，返回。
 2 可能是有默认值的参数，如果是，则返回。
 
-关于什么是上下文绑定，以后再研究。
+关于什么是上下文绑定，以后再研究。接着来看`resolveClass()` 函数：
 
 ```php
  protected function resolveClass(ReflectionParameter $parameter)
@@ -553,7 +555,5 @@ protected function resolveNonClass(ReflectionParameter $parameter)
     }
 ```
 
-`resolveClass()` 函数用于处理解析出类名但不存在于自定义参数中的情况，处理方式很简单，找不到，我让 `make` 给我找。 : )
-
-
+`resolveClass()` 函数用于处理解析出类名但不存在于自定义参数中的情况，处理方式很简单，没有传入的类名，让 `make` 帮忙。 : )
 

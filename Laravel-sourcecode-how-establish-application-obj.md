@@ -298,7 +298,7 @@ $this->app->singleton('events', function ($app) {
 
 现在要调用`make` 函数，先看一下如何make的实现的吧：
 
-###### \$app->make() 函数
+###### $app->make() 函数
 
 ```php
 public function make($abstract, array $parameters = [])
@@ -528,9 +528,9 @@ protected function resolveNonClass(ReflectionParameter $parameter)
         throw new BindingResolutionException($message);
     }
 ```
-`resolveNonClass()` 函数在解析不出类名时调用,他检测两种可能情况。
+`resolveNonClass()` 函数在解析不出类名时调用,他检测两种可能情况：
 
-1 可能是通过上下文绑定的参数，如果是，返回。
+1 可能是通过上下文绑定的参数，如果是，调用。
 2 可能是有默认值的参数，如果是，则返回。
 
 关于什么是上下文绑定，以后再研究。接着来看`resolveClass()` 函数：
@@ -555,5 +555,5 @@ protected function resolveNonClass(ReflectionParameter $parameter)
     }
 ```
 
-`resolveClass()` 函数用于处理解析出类名但不存在于自定义参数中的情况，处理方式很简单，没有传入的类名，让 `make` 帮忙。 : )
+`resolveClass()` 函数用于处理解析出类名但不存在于自定义参数中的情况，处理方式很简单：让 `make` 帮忙。 
 

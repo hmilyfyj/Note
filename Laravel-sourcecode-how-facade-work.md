@@ -7,13 +7,9 @@ categories: Laravel
 
 Route如何用静态方法来处理路由的？ 因为`Facade`。
 
-```
-
 <!-- more -->
 
 ---
-
-# 
 
 # 流程
 

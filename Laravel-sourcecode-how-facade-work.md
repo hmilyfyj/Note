@@ -11,33 +11,8 @@ Route如何用静态方法来处理路由的？ 因为`Facade`。
 
 ---
 
-# 流程
 
-## 从Kernel 开始
-
-```php
-protected function sendRequestThroughRouter($request)
-    {
-        $this->app->instance('request', $request);
-        
-        Facade::clearResolvedInstance('request');
-
-        $this->bootstrap();
-        
-        return (new Pipeline($this->app))
-                    ->send($request)
-                    ->through($this->app->shouldSkipMiddleware() ? [] : $this->middleware)
-                    ->then($this->dispatchToRouter());
-    }
-```
-
-在将请求送往路由器之前，需要做一些几本功能的启动：
-
-    $this->bootstrap();
-
-
-
-# 流程
+# 流程梳理
 
 ## 从Kernel 开始
 

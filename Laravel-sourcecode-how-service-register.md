@@ -29,15 +29,15 @@ categories: Laravel
      */
     public function load(array $providers)
     {
-	    //第一步： 从缓存文件中读取配置清单
+        //第一步： 从缓存文件中读取配置清单
         $manifest = $this->loadManifest();
         
-	    //第二步： 判断是否需要重新缓存编译配置 return is_null($manifest) || $manifest['providers'] != $providers;
+        //第二步： 判断是否需要重新缓存编译配置 return is_null($manifest) || $manifest['providers'] != $providers;
         if ($this->shouldRecompile($manifest, $providers)) {
             $manifest = $this->compileManifest($providers);
         }
         
-		//第三步：  绑定事件
+        //第三步：  绑定事件
         foreach ($manifest['when'] as $provider => $events) {
             $this->registerLoadEvents($provider, $events);
         }

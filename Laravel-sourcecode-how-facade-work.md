@@ -5,7 +5,7 @@ tags: [Laravel,PHP]
 categories: Laravel
 ---
 
-Route如何用静态方法来处理路由的？ 因为`Facade`。
+Route如何用静态方法来处理路由的？  `Facade`。
 
 <!-- more -->
 
@@ -57,7 +57,7 @@ protected $bootstrappers = [
     ];
 ```
 
-看看`Application` 下的`enter code here` 方法：
+跟进 `Application` 下的`bootstrapWith()` 方法：
 
 ```php
 public function bootstrapWith(array $bootstrappers)
@@ -75,7 +75,7 @@ public function bootstrapWith(array $bootstrappers)
 ```
 
 
-原来是迭代调用`Kernel` 类内`$bootstrappers` 数组中类的`bootstrap($this)` 方法。
+原来是迭代调用`Kernel` 类内`$bootstrappers` 数组中各个类的`bootstrap()` 方法。
 
 在数组中我们看到一个：
 
@@ -85,7 +85,7 @@ public function bootstrapWith(array $bootstrappers)
 
 ## RegisterFacades
 
-`RegisterFacades` 类只有一个方法：
+`RegisterFacades` 类内只有一个方法，其他方法都继承自 `Facade`：
 
 ```php
 public function bootstrap(Application $app)

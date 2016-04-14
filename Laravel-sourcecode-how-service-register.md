@@ -1,7 +1,7 @@
 
 
 title: Laravel 源码分析 -- 服务的注册、延迟启动
-date: 2016-04-13 10:02
+date: 2016-04-14 19:44
 tags: [Laravel,PHP]
 categories: Laravel
 ---
@@ -16,7 +16,7 @@ categories: Laravel
 
 个人理解：`Laravel` 将根据不同的功能书写了不同的类库，这些类库统称为 服务（`Service`） ，为了解决不同类的加载、运行、延迟启动、以及依赖注入等麻烦事情，我们给每个`Service` 配置了一个“保姆“”，她们统称为`ServiceProvider` ，当`Application` 作为指挥者加载启动时，他可以按需调用`ServiceProvider` 的`register` 、`boot()` 等方法进行调度。
 
-根据绑定时间的不同 `ServiceProvider` 可分为 3 种类型：`when` 、`eager` （立即绑定）、`deferred` (延迟)。
+根据绑定时间的不同 `ServiceProvider` 可分为 3 种类型：`when`（事件触发型绑定） 、`eager` （立即绑定）、`deferred` (延迟绑定)。
 
 上一篇笔记中说过，内核在将`$request` 请求交给中间件处理前，会对`$app` 进行一些处理，其中一步是调用`$this->bootstrap()` 函数，该函数将调用数个类的`bootstrap()` 方法，其中一个类叫做`Illuminate\Foundation\Bootstrap\RegisterProviders` ，用来注册需要的服务。
 

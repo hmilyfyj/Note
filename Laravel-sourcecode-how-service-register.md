@@ -12,13 +12,31 @@ categories: Laravel
 
 ---
 
+### 概念
+
 开始之前应当对 `ServiceProvider` 有一些基本的了解。
 
 个人理解：`Laravel` 将根据不同的功能书写了不同的类库，这些类库统称为 服务（`Service`） ，为了解决不同类的加载、运行、延迟启动、以及依赖注入等麻烦事情，我们给每个`Service` 配置了一个“保姆“”，她们统称为`ServiceProvider` ，当`Application` 作为指挥者加载启动时，他可以按需调用`ServiceProvider` 的`register` 、`boot()` 等方法进行调度。
 
 根据绑定时间的不同 `ServiceProvider` 可分为 3 种类型：`when`（事件触发型绑定） 、`eager` （立即绑定）、`deferred` (延迟绑定)。
 
-上一篇笔记中说过，内核在将`$request` 请求交给中间件处理前，会对`$app` 进行一些处理，其中一步是调用`$this->bootstrap()` 函数，该函数将调用数个类的`bootstrap()` 方法，其中一个类叫做`Illuminate\Foundation\Bootstrap\RegisterProviders` ，用来注册需要的服务。
+上一篇笔记中说过，内核在将`$request` 请求交给中间件处理前，会对`$app` 进行一些处理，其中一步是调用`$this->bootstrap()` 函数，该函数将调用数个类的`bootstrap()` 方法，其中一个类叫做`Illuminate\Foundation\Bootstrap\RegisterProviders` ，用来注册需要的服务。`RegisterProviders` 类的方法将调用`Application` 实例的`registerConfiguredProviders()` 方法。`registerConfiguredProviders()` 实现如下：
+
+```php
+public function registerConfiguredProviders()
+    {
+        //服务数组缓存文件路径："E:\xampp\htdocs\laravel-test\bootstrap/cache/services.php"
+        $manifestPath = $this->getCachedServicesPath();
+        
+        //初始化 ProviderRepository() 并调用 load() 函数。
+        (new ProviderRepository($this, new Filesystem, $manifestPath))
+                    ->load($this->config['app.providers']);
+    }
+```
+
+直接跳到`ProviderRepository`  类看`load()` 实现：
+
+# ProviderRepository
 
 ```php
 /**
@@ -37,7 +55,7 @@ categories: Laravel
             $manifest = $this->compileManifest($providers);
         }
         
-        //第三步：  绑定事件
+              //第三步：  绑定事件
         foreach ($manifest['when'] as $provider => $events) {
             $this->registerLoadEvents($provider, $events);
         }
@@ -144,9 +162,11 @@ protected function registerLoadEvents($provider, array $events)
     }
 ```
 
-原来是实现了绑定`$event` 事件，当某事件触发时，将执行该`ServiceProvider` 的`register()` 函数。
+原来是实现了绑定`$event` 事件，当某事件触发时，将执行该服务提供者的`register()` 函数。
 
 再来看`$this->app->addDeferredServices($manifest['deferred']);` 对`deffered` 类型的处理：
+
+# Application
 
 首先要说明的是 `$services` 数组的构成，服务名为 `key`，该服务所依赖的服务提供者数组作为 `value`。
 
@@ -208,7 +228,7 @@ public function registerDeferredProvider($provider, $service = null)
 
         $this->register($instance = new $provider($this));
 
-		// 暂时不懂。略
+        // 暂时不懂。略
         if (! $this->booted) {
             $this->booting(function () use ($instance) {
                 $this->bootProvider($instance);

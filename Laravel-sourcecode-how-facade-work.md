@@ -167,7 +167,7 @@ public static function getInstance(array $aliases = [])
 
 这一过程，将传入的数组并入本类的静态参数`$this->aliases` 内，并根据是否被实例化过做了不同的处理，无需细说。
 
-回到`bootstrap()`函数 ，最后，调用了`register()` 方法，这里是有趣的开始：
+回到 `bootstrap()` 函数 ，最后，调用了`register()` 方法，这里是有趣的开始：
 
     AliasLoader::getInstance($app->make('config')->get('app.aliases'))->register();
 
@@ -205,12 +205,12 @@ public function load($alias)
             return class_alias($this->aliases[$alias], $alias);
         }
     }
-``` 
+```
 
 很简单，会通过 `class_alias` 方法定义别名并返回处理结果，此时别名和原有类将完全相同。
 
 
-此时，我已经可以愉快的调用 Router 而不抱错，但是，如果我想调用 Router::get，仅仅这样是不行的， `Illuminate\Support\Facades\Route` 本身并不带任何路由处理的方法的实现，甚至根本找不到`get()` 方法，这里说到了找不到，类找不到可以调用`__autoload` ，静态方法找不到，同样可以调用`__callStatic` 方法，看一下源码：
+此时，我已经可以愉快的调用 Router 而不报错，但如果我想调用 Router::get，仅仅这样是不行的， `Illuminate\Support\Facades\Route` 本身并不带任何路由处理的方法的实现，甚至根本找不到`get()` 方法，这里说到了找不到，类找不到可以调用`__autoload` ，静态方法找不到，同样可以调用`__callStatic` 方法，看一下源码：
 
 ```php
 public static function __callStatic($method, $args)

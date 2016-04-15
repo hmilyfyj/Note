@@ -78,7 +78,7 @@ public function registerConfiguredProviders()
         $this->app->addDeferredServices($manifest['deferred']);
     }
 ```
-具体流程如注释。跟进每一步的代码来看。
+具体流程如注释。跟进看代码实现。
 
 第二步做了是否需要编译的判断，这里看看 `compileManifest()` 的实现：
 
@@ -171,7 +171,7 @@ protected function registerLoadEvents($provider, array $events)
     }
 ```
 
-原来是实现了绑定`$event` 事件，当某事件触发时，将执行该服务提供者的`register()` 函数。
+原来是实现了该服务的触发型注册，当某事件触发时，将执行该服务提供者的`register()` 函数。
 
 再来看`$this->app->addDeferredServices($manifest['deferred']);` 对`deffered` 类型的处理：
 

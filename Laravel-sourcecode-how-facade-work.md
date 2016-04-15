@@ -7,6 +7,10 @@ categories: Laravel
 
 Route如何用静态方法来处理路由的？  `Facade`。
 
+主要涉及类：
+
+    'Illuminate\Foundation\Bootstrap\RegisterFacades'
+
 <!-- more -->
 
 ---

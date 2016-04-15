@@ -1,6 +1,6 @@
 
 
-title: Laravel 源码分析 -- 服务的注册、延迟
+title: Laravel 源码分析 -- 服务的注册、启动、延迟
 date: 2016-04-14 19:44
 tags: [Laravel,PHP]
 categories: Laravel
@@ -232,7 +232,7 @@ public function registerDeferredProvider($provider, $service = null)
 
         $this->register($instance = new $provider($this));
 
-        // 暂时不懂。略
+        // 这里暂时不说，放在下节启动时讲。
         if (! $this->booted) {
             $this->booting(function () use ($instance) {
                 $this->bootProvider($instance);

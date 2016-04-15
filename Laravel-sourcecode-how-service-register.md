@@ -23,7 +23,7 @@ categories: Laravel
 
 #### 个人理解
 
-`Laravel` 将根据不同的功能书写了不同的类库，这些类库统称为 服务（`Service`） ，为了解决不同类的加载、运行、延迟启动、以及依赖注入等麻烦事情，我们给每个`Service` 配置了一个“保姆“”，她们统称为`ServiceProvider` ，当`Application` 作为指挥者加载启动时，他可以按需通过 `ServiceProvider` 的`register` 、`boot()` 等方法进行调度。
+`Laravel` 将根据不同的功能书写了不同的类库，这些类库统称为 服务（`Service`） ，为了解决不同服务的加载、运行、延迟启动、以及依赖注入等麻烦事情，我们给每个`Service` 配置了一个“保姆“”，她们统称为`ServiceProvider`，她们具有统一的方法 ，当`Application` 作为指挥者加载启动时，他可以按需通过 `ServiceProvider` 的`register` 、`boot()` 等方法进行调度。
 
 根据注册(`register`)时间的不同， `ServiceProvider` 可分为 3 种类型：`when`（事件触发型绑定） 、`eager` （立即绑定）、`deferred` (延迟绑定)。
 
@@ -149,7 +149,7 @@ array:4 [▼
 ]
 ```
 
-这里先看 `registerLoadEvents()` 函数对 `when` 类型的服务提供者的处理如何实现：
+这里先看 `registerLoadEvents()` 函数对 `when` 类型的服务提供者的处理是如何实现：
 
 	foreach ($manifest['when'] as $provider => $events) {
 	            $this->registerLoadEvents($provider, $events);

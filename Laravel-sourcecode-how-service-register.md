@@ -281,12 +281,12 @@ public function boot()
     }
 ```
 
-本方法最主要的功能是通过`array_walk()` 迭代执行闭包函数，以此来调用各个`ServiceProver` 的`boot()` 方法。并且在执行前后分别触发了绑定了`启动前` 、`启动后` 的事件。即：
+本方法最主要的功能是通过 `array_walk()` 迭代执行闭包函数，以此来调用各个 `ServiceProver` 的 `boot()` 方法。并且在执行前后分别触发了绑定了`启动前` 、`启动后` 的事件。即：
 
     $this->fireAppCallbacks($this->bootingCallbacks);
     $this->fireAppCallbacks($this->bootedCallbacks);
 
-`$this->bootingCallbacks` 是个保存闭包的数组，它由 `Application` 实例的`booting()` 方法补充、添加。
+`$this->bootingCallbacks` 是个保存闭包的数组，它由 `Application` 实例的 `booting()` 方法补充、添加。
 
 ```php
 public function booting($callback)
@@ -306,7 +306,7 @@ public function booted($callback)
 
 ```
 
-在上面延迟注册服务的时候，用到了`booting()` 函数：
+在上面延迟注册服务的时候，用到了 `booting()` 函数：
 
 ```php
 public function registerDeferredProvider($provider, $service = null)
@@ -329,4 +329,51 @@ public function registerDeferredProvider($provider, $service = null)
 ```
 
 为什么要在所有服务启动前，先启动本延迟服务呢？我认为延迟服务之所以称之为延迟，是因为在需要的时候才进行注册，既然现在有其他服务需要本服务，那么我们要在其他服务启动前，把它准备好。
+
+关于`booted()` ，在这几处有看到调用：
+
+`Kernel`  构造函数：
+
+```php
+ public function __construct(Application $app, Dispatcher $events)
+    {
+        if (! defined('ARTISAN_BINARY')) {
+            define('ARTISAN_BINARY', 'artisan');
+        }
+
+        $this->app = $app;
+        $this->events = $events;
+
+        $this->app->booted(function () {
+            $this->defineConsoleSchedule();
+        });
+    }
+```
+
+
+`RouterServiceProvider` 的`boot()` 函数：
+
+```php
+public function boot(Router $router)
+    {
+        $this->setRootControllerNamespace();
+
+        if ($this->app->routesAreCached()) {
+            $this->loadCachedRoutes();
+        } else {
+            $this->loadRoutes();
+            
+            $this->app->booted(function () use ($router) {
+                $router->getRoutes()->refreshNameLookups();
+            });
+        }
+    }
+
+protected function loadCachedRoutes()
+    {
+        $this->app->booted(function () {
+            require $this->app->getCachedRoutesPath();
+        });
+    }
+```
 

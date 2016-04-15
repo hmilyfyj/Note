@@ -1,12 +1,12 @@
 
 
-title: Laravel 源码分析 -- 服务的注册、延迟启动
+title: Laravel 源码分析 -- 服务的注册、延迟
 date: 2016-04-14 19:44
 tags: [Laravel,PHP]
 categories: Laravel
 ---
 
-本文主要分析服务提供者如何启动、在哪里启动。
+本文主要分析服务提供者如何注册以及延迟注册的方法。
 
 <!-- more -->
 
@@ -16,9 +16,13 @@ categories: Laravel
 
 开始之前应当对 `ServiceProvider` 有一些基本的了解。
 
-个人理解：`Laravel` 将根据不同的功能书写了不同的类库，这些类库统称为 服务（`Service`） ，为了解决不同类的加载、运行、延迟启动、以及依赖注入等麻烦事情，我们给每个`Service` 配置了一个“保姆“”，她们统称为`ServiceProvider` ，当`Application` 作为指挥者加载启动时，他可以按需调用`ServiceProvider` 的`register` 、`boot()` 等方法进行调度。
+#### 个人理解
 
-根据绑定时间的不同 `ServiceProvider` 可分为 3 种类型：`when`（事件触发型绑定） 、`eager` （立即绑定）、`deferred` (延迟绑定)。
+`Laravel` 将根据不同的功能书写了不同的类库，这些类库统称为 服务（`Service`） ，为了解决不同类的加载、运行、延迟启动、以及依赖注入等麻烦事情，我们给每个`Service` 配置了一个“保姆“”，她们统称为`ServiceProvider` ，当`Application` 作为指挥者加载启动时，他可以按需通过 `ServiceProvider` 的`register` 、`boot()` 等方法进行调度。
+
+根据注册(`register`)时间的不同， `ServiceProvider` 可分为 3 种类型：`when`（事件触发型绑定） 、`eager` （立即绑定）、`deferred` (延迟绑定)。
+
+#### 启动位置
 
 上一篇笔记中说过，内核在将`$request` 请求交给中间件处理前，会对`$app` 进行一些处理，其中一步是调用`$this->bootstrap()` 函数，该函数将调用数个类的`bootstrap()` 方法，其中一个类叫做`Illuminate\Foundation\Bootstrap\RegisterProviders` ，用来注册需要的服务。`RegisterProviders` 类的方法将调用`Application` 实例的`registerConfiguredProviders()` 方法。`registerConfiguredProviders()` 实现如下：
 
@@ -236,4 +240,93 @@ public function registerDeferredProvider($provider, $service = null)
         }
     }
 ```
+
+
+# 启动（boot）
+
+ `Kernel::bootstra()` 函数启动的最后一函数，是 `Illuminate\Foundation\Bootstrap\BootProviders` 的`bootstrap()` 方法，它将调用`Application` 实例的方法：
+
+    $app->boot();
+
+直接查看`boot()` 函数：
+
+```php
+public function boot()
+    {
+        if ($this->booted) {
+            return;
+        }
+        
+        // Once the application has booted we will also fire some "booted" callbacks
+        // for any listeners that need to do work after this initial booting gets
+        // finished. This is useful when ordering the boot-up processes we run.
+        // 执行 绑定了启动中的事件
+        $this->fireAppCallbacks($this->bootingCallbacks);
+        
+        array_walk($this->serviceProviders, function ($p) {
+            $this->bootProvider($p);
+        });
+
+        $this->booted = true;
+
+        // 执行绑定了已启动的事件。
+        $this->fireAppCallbacks($this->bootedCallbacks);
+    }
+
+ protected function bootProvider(ServiceProvider $provider)
+    {
+        if (method_exists($provider, 'boot')) {
+            return $this->call([$provider, 'boot']);
+        }
+    }
+```
+
+本方法最主要的功能是通过`array_walk()` 迭代执行闭包函数，以此来调用各个`ServiceProver` 的`boot()` 方法。并且在执行前后分别触发了绑定了`启动前` 、`启动后` 的事件。即：
+
+    $this->fireAppCallbacks($this->bootingCallbacks);
+    $this->fireAppCallbacks($this->bootedCallbacks);
+
+`$this->bootingCallbacks` 是个保存闭包的数组，它由 `Application` 实例的`booting()` 方法补充、添加。
+
+```php
+public function booting($callback)
+    {
+        $this->bootingCallbacks[] = $callback;
+    }
+
+public function booted($callback)
+    {
+        $this->bootedCallbacks[] = $callback;
+
+        if ($this->isBooted()) {
+            $this->fireAppCallbacks([$callback]);
+        }
+    }
+
+
+```
+
+在上面延迟注册服务的时候，用到了`booting()` 函数：
+
+```php
+public function registerDeferredProvider($provider, $service = null)
+    {
+        // Once the provider that provides the deferred service has been registered we
+        // will remove it from our local list of the deferred services with related
+        // providers so that this container does not try to resolve it out again.
+        if ($service) {
+            unset($this->deferredServices[$service]);
+        }
+
+        $this->register($instance = new $provider($this));
+
+        if (! $this->booted) {
+            $this->booting(function () use ($instance) {
+                $this->bootProvider($instance);
+            });
+        }
+    }
+```
+
+为什么要在所有服务启动前，先启动本延迟服务呢？我认为延迟服务之所以称之为延迟，是因为在需要的时候才进行注册，既然现在有其他服务需要本服务，那么我们要在其他服务启动前，把它准备好。
 

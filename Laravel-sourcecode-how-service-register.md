@@ -8,6 +8,11 @@ categories: Laravel
 
 本文主要分析服务提供者如何注册以及延迟注册的方法。
 
+主要涉及这两个类：
+
+    'Illuminate\Foundation\Bootstrap\RegisterProviders'
+    'Illuminate\Foundation\Bootstrap\BootProviders'
+
 <!-- more -->
 
 ---
@@ -24,7 +29,7 @@ categories: Laravel
 
 #### 启动位置
 
-上一篇笔记中说过，内核在将`$request` 请求交给中间件处理前，会对`$app` 进行一些处理，其中一步是调用`$this->bootstrap()` 函数，该函数将调用数个类的`bootstrap()` 方法，其中一个类叫做`Illuminate\Foundation\Bootstrap\RegisterProviders` ，用来注册需要的服务。`RegisterProviders` 类的方法将调用`Application` 实例的`registerConfiguredProviders()` 方法。`registerConfiguredProviders()` 实现如下：
+上一篇笔记中说过，内核在将`$request` 请求交给中间件处理前，会对 `$app` 进行配置以及相关服务的启动，其中一步是调用 `$this->bootstrap()` 函数，该函数将调用数个类的 `bootstrap()` 方法，其中一个类叫做 `Illuminate\Foundation\Bootstrap\RegisterProviders` ，用来注册需要的服务。`RegisterProviders` 类的方法将调用`Application` 实例的`registerConfiguredProviders()` 方法。`registerConfiguredProviders()` 实现如下：
 
 ```php
 public function registerConfiguredProviders()
@@ -306,7 +311,7 @@ public function booted($callback)
 
 ```
 
-在上面延迟注册服务的时候，用到了 `booting()` 函数：
+在上一节延迟注册服务的时候，用到了 `booting()` 函数：
 
 ```php
 public function registerDeferredProvider($provider, $service = null)

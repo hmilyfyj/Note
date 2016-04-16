@@ -21,6 +21,24 @@ return (new Pipeline($this->app))
 
 ---
 
+# 开始之前
+
+## 概念性
+
+先了解路由的一些配置。
+
+```php
+Route::group(['as' => 'admin::','middleware' => 'auth', 'namespace' => 'AdminCon' , 'domain' => 'test.myapp.com', 'prefix' => 'Admin'], function () {
+    Route::get('dashboard', ['as' => 'dashboard', function () {
+    }]);
+});
+```
+路由会产生这样的效果：
+· 路由被**命名**为 "admin::dashboard",
+- 送往路由前会经过 `auth` 中间件处理
+- 匹配此路由的话，访问的控制器存放在 `App\Http\Controllers\AdminCon` 命名空间下。
+- 匹配条件： `test.myapp.com/Admin/dashboard`
+
 # 配置阶段
 
 ## 注册服务
@@ -117,6 +135,54 @@ public function boot(Router $router)
             $this->app->booted(function () use ($router) {
                 $router->getRoutes()->refreshNameLookups();
             });
+
+ `loadRoutes()` 调用了本类的 `map()` 函数。
+
+```php
+/**
+     * Define the routes for the application.
+     *
+     * @param  \Illuminate\Routing\Router  $router
+     * @return void
+     */
+    public function map(Router $router)
+    {
+        $router->group(['namespace' => $this->namespace], function ($router) {
+            require app_path('Http/routes.php');
+        });
+    }
+
+public function group(array $attributes, Closure $callback)
+    {
+        $this->updateGroupStack($attributes);
+
+        // Once we have updated the group stack, we will execute the user Closure and
+        // merge in the groups attributes when the route is created. After we have
+        // run the callback, we will pop the attributes off of this group stack.
+        call_user_func($callback, $this);
+
+        array_pop($this->groupStack);
+    }
+```
+
+`map()` 函数调用本类 `group()` 函数，看 `group()` 如何处理新注册的路由：
+
+第一步：`$this->updateGroupStack($attributes);` 这里主要是针对上一层 `group` 做的处理 `as` 、`prefix` 、`where` （暂时不知作用）、`as` 等参数，都需要和上一层 `group` 参数进行拼接。处理后入栈 `$this->groupStack` 。
+
+第二部：`call_user_func($callback, $this);` 调用传入的闭包，这里我们传入的是：
+
+    require app_path('Http/routes.php');
+
+即创建所有我们自定义的路由，拿一个举例：
+
+	Route::get('/', function () { dump(['sss']); });
+
+
+
+
+第三步：本次`group` 结束，出栈相关配置。
+
+
 
 
 

@@ -413,4 +413,36 @@ protected function check(array $routes, $request, $includingMethod = true)
     }
 ```
 
+这里的核心是`$value->matches` 即路由对象的 `matches` 方法，跟进：
+
+```php
+public function matches(Request $request, $includingMethod = true)
+    {
+        $this->compileRoute();
+
+        foreach ($this->getValidators() as $validator) {
+            if (! $includingMethod && $validator instanceof MethodValidator) {
+                continue;
+            }
+
+            if (! $validator->matches($this, $request)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+```
+
+路由校验数组：
+
+```php
+array:4 [▼
+  0 => MethodValidator {#108}
+  1 => SchemeValidator {#113}
+  2 => HostValidator {#114}
+  3 => UriValidator {#115}
+]
+```
+
 

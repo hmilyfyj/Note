@@ -309,8 +309,108 @@ $this->actionList[trim($action['controller'], '\\')] = $route;
 
 # 匹配阶段
 
+`Kernel` 实例处理`$request` 的最后一程便是送往路由：
 
+```php
+return (new Pipeline($this->app))
+                    ->send($request)
+                    ->through($this->app->shouldSkipMiddleware() ? [] : $this->middleware)
+                    ->then($this->dispatchToRouter());
 
+protected function dispatchToRouter()
+    {
+        return function ($request) {
+            $this->app->instance('request', $request);
+            
+            return $this->router->dispatch($request);
+        };
+    }
+```
 
+跟进看 `Router::dispatch()` 实现：
+
+```php
+public function dispatch(Request $request)
+    {
+        $this->currentRequest = $request;
+        // 要详细看的 路由分发
+        $response = $this->dispatchToRoute($request);
+        
+        return $this->prepareResponse($request, $response);
+    }
+```
+
+跟进 `$response = $this->dispatchToRoute($request);` 的实现：
+
+```php
+public function dispatchToRoute(Request $request)
+    {
+        // First we will find a route that matches this request. We will also set the
+        // route resolver on the request so middlewares assigned to the route will
+        // receive access to this route instance for checking of the parameters.
+        $route = $this->findRoute($request);
+        
+        $request->setRouteResolver(function () use ($route) {
+            return $route;
+        });
+
+        $this->events->fire(new Events\RouteMatched($route, $request));
+
+        $response = $this->runRouteWithinStack($route, $request);
+        
+        return $this->prepareResponse($request, $response);
+    }
+    
+protected function findRoute($request)
+    {
+        $this->current = $route = $this->routes->match($request);
+        
+        $this->container->instance('Illuminate\Routing\Route', $route);
+        
+        return $this->substituteBindings($route);
+    }
+```
+
+`dispatchToRoute()` 函数第一步就是调用 `findRoute()` 方法并通过 `$request` 对象匹配相应的路由， `findRoute()`  将调用路由容器实例 routes 的  `match` 方法匹配路由，跟进：
+
+```php
+public function match(Request $request)
+    {
+        $routes = $this->get($request->getMethod());
+        
+        // First, we will see if we can find a matching route for this current request
+        // method. If we can, great, we can just return it so that it can be called
+        // by the consumer. Otherwise we will check for routes with another verb.
+        $route = $this->check($routes, $request);
+        
+        if (! is_null($route)) {
+            return $route->bind($request);
+        }
+
+        // If no route was found we will now check if a matching route is specified by
+        // another HTTP verb. If it is we will need to throw a MethodNotAllowed and
+        // inform the user agent of which HTTP verb it should use for this route.
+        $others = $this->checkForAlternateVerbs($request);
+        
+        if (count($others) > 0) {
+            return $this->getRouteForMethods($request, $others);
+        }
+
+        throw new NotFoundHttpException;
+    }
+```
+首先，通过 `请求方式`(如 `GET`、`POST` ) 取出路由数组。
+然后，check 方法将对取出的路由数组与`$request` 请求一一对比
+
+ `check()` 方法实现：
+
+```php
+protected function check(array $routes, $request, $includingMethod = true)
+    {
+        return Arr::first($routes, function ($key, $value) use ($request, $includingMethod) {
+            return $value->matches($request, $includingMethod);
+        });
+    }
+```
 
 

@@ -295,6 +295,17 @@ array:6 [▼
 
 本次 `group` 结束，出栈相关配置。
 
+第二步最后一步里通过`add()` 方法将`$route` 放入结果集，结果集的参数有如下几种：
+
+```php
+//
+$this->routes[$method][$domainAndUri] = $route;
+$this->allRoutes[$method.$domainAndUri] = $route;
+
+//lookup table
+$this->nameList[$action['as']] = $route;
+$this->actionList[trim($action['controller'], '\\')] = $route;
+```
 
 # 匹配阶段
 

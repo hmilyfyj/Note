@@ -230,9 +230,70 @@ protected function createRoute($methods, $uri, $action)
 1. 字符串指定：Route::get('user/profile', 'UserController@showProfile');
 2. 字符串指定放入数组内：Route::get('user/profile', [  'as' => 'profile', 'uses' =>  'UserController@showProfile' ]);
 
+当满足以上两种情况之一时，`mergeGroupAttributesIntoRoute()` 返回 `true` ，调用 `convertToControllerAction()` 函数，不多说，跟进实现：
+
+```php
+protected function convertToControllerAction($action)
+    {
+        if (is_string($action)) {
+            $action = ['uses' => $action];
+        }
+
+        // Here we'll merge any group "uses" statement if necessary so that the action
+        // has the proper clause for this property. Then we can simply set the name
+        // of the controller on the action and return the action array for usage.
+        if (! empty($this->groupStack)) {
+            $action['uses'] = $this->prependGroupUses($action['uses']);
+        }
+
+        // Here we will set this controller name on the action array just so we always
+        // have a copy of it for reference if we need it. This can be used while we
+        // search for a controller name or do some other type of fetch operation.
+        $action['controller'] = $action['uses'];
+
+        return $action;
+    }
+```
+
+首先，取出字符串形式的 控制器动作，取出当前所在的`group` 配置，并将相应的命名空间拼接到控制器动作前。
+
+然后，增加 `controller` 字段并传入处理过的控制器动作。最后就将处理过的`$action` 数组返回给 `createRoute()` 函数，继续看 `createRoute()` 的执行的命令：
+
+	$route = $this->newRoute(
+	            $methods, $this->prefix($uri), $action
+	        );
+
+```php
+protected function newRoute($methods, $uri, $action)
+    {
+        return (new Route($methods, $uri, $action))
+                    ->setRouter($this)
+                    ->setContainer($this->container);
+    }
+```
+
+利用处理好的参数，创建了一个`Route` 实例。下一步将执行：
+
+	if ($this->hasGroupStack()) {
+	            $this->mergeGroupAttributesIntoRoute($route);
+	        }
+
+如果该层路由存在于某个 `group` 下，则补充并合并 `$action` 参数（完整形式如下），然后设置其为`$route` 实例的action，最后将完全处理好可用的`$route` 对象返回，交给`addRoute()` 函数加入到`routes` 路由集当中，
+
+```php
+array:6 [▼
+  "uses" => "App\Http\Controllers\UserController@test"
+  "as" => "name"
+  "controller" => "App\Http\Controllers\UserController@test"
+  "namespace" => "App\Http\Controllers"
+  "prefix" => null
+  "where" => []
+]
+```
+
 #### 第三步
 
-本次`group` 结束，出栈相关配置。
+本次 `group` 结束，出栈相关配置。
 
 
 # 匹配阶段

@@ -167,9 +167,13 @@ public function group(array $attributes, Closure $callback)
 
 `map()` 函数调用本类 `group()` 函数，看 `group()` 如何处理新注册的路由：
 
-第一步：`$this->updateGroupStack($attributes);` 这里主要是针对上一层 `group` 做的处理 `as` 、`prefix` 、`where` （暂时不知作用）、`as` 等参数，都需要和上一层 `group` 参数进行拼接。处理后入栈 `$this->groupStack` 。
+#### 第一步
 
-第二部：`call_user_func($callback, $this);` 调用传入的闭包，这里我们传入的是：
+`$this->updateGroupStack($attributes);` 这里主要是针对上一层 `group` 做的处理 `as` 、`prefix` 、`where` （暂时不知作用）、`as` 等参数，都需要和上一层 `group` 参数进行拼接。处理后入栈 `$this->groupStack` 。
+
+#### 第二步
+
+`call_user_func($callback, $this);` 调用传入的闭包，这里我们传入的是：
 
     require app_path('Http/routes.php');
 
@@ -177,13 +181,58 @@ public function group(array $attributes, Closure $callback)
 
 	Route::get('/', function () { dump(['sss']); });
 
+查看 `get()` 及其调用函数：
 
+```php
+public function get($uri, $action = null)
+    {
+        return $this->addRoute(['GET', 'HEAD'], $uri, $action);
+    }
 
+protected function addRoute($methods, $uri, $action)
+    {
+        return $this->routes->add($this->createRoute($methods, $uri, $action));
+    }
+```
+简单讲，就是通过 `Route::get()` 方法创建了一个包含本次匹配规则的路由（Router） 对象，然后将其存入最开始定义好的 `$routes` 路由集合中。
 
-第三步：本次`group` 结束，出栈相关配置。
+看看 `createRoute` 如何创建`Route` 对象的：
 
+```php
+protected function createRoute($methods, $uri, $action)
+    {
+        // If the route is routing to a controller we will parse the route action into
+        // an acceptable array format before registering it and creating this route
+        // instance itself. We need to build the Closure that will call this out.
+        if ($this->actionReferencesController($action)) {
+            $action = $this->convertToControllerAction($action);
+        }
 
+        $route = $this->newRoute(
+            $methods, $this->prefix($uri), $action
+        );
 
+        // If we have groups that need to be merged, we will merge them now after this
+        // route has already been created and is ready to go. After we're done with
+        // the merge we will be ready to return the route back out to the caller.
+        if ($this->hasGroupStack()) {
+            $this->mergeGroupAttributesIntoRoute($route);
+        }
+
+        $this->addWhereClausesToRoute($route);
+
+        return $route;
+    }
+```
+
+第一步就针对 `$action` 参数调用`Controller` 的处理，路由调用 `Controller` 有两种方式：
+
+1. 字符串指定：Route::get('user/profile', 'UserController@showProfile');
+2. 字符串指定放入数组内：Route::get('user/profile', [  'as' => 'profile', 'uses' =>  'UserController@showProfile' ]);
+
+#### 第三步
+
+本次`group` 结束，出栈相关配置。
 
 
 # 匹配阶段

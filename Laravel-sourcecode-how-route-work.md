@@ -1,4 +1,4 @@
-title: Laravel 源码分析 -- Route 路由可以这么玩。
+title: Laravel 源码分析 -- Route 注册、分发、识别。
 date: 2016-04-15 22:55
 tags: [Laravel,PHP]
 categories: Laravel
@@ -433,6 +433,7 @@ public function matches(Request $request, $includingMethod = true)
         return true;
     }
 ```
+通过调用不同校验器的`matches()` 方法进行校验，都满足才算匹配。
 
 路由校验数组：
 

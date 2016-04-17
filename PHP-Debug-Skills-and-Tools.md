@@ -56,3 +56,7 @@ composer global require symfony/var-dumper;
 
 ## Xdebug
 
+### 安装
+
+[访问官方文档](https://xdebug.org/docs/install)
+

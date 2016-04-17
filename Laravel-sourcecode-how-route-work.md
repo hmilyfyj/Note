@@ -449,7 +449,7 @@ array:4 [▼
 
 # 匹配结果处理
 
-匹配到路由后，看下一个步骤：
+`findRoute()` 第一步匹配到路由后，看下一个步骤：
 
 ```php
 protected function findRoute($request)
@@ -528,9 +528,6 @@ public function signatureParameters($subClass = null)
         });
     }
 ```
-
-
-
 
 我们回到 `Router` 类的方法：
 

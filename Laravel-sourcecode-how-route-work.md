@@ -15,7 +15,7 @@ return (new Pipeline($this->app))
                     ->then($this->dispatchToRouter());
 ```
 
-今天就看看，路由是怎么配置、匹配、生效的。
+这篇笔记主要是分析路由是怎么配置、匹配、生效的。
 
 <!-- more -->
 
@@ -512,8 +512,6 @@ protected function substituteImplicitBindings($route)
 public function signatureParameters($subClass = null)
     {
         $action = $this->getAction();
-        
-        dump($action);
         
         if (is_string($action['uses'])) {
             list($class, $method) = explode('@', $action['uses']);

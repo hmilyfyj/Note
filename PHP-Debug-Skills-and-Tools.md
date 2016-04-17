@@ -12,6 +12,7 @@ categories: PHP
 
 
 	1. var-dumper
+	2. xdebug
 
 ### 技巧类
 
@@ -52,4 +53,6 @@ composer global require symfony/var-dumper;
 
 从此所有PHP 脚本都可以使用 `composer` 全局安装的
 
+
+## Xdebug
 

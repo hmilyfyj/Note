@@ -6,7 +6,7 @@ categories: Laravel
 
 顺着路由的走向，从启动到分发，一步步走，一步两步，一步两步，一步一步似爪牙，似魔鬼的步伐...
 
-`handle()` 处理`$request` 时，流水线的最后一棒，就是交由路由分发：
+`Kernel::handle()` 处理 `$request` 时，流水线的最后一棒，就是交由路由分发：
 
 ```php
 return (new Pipeline($this->app))
@@ -445,5 +445,120 @@ array:4 [▼
   3 => UriValidator {#115}
 ]
 ```
+
+
+# 匹配结果处理
+
+匹配到路由后，看下一个步骤：
+
+```php
+protected function findRoute($request)
+    {
+        $this->current = $route = $this->routes->match($request);
+        
+        $this->container->instance('Illuminate\Routing\Route', $route);
+        
+        return $this->substituteBindings($route);
+    }
+```
+
+先保存匹配到的路由，然后处理绑定的参数、路由模型，跟进 `substituteBindings()` 函数：
+
+```php
+protected function substituteBindings($route)
+    {
+        foreach ($route->parameters() as $key => $value) {
+            // 处理显式绑定
+            if (isset($this->binders[$key])) {
+                $route->setParameter($key, $this->performBinding($key, $value, $route));
+            }
+        }
+
+        // 处理隐式绑定
+        $this->substituteImplicitBindings($route);
+
+        return $route;
+    }
+```
+
+
+看它如何解决隐式绑定：
+
+```php
+protected function substituteImplicitBindings($route)
+    {
+        // 获取 通过 url 传来的参数
+        $parameters = $route->parameters();
+        //
+        // 获取请求控制的方法需要的 Model 类型参数
+        foreach ($route->signatureParameters(Model::class) as $parameter) {
+            $class = $parameter->getClass();
+            
+            // 方法需要的参数 与 绑定参数名一致 并且不是 Model 类实例（不是显式绑定）。
+            if (array_key_exists($parameter->name, $parameters) &&
+                ! $route->getParameter($parameter->name) instanceof Model) {
+                $method = $parameter->isDefaultValueAvailable() ? 'first' : 'firstOrFail';
+                // 实例化该 Model
+                $model = $class->newInstance();
+                
+                // 查询数据库并设定结果为参数值。
+                $route->setParameter(
+                    $parameter->name, $model->where(
+                        $model->getRouteKeyName(), $parameters[$parameter->name]
+                    )->{$method}()
+                );
+            }
+        }
+    }
+
+public function signatureParameters($subClass = null)
+    {
+        $action = $this->getAction();
+        
+        dump($action);
+        
+        if (is_string($action['uses'])) {
+            list($class, $method) = explode('@', $action['uses']);
+
+            $parameters = (new ReflectionMethod($class, $method))->getParameters();
+        } else {
+            $parameters = (new ReflectionFunction($action['uses']))->getParameters();
+        }
+        
+        return is_null($subClass) ? $parameters : array_filter($parameters, function ($p) use ($subClass) {
+            return $p->getClass() && $p->getClass()->isSubclassOf($subClass);
+        });
+    }
+```
+
+
+
+
+我们回到 `Router` 类的方法：
+
+```php
+public function dispatchToRoute(Request $request)
+    {
+        // First we will find a route that matches this request. We will also set the
+        // route resolver on the request so middlewares assigned to the route will
+        // receive access to this route instance for checking of the parameters.
+        $route = $this->findRoute($request);
+        
+        // $this->routeResolver = $callback;
+        $request->setRouteResolver(function () use ($route) {
+            return $route;
+        });
+
+        $this->events->fire(new Events\RouteMatched($route, $request));
+
+        $response = $this->runRouteWithinStack($route, $request);
+        
+        return $this->prepareResponse($request, $response);
+    }
+```
+获取到匹配的路由后，先以闭包作为参数设置了 `Request` 对象获取路由的方法 `routeResolver`
+
+然后触发匹配到路由事件 `enter code here` 。
+
 
 

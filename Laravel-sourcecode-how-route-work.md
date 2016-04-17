@@ -480,8 +480,6 @@ protected function substituteBindings($route)
         return $route;
     }
 ```
-
-
 看它如何解决隐式绑定：
 
 ```php

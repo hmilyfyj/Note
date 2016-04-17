@@ -12,7 +12,7 @@ categories: PHP
 
 
 	1. var-dumper
-	2. xdebug
+	2. Xdebug
 
 ### 技巧类
 

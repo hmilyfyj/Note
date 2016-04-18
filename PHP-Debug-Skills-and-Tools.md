@@ -10,7 +10,6 @@ categories: PHP
 
 ### 工具类
 
-
 	1. var-dumper
 	2. Xdebug
 
@@ -42,16 +41,14 @@ categories: PHP
 首先，全局安装。
 
 ```
-
 composer global require symfony/var-dumper;
-
 ```
 
 修改`php.ini` ：
 
      auto_prepend_file = C:\Users\fengy\AppData\Roaming\Composer\vendor\autoload.php
 
-从此所有PHP 脚本都可以使用 `composer` 全局安装的
+从此所有PHP 脚本都可以使用 `composer` 全局安装的类库。
 
 
 ## Xdebug

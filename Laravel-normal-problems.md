@@ -44,3 +44,8 @@ Route::group(['middleware' => ['web']], function () {
 });
 ```
 
+ #### 更多资料
+
+[Undefined variable: errors — Laravel 5.2](http://stackoverflow.com/questions/34474224/undefined-variable-errors-laravel-5-2)
+
+

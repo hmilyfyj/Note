@@ -8,7 +8,7 @@ categories: Laravel
 
 ---
 
-### Undefined variable: errors
+### 1. Undefined variable: errors
 
 #### 原因
 

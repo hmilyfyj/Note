@@ -1,4 +1,4 @@
-title: 一台设备管理多个 GIT 帐号
+title: 一台设备管理多个 GIT 帐号的仓库
 date: 2016-04-19 16:56
 tags: [GIT]
 categories: GIT

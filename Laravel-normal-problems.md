@@ -10,7 +10,9 @@ categories: Laravel
 
 ### Undefined variable: errors
 
-原因：在老版本中就算用户不向模版中传送 `$errors` 参数，Laravel 也会设置一个 `$errors` 参数，它的生成是由中间件：`\Illuminate\View\Middleware\ShareErrorsFromSession::class` 生成的。
+#### 原因
+
+在老版本中就算用户不向模版中传送 `$errors` 参数，Laravel 也会设置一个 `$errors` 参数，它的生成是由中间件：`\Illuminate\View\Middleware\ShareErrorsFromSession::class` 生成的。
 
 然而在 v5.2 版本后，该中间件不会伴随着每一个请求，而是被分入了 `$middewareGroups` 数组的 `web` 字段内，即：
 
@@ -28,5 +30,15 @@ protected $middlewareGroups = [
             'throttle:60,1',
         ],
     ];
+```
+
+#### 解决
+
+添加 `web` 中间件。
+
+```php
+Route::group(['middleware' => ['web']], function () {
+
+});
 ```
 

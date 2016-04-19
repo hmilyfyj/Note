@@ -4,7 +4,7 @@ tags: [Laravel,PHP]
 categories: Laravel
 ---
 
-读了一段源码，那么这些功能是如何发挥作用的呢？
+读了 `Laravel` 源码有一段时间了，那么这些功能是如何发挥作用的呢？
 
 今天看 `Laravel` 官方如何实现自带的校验、注册功能。
 
@@ -18,10 +18,9 @@ Trait
 
 
 
-
 # 校验状态
 
-中间件 `auth` 实现了用户状态的检测，看其 `handle()` 代码；
+中间件 `auth` 实现了用户状态的检测，看其 `handle()` 函数代码；
 
 ```php
 public function handle($request, Closure $next, $guard = null)

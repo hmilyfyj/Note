@@ -46,6 +46,8 @@ Hi fengit! You've successfully authenticated, but GitHub does not provide shel l
 
 ## 连接仓库
 
+新方法：
+
 	git clone fengit:githubname/repository.git
 
 原来的连接方法：

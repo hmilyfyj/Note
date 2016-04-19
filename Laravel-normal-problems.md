@@ -4,6 +4,8 @@ tags: [Laravel,PHP]
 categories: Laravel
 ---
 
+总结一些在使用 `Laravel` 时遇到的问题，以备查询。
+
 <!-- more -->
 
 ---

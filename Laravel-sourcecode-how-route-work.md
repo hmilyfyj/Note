@@ -34,7 +34,7 @@ Route::group(['as' => 'admin::','middleware' => 'auth', 'namespace' => 'AdminCon
 });
 ```
 路由会产生这样的效果：
-· 路由被**命名**为 "admin::dashboard",
+- 路由被**命名**为 "admin::dashboard"
 - 送往路由前会经过 `auth` 中间件处理
 - 匹配此路由的话，访问的控制器存放在 `App\Http\Controllers\AdminCon` 命名空间下。
 - 匹配条件： `test.myapp.com/Admin/dashboard`

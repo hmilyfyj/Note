@@ -26,7 +26,7 @@ Route::group(['middleware' => ['web']], function () {
 
 # 正文
 
-先看 `view()` 的实现：
+## `view()` 的实现：
 
 ```php
 function view($view = null, $data = [], $mergeData = [])
@@ -41,7 +41,9 @@ function view($view = null, $data = [], $mergeData = [])
     }
 ```
 
-功能：调用 `ViewFactory` 实例的 `make()` 方法，并返回其结果。
+### 功能：
+
+调用 `ViewFactory` 实例的 `make()` 方法，并返回其结果。
 
 代码较少，首先要找到 `ViewFactory` 类。
 

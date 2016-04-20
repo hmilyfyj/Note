@@ -609,7 +609,15 @@ public function run(Request $request)
     }
 ```
 
-`run()` 方法根据路由的定义去执行闭包或控制器
+`run()` 方法根据路由的定义去执行闭包或控制器，如：
+
+```php
+Route::group(['middleware' => ['web']], function () {
+	Route::get('/test', [ function () {
+		return view('auth.login');
+	}]);
+});
+```
 
 
 

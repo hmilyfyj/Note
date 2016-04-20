@@ -16,6 +16,25 @@ categories: Laravel
 
 Trait
 
+# 创建路由
+
+```php
+Route::group(['middleware' => ['web']], function () {
+	Route::auth();
+});
+```
+
+在这里说一下，原先用默认的命令创建的路由是这样的：
+
+```
+Route::auth();
+
+Route::group(['middleware' => ['web']], function () {
+});
+```
+
+这种情况会产生报错 `Undefined variable: errors` 错误，原因在上一篇  [错误集锦](/2016/04/19/Laravel-normal-problems/)  提过，不再多提。
+
 # 校验状态
 
 中间件 `auth` 实现了用户状态的检测，看其 `handle()` 函数代码；
@@ -36,9 +55,11 @@ public function handle($request, Closure $next, $guard = null)
 ```
 
 
-`Auth` 类是通过门面 `Facade` 实现的，采用静态方法调用 `AuthManager` （类别名 `auth`）实例的各个方法，如 `Auth::guard($guard)`，该方法将返回一个 `SessionGuard` ，这个 “Session 警卫”  的职责就是检测 访问用户的权限 、操纵用户的 `Session` 等。
+`Auth` 类是通过门面 `Facade` 实现的，采用静态方法调用 `AuthManager` （类别名 `auth`）实例的各个方法，如 `Auth::guard($guard)`，该方法将返回一个 `SessionGuard` ， “Session 警卫”  的职责就是检测 访问用户的权限 、操纵用户的 `Session` 等。
 
 那么，这个 `auth` 中间件的作用就出来了：检测 用户权限，访客则跳转登陆界面、用户则继续下一步处理。
+
+# 与CI比较
 
 这些功能在 `CI` 里较难实现，一是因为 `CI` 虽然有 `Hooks`， 但 `Hooks` 可执行的地方并不能精细到这种地步 和 阶段（我记得 `hooks` 在某 `controller` 之前执行的话，基本上啥都没加载，就不要提权限啥的，那时 `Session` 类库都得不到。），再就是 `CI` 没有路由控制，我们没有办法分组指定一组进行权限控制，这样控制起来会有些麻烦。  
 

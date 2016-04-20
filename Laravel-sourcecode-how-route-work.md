@@ -6,7 +6,7 @@ categories: Laravel
 
 顺着路由的走向，从启动到分发，一步步走，一步两步，一步两步，一步一步似爪牙，似魔鬼的步伐...
 
-`Kernel::handle()` 处理 `$request` 时，流水线的最后一棒，就是交由路由分发：
+在 `Kernel::handle()` 函数处理 `$request` 时，流水线的最后一棒，就是交由路由分发：
 
 ```php
 return (new Pipeline($this->app))

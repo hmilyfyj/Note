@@ -553,7 +553,63 @@ public function dispatchToRoute(Request $request)
 
 然后触发 “匹配到路由“ 事件 `Events\RouteMatched` 。
 
-再之后的一些响应处理，放在下一篇笔记中写。
+匹配所得路由交给本类 `runRouteWithinStack()` 处理，跟进：
+
+```php
+protected function runRouteWithinStack(Route $route, Request $request)
+    {
+        $shouldSkipMiddleware = $this->container->bound('middleware.disable') &&
+                                $this->container->make('middleware.disable') === true;
+
+        $middleware = $shouldSkipMiddleware ? [] : $this->gatherRouteMiddlewares($route);
+        
+        return (new Pipeline($this->container))
+                        ->send($request)
+                        ->through($middleware)
+                        ->then(function ($request) use ($route) {
+                            return $this->prepareResponse(
+                                $request,
+                                $route->run($request)
+                            );
+                        });
+    }
+```
+
+又是一道流水线操作，经过中间件和 `$route-run($request)` 操作后，将所得内容交给 `prepareResponse()` 处理。`prepareResponse()` 的实现较为简单，根据 `$response` 的类型交由不同的类去实例化为 `$response` 。
+
+```php
+public function prepareResponse($request, $response)
+    {
+        if ($response instanceof PsrResponseInterface) {
+            $response = (new HttpFoundationFactory)->createResponse($response);
+        } elseif (! $response instanceof SymfonyResponse) {
+            $response = new Response($response);
+        }
+        
+        return $response->prepare($request);
+    }
+```
+
+这里跟进一下 `$route->run($request)` 函数的实现：
+
+```php
+public function run(Request $request)
+    {
+        $this->container = $this->container ?: new Container;
+
+        try {
+            if (! is_string($this->action['uses'])) {
+                return $this->runCallable($request);
+            }
+
+            return $this->runController($request);
+        } catch (HttpResponseException $e) {
+            return $e->getResponse();
+        }
+    }
+```
+
+`run()` 方法根据路由的定义去执行闭包或控制器
 
 
 

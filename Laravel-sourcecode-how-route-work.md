@@ -551,7 +551,9 @@ public function dispatchToRoute(Request $request)
 ```
 获取到匹配的路由后，先以闭包作为参数设置了 `Request` 对象获取路由的方法 `routeResolver`
 
-然后触发匹配到路由事件 `enter code here` 。
+然后触发匹配到路由事件 `Events\RouteMatched` 。
+
+再之后的一些响应处理，放在下一篇笔记中写。
 
 
 

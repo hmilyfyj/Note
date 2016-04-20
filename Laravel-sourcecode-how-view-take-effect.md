@@ -51,7 +51,7 @@ function view($view = null, $data = [], $mergeData = [])
 
 	'view' => ['Illuminate\View\Factory', 'Illuminate\Contracts\View\Factory']
 
-别名的实现思路是：当我们请求相关类实例时，会调用与 `view` 绑定的实例化方法，`view` 绑定方法的在 `Illuminate\View\ViewServiceProvider` 内（`config/app.php`  文件的 `providers` 数组点名道姓要用他..）。
+复习下别名的实现思路和作用：当我们调用 `Application` 的 `make()` 方法（即 `app("ClassName")`） 请求相关类实例时，会调用与该类别名（如 `view`）绑定的实例化方法，`view` 的实现方法在 `Illuminate\View\ViewServiceProvider` 内定义，`config/app.php`  文件的 `providers` 数组点名道姓要用这个服务提供者呢..
 
 ```php
 public function registerFactory()

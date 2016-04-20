@@ -575,7 +575,7 @@ protected function runRouteWithinStack(Route $route, Request $request)
     }
 ```
 
-又是一道流水线操作，经过中间件和 `$route-run($request)` 操作后，将所得内容交给 `prepareResponse()` 处理。`prepareResponse()` 的实现较为简单，根据 `$response` 的类型交由不同的类去实例化为 `$response` 。
+又是一道流水线操作，经过中间件和 `$route-run($request)` 操作后，将所得内容交给 `prepareResponse()` 处理。`prepareResponse()` 的实现较为简单，根据 `$response` 的类型交由不同的类去包装、实例化为 `$response` 。
 
 ```php
 public function prepareResponse($request, $response)

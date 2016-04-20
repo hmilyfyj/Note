@@ -1,4 +1,4 @@
-title: Laravel 源码分析 -- 自带用户校验的实现
+title: Laravel 源码分析 -- 自带用户校验的实现 （未完成）
 date: 2016-04-19 15:31
 tags: [Laravel,PHP]
 categories: Laravel
@@ -57,11 +57,17 @@ public function handle($request, Closure $next, $guard = null)
 
 `Auth` 类是通过门面 `Facade` 实现的，采用静态方法调用 `AuthManager` （类别名 `auth`）实例的各个方法，如 `Auth::guard($guard)`，该方法将返回一个 `SessionGuard` ， “Session 警卫”  的职责就是检测 访问用户的权限 、操纵用户的 `Session` 等。
 
-那么，这个 `auth` 中间件的作用就出来了：检测 用户权限，访客则跳转登陆界面、用户则继续下一步处理。
+那么，这个 `auth` 中间件的作用就出来了：检测 用户权限，访客则跳转登陆界面（或返回未授权信息）、用户则继续下一步处理。
 
 # 与CI比较
 
 这些功能在 `CI` 里较难实现，一是因为 `CI` 虽然有 `Hooks`， 但 `Hooks` 可执行的地方并不能精细到这种地步 和 阶段（我记得 `hooks` 在某 `controller` 之前执行的话，基本上啥都没加载，就不要提权限啥的，那时 `Session` 类库都得不到。），再就是 `CI` 没有路由控制，我们没有办法分组指定一组进行权限控制，这样控制起来会有些麻烦。  
 
 当然，更大的原因可能是我用 `CI` 不精。 
+
+# 参考资料
+
+这里有个参考资料。
+
+[V2ex](http://v2ex.com/t/272328#reply34)
 

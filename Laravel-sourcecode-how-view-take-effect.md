@@ -5,7 +5,7 @@ tags: [Laravel,PHP]
 categories: Laravel
 ---
 
-[前一片笔记](http://b.fengbl.cn/2016/04/15/Laravel-sourcecode-how-route-work/#%E5%8C%B9%E9%85%8D%E7%BB%93%E6%9E%9C%E5%A4%84%E7%90%86) 讲过路由如何进行路由的匹配、分发，其中最后一步就是对路由返回的结果尽兴包装处理。有时路由需要引入模版，如：
+前一片笔记讲过 [ 路由如何进行路由的匹配、分发 ](http://b.fengbl.cn/2016/04/15/Laravel-sourcecode-how-route-work/#%E5%8C%B9%E9%85%8D%E7%BB%93%E6%9E%9C%E5%A4%84%E7%90%86) ，其中最后一步就是对路由返回的结果进行包装处理。有时路由需要引入模版，如：
 
 ```php
 Route::group(['middleware' => ['web']], function () {
@@ -15,14 +15,14 @@ Route::group(['middleware' => ['web']], function () {
 });
 ```
 
-那么 `view()` 函数如何执行，返回的又是什么内容呢？本片笔记就是要搞清这个。
+那么 `view()` 函数如何执行？返回的是什么内容？模版内容又在哪里被渲染的呢？本篇笔记就是要搞清这个。
 
 
 <!-- more -->
 
 ---
 
-首先，`view()` 是个全局函数，它在 `/laravel/framework/src/Illuminate/Support/helpers.php` 文件内定义，该文件由 `composer` 在项目启动初期就执行，由 `autoload_real.php` 调用，初期自动执行的列表定义在 `autoload_files.php` 内。不是本笔记重点，不再多说。
+首先，`view()` 是个全局函数，它在 `/laravel/framework/src/Illuminate/Support/helpers.php` 文件内定义，该文件由 `composer` 在项目启动初期就执行，由 `autoload_real.php` 调用，初期需要自动执行的文件列表在 `autoload_files.php` 内定义。不是本笔记重点，不再多说。
 
 # 正文
 
@@ -41,9 +41,13 @@ function view($view = null, $data = [], $mergeData = [])
     }
 ```
 
-方法简单，调用了 `ViewFactory` 实例的 `make()` 方法，然后返回结果。
+功能：调用 `ViewFactory` 实例的 `make()` 方法，并返回其结果。
 
-`ViewFactory`  是类 `Illuminate\Contracts\View\Factory` 的别名。这个类由 `Application` 定义了别名：
+代码较少，首先要找到 `ViewFactory` 类。
+
+## ViewFactory 是啥
+
+`ViewFactory`  是类 `Illuminate\Contracts\View\Factory` 的别名。这个类由在 `Application` 类出现过，并被定义了别名：
 
 	'view' => ['Illuminate\View\Factory', 'Illuminate\Contracts\View\Factory']
 

@@ -47,13 +47,15 @@ function view($view = null, $data = [], $mergeData = [])
 
 代码较少，首先要找到 `ViewFactory` 类。
 
-## ViewFactory 是啥
+## ViewFactory 
 
-`ViewFactory`  是类 `Illuminate\Contracts\View\Factory` 的别名。这个类由在 `Application` 类出现过，并被定义了别名：
+`ViewFactory`  是类 `Illuminate\Contracts\View\Factory` 的别名。这个类由第一次出现是在 `Application` 类内，并被定义了别名：
 
 	'view' => ['Illuminate\View\Factory', 'Illuminate\Contracts\View\Factory']
 
-复习下别名的实现思路和作用：当我们调用 `Application` 的 `make()` 方法（即 `app("ClassName")`） 请求相关类实例时，会调用与该类别名（如 `view`）绑定的实例化方法，`view` 的实现方法在 `Illuminate\View\ViewServiceProvider` 内定义，`config/app.php`  文件的 `providers` 数组点名道姓要用这个服务提供者呢..
+复习下别名的实现思路和作用：
+
+>当我们调用 `Application` 的 `make()` 方法（即 `app("ClassName")`） 请求相关类实例时，会调用与该类别名（如 `view`）绑定的实例化方法，`view` 的实现方法在 `Illuminate\View\ViewServiceProvider` 内定义，`config/app.php`  文件的 `providers` 数组点名道姓要用这个服务提供者呢..
 
 ```php
 public function registerFactory()

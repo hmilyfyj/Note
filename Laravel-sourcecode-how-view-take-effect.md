@@ -5,7 +5,7 @@ tags: [Laravel,PHP]
 categories: Laravel
 ---
 
-前一片笔记讲过 [ 路由如何进行路由的匹配、分发 ](http://b.fengbl.cn/2016/04/15/Laravel-sourcecode-how-route-work/#%E5%8C%B9%E9%85%8D%E7%BB%93%E6%9E%9C%E5%A4%84%E7%90%86) ，其中最后一步就是对路由返回的结果进行包装处理。有时路由会引入模版，如：
+前一篇笔记讲过 [ 路由如何进行路由的匹配、分发 ](http://b.fengbl.cn/2016/04/15/Laravel-sourcecode-how-route-work/#%E5%8C%B9%E9%85%8D%E7%BB%93%E6%9E%9C%E5%A4%84%E7%90%86) ，其中最后一步就是对路由返回的结果进行包装处理。有时路由会引入模版，如：
 
 ```php
 Route::group(['middleware' => ['web']], function () {

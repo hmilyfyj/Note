@@ -1,5 +1,5 @@
 
-title: Laravel 源码分析 -- Facade 原来是这么玩的
+title: Laravel 源码分析（四） -- Facade 原来是这么玩的
 date: 2016-04-13 10:02
 tags: [Laravel,PHP]
 categories: Laravel

@@ -148,8 +148,6 @@ function trait_uses_recursive($trait)
 
 `class_uses_recursive()` 函数将遍历传入类及其父类的子类，然后通过 `trait_uses_recursive()` 方法遍历其 use 过的 Trait ，并放入数组中返回。
 
-言归正传：
-3. ，第仿佛
 
 
 

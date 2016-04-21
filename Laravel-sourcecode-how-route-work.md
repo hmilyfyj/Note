@@ -1,4 +1,4 @@
-title: Laravel 源码分析 -- 路由（Route）的注册、分发、识别。
+title: Laravel 源码分析（六） -- 路由（Route）的注册、分发、识别。
 date: 2016-04-15 22:55
 tags: [Laravel,PHP]
 categories: Laravel

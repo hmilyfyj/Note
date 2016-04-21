@@ -6,7 +6,7 @@ categories: Laravel
 
 读  `Laravel` 源码有一段时间了，那么这些功能是如何发挥作用的呢？
 
-今天看 `Laravel` 官方如何实现自带的校验、注册功能。
+今天看 `Laravel` 官方如何实现自带的校验、注册流程。
 
 <!-- more -->
 

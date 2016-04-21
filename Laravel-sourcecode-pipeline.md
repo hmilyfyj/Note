@@ -1,4 +1,4 @@
-title: Laravel 源码分析 -- 流水线
+title: Laravel 源码分析（二） -- 流水线
 date: 2016-04-11 21:59
 tags: [Laravel,PHP]
 categories: Laravel
@@ -247,4 +247,9 @@ function ($passable) use ($stack, $pipe) {
 至此，就实现了按照中间件的顺序对`$request` 处理，然后结果交由下家做后续处理的流程。
 
 的确有些像流水线。
+
+
+更多参考：
+
+http://www.jianshu.com/p/3c2791a525d0
 

@@ -33,7 +33,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 ```
 
-这种情况会产生报错 `Undefined variable: errors` 错误，原因在上一篇  [错误集锦](/2016/04/19/Laravel-normal-problems/)  提过，不再多提。
+这种情况会产生报错 `Undefined variable: errors` 错误，原因在上一篇  [错误集锦](/2016/04/19/Laravel-normal-problems/)  提过。
 
 # 校验状态
 

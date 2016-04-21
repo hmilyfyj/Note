@@ -99,6 +99,7 @@ public function login(Request $request)
             $this->incrementLoginAttempts($request);
         }
 
+        // 返回失败信息。
         return $this->sendFailedLoginResponse($request);
     }
 ```

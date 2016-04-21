@@ -1,4 +1,4 @@
-title: Laravel 源码分析 -- 自带用户校验的实现 （未完成）
+title: Laravel 源码分析 -- 自带用户校验的实现 （未完）
 date: 2016-04-19 15:31
 tags: [Laravel,PHP]
 categories: Laravel

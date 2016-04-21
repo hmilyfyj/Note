@@ -1,6 +1,6 @@
 
 
-title: Laravel 源码分析 -- 服务的注册、启动、延迟
+title: Laravel 源码分析（五） -- 服务的注册、启动、延迟
 date: 2016-04-14 19:44
 tags: [Laravel,PHP]
 categories: Laravel

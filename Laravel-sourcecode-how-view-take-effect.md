@@ -183,7 +183,7 @@ public function render(callable $callback = null)
 
 果然，实现的 `__toString()` 函数通过 `render()` 函数对模版进行了渲染并返回了字符串格式的 `html` 内容。
 
-具体的模版渲染分析，以后再补。
+具体的模版渲染过程，以后再补。
 
 # To be coninued..
 

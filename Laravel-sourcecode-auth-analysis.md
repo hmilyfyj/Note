@@ -66,19 +66,23 @@ public function handle($request, Closure $next, $guard = null)
 ```php
 public function login(Request $request)
     {
+        // 1. 验证请求。（验证方法单写一篇笔记。）
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
+        // 判断是本类否使用了 `ThrottlesLogins`。 用来防范暴力破解的。
         $throttles = $this->isUsingThrottlesLoginsTrait();
 
+        // 如果请求次数过多，触发压制事件
         if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
         }
-
+        
+        // 获取提交的信息
         $credentials = $this->getCredentials($request);
         
         if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
@@ -97,6 +101,8 @@ public function login(Request $request)
 ```
 
 ## login() 流程
+
+注释在代码内补上。
 
 1. 验证请求。（验证方法单写一篇笔记。）
 2. 判断是本类否使用了 `ThrottlesLogins`。
@@ -134,7 +140,12 @@ function trait_uses_recursive($trait)
     }
 ```
 
-`class_uses_recursive()` 函数将遍历
+`class_uses_recursive` 实现：
+
+`class_uses_recursive()` 函数将遍历传入类及其父类的子类，然后通过 `trait_uses_recursive()` 方法遍历其 use 过的 Trait ，并放入数组中返回。
+
+言归正传：
+3. ，第仿佛
 
 
 

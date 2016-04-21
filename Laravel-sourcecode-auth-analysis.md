@@ -82,10 +82,12 @@ public function login(Request $request)
             return $this->sendLockoutResponse($request);
         }
         
-        // 获取提交的信息
+        // 获取用户提交的信息
         $credentials = $this->getCredentials($request);
         
+        // 尝试登录
         if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
+            // 登陆成功，返回登陆结果。
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
@@ -93,6 +95,7 @@ public function login(Request $request)
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         if ($throttles && ! $lockedOut) {
+            // 登录失败，增加尝试次数。
             $this->incrementLoginAttempts($request);
         }
 

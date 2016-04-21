@@ -1,5 +1,5 @@
 
-title: Laravel 源码分析 -- View 的渲染 (未完)
+title: Laravel 源码分析（八） -- View 的渲染 (未完)
 date: 2016-4-20 21:56
 tags: [Laravel,PHP]
 categories: Laravel

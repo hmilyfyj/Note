@@ -75,7 +75,7 @@ public function login(Request $request)
         // 判断是本类否使用了 `ThrottlesLogins`。 用来防范暴力破解的。
         $throttles = $this->isUsingThrottlesLoginsTrait();
 
-        // 如果请求次数过多，触发压制事件
+        // 请求次数超过限制，触发压制事件
         if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 

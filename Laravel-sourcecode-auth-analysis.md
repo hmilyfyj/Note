@@ -26,7 +26,7 @@ Route::group(['middleware' => ['web']], function () {
 
 在这里说一下，原先用默认的命令创建的路由是这样的：
 
-```
+```php
 Route::auth();
 
 Route::group(['middleware' => ['web']], function () {
@@ -58,6 +58,88 @@ public function handle($request, Closure $next, $guard = null)
 `Auth` 类是通过门面 `Facade` 实现的，采用静态方法调用 `AuthManager` （类别名 `auth`）实例的各个方法，如 `Auth::guard($guard)`，该方法将返回一个 `SessionGuard` ， “Session 警卫”  的职责就是检测 访问用户的权限 、操纵用户的 `Session` 等。
 
 那么，这个 `auth` 中间件的作用就出来了：检测 用户权限，访客则跳转登陆界面（或返回未授权信息）、用户则继续下一步处理。
+
+# 登陆
+
+用户提交的表单交给 `AuthController` 的 `login()` 方法：
+
+```php
+public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        $throttles = $this->isUsingThrottlesLoginsTrait();
+
+        if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        $credentials = $this->getCredentials($request);
+        
+        if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
+            return $this->handleUserWasAuthenticated($request, $throttles);
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        if ($throttles && ! $lockedOut) {
+            $this->incrementLoginAttempts($request);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
+```
+
+## login() 流程
+
+1. 验证请求。（验证方法单写一篇笔记。）
+2. 判断是本类否使用了 `ThrottlesLogins`。
+这个实现很有意思，要说一下：
+
+```php
+protected function isUsingThrottlesLoginsTrait()
+    {
+        return in_array(
+            ThrottlesLogins::class, class_uses_recursive(static::class)
+        );
+    }
+
+function class_uses_recursive($class)
+    {
+        $results = [];
+
+        foreach (array_merge([$class => $class], class_parents($class)) as $class) {
+            $results += trait_uses_recursive($class);
+        }
+
+        return array_unique($results);
+    }
+    
+    
+function trait_uses_recursive($trait)
+    {
+        $traits = class_uses($trait);
+
+        foreach ($traits as $trait) {
+            $traits += trait_uses_recursive($trait);
+        }
+
+        return $traits;
+    }
+```
+
+`class_uses_recursive()` 函数将遍历
+
+
+
+
+
 
 # 与CI比较
 

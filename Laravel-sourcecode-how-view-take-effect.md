@@ -55,7 +55,11 @@ function view($view = null, $data = [], $mergeData = [])
 
 复习下别名的实现思路和作用：
 
->当我们调用 `Application` 的 `make()` 方法（即 `app("ClassName")`） 请求相关类实例时，会调用与该类别名（如 `view`）绑定的实例化方法，`view` 的实现方法在 `Illuminate\View\ViewServiceProvider` 内定义，`config/app.php`  文件的 `providers` 数组点名道姓要用这个服务提供者呢..
+当我们通过 `app("ClassName")` 的方法调用 `Application::make()` 方法去请求某个实例时，会调用与该类别名绑定的实例化方法，如 `view` ， 其实例化方法在 `Illuminate\View\ViewServiceProvider` 内定义。
+
+大部分需要启动的服务提供者，都在 `config/app.php` 内定义，为什么要在这定义？因为它会自己动。
+
+看 `view` 即 `ViewFactory` 服务的注册方法： 
 
 ```php
 public function registerFactory()

@@ -1,10 +1,10 @@
-title: 一台设备管理多个 GIT 帐号的仓库
+title: 一台设备管理多个 Git 帐号的仓库
 date: 2016-04-19 16:56
 tags: [GIT]
 categories: GIT
 ---
 
-GIT、Coding 都不允许同一个 key 绑定多个帐号。那么我们需要做一些配置。
+Git、Coding 等网站都不允许同一个 ssh 公钥 绑定多个帐号。于是做些配置来“曲线救国”。
 
 <!-- more -->
 

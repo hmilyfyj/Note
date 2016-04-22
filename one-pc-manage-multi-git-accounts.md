@@ -42,7 +42,7 @@ IdentityFile ～/.ssh/id_rsa_hmilyfyj
 
 ```
 ssh -T fengit
-Hi fengit! You've successfully authenticated, but GitHub does not provide shel l access.
+Hi fengit! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
 ## 连接仓库

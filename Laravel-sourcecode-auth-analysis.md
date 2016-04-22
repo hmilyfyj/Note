@@ -72,7 +72,7 @@ public function login(Request $request)
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        // 判断是本类否使用了 `ThrottlesLogins`。 用来防范暴力破解的。
+        // 判断是本类否使用了 `ThrottlesLogins`。 用于防范暴力破解。
         $throttles = $this->isUsingThrottlesLoginsTrait();
 
         // 请求次数超过限制，触发压制事件
@@ -147,11 +147,6 @@ function trait_uses_recursive($trait)
 `class_uses_recursive` 实现：
 
 `class_uses_recursive()` 函数将遍历传入类及其父类的子类，然后通过 `trait_uses_recursive()` 方法遍历其 use 过的 Trait ，并放入数组中返回。
-
-
-
-
-
 
 
 # 与CI比较

@@ -61,6 +61,8 @@ public function handle($request, Closure $next, $guard = null)
 
 # 登陆
 
+## 表单登陆
+
 用户提交的表单交给 `AuthController` 的 `login()` 方法：
 
 ```php
@@ -147,6 +149,10 @@ function trait_uses_recursive($trait)
 `class_uses_recursive` 实现：
 
 `class_uses_recursive()` 函数将遍历传入类及其父类的子类，然后通过 `trait_uses_recursive()` 方法遍历其 use 过的 Trait ，并放入数组中返回。
+
+## 无状态接口登陆
+
+待补充。
 
 
 # 与CI比较

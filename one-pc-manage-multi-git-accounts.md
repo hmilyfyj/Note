@@ -31,6 +31,7 @@ Host fengit
 HostName github.com
 User git
 IdentityFile ～/.ssh/id_rsa_fengit
+
 Host hmilyfyj
 HostName github.com
 User git

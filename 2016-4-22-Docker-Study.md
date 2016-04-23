@@ -55,6 +55,6 @@ curl -sS https://getcomposer.org/installer \
 # memcached 扩展
 
 在 tmp 目录下载
-1. 
-2.
+1. wget http://pecl.php.net/get/memcache-3.0.8.tgz
+2. COPY libevent-2.0.10-stable.tar.gz /tmp/libevent-2.0.10-stable.tar.gz
 

@@ -51,3 +51,10 @@ curl -sS https://getcomposer.org/installer \
 
 3. Dumper
 
+
+# memcached 扩展
+
+在 tmp 目录下载
+1. 
+2.
+

@@ -18,7 +18,36 @@ categories: Docker
     
 大扫除（清除所有容器 && 镜像）：
 
-      docker kill $(docker ps -q) && docker rm $(docker ps -a -q)
+      docker kill $(docker ps -q); docker rm $(docker ps -a -q)
       docker rmi $(docker images -q -a) 
+      
+交互
 
+1. 获取PID
+
+    PID=$(docker inspect --format "{{ .State.Pid }}" <container-id>)
+
+2.
+
+    nsenter --target $PID --mount --uts --ipc --net --pid
+    
+3.
+
+    docker run -d -p 80:80 --name web --link dao_memcached_1:memcached  daocloud.io/hmilyfyj/php7_nginx:master-4e74f55
+    
+    
+# 配置 Laravel 环境
+
+1. 安装 Composer
+
+```shell
+curl -sS https://getcomposer.org/installer \
+        | php -- --install-dir=/usr/local/bin --filename=composer
+```
+
+2.
+
+    composer global require "laravel/installer"
+
+3. dumper
 

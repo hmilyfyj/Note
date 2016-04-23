@@ -56,5 +56,26 @@ curl -sS https://getcomposer.org/installer \
 
 在 tmp 目录下载
 1. wget http://pecl.php.net/get/memcache-3.0.8.tgz
-2. COPY libevent-2.0.10-stable.tar.gz /tmp/libevent-2.0.10-stable.tar.gz
+2. COPY libevent-2.0.22-stable.tar.gz /tmp/libevent-2.0.22-stable.tar.gz
 
+```Shell
+cd /tmp
+tar zxvf libevent-2.0.22-stable.tar
+cd libevent-2.0.22-stable
+./configure --prefix=/usr/local
+make; make install
+
+cd /tmp && tar zxvf libevent-2.0.22-stable.tar && cd libevent-2.0.22-stable && ./configure --prefix=/usr/local && make && make install
+```
+
+
+```Shell
+cd /tmp  #首先进入到该下载包的目录
+tar zxvf memcache-3.0.8.tgz #解压包
+cd memcache-3.0.8 #进入到解压的目录
+/opt/lampp/bin/phpize #动态为php添加扩展。phpize路径可能不一致，请根据自己的实际情况
+./configure –enable-memcache –with-php-config=/opt/lampp/bin/php-config –with-zlib-dir #php-config请根据自己环境情况填写
+make; make install #编译+安装
+
+cd /tmp && tar zxvf memcache-3.0.8.tgz && cd memcache-3.0.8 && /usr/local/php/bin/phpize && ./configure –enable-memcache  –with-php-config=/usr/local/php/bin/php-config –with-zlib-dir && make && make install
+```

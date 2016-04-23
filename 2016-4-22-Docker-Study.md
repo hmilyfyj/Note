@@ -10,4 +10,15 @@ categories: Docker
 
 ---
 
+# 常用命令
+
+交互命令：
+
+    docker run -i -t  daocloud.io/hmilyfyj/memcached:master-a9a55bf  /bin/bash
+    
+大扫除（清除所有容器 && 镜像）：
+
+      docker kill $(docker ps -q) && docker rm $(docker ps -a -q)
+      docker rmi $(docker images -q -a) 
+
 

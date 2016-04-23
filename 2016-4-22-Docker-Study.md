@@ -45,9 +45,9 @@ curl -sS https://getcomposer.org/installer \
         | php -- --install-dir=/usr/local/bin --filename=composer
 ```
 
-2.
+2. Laravel
 
     composer global require "laravel/installer"
 
-3. dumper
+3. Dumper
 

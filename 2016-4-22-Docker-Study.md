@@ -10,6 +10,13 @@ categories: Docker
 
 ---
 
+# 总结下需要的环境：
+
+1. mysql
+2. php7
+3. nginx
+4. composer/laravel
+
 # 常用命令
 
 交互命令：
@@ -31,14 +38,22 @@ categories: Docker
 
     nsenter --target $PID --mount --uts --ipc --net --pid
     
+组合起来：
+
+    PID=$(docker inspect --format "{{ .State.Pid }}" <container-id>) && nsenter --target $PID --mount --uts --ipc --net --pid
+    
 3.
 
     docker run -d -p 80:80 --name web --link dao_memcached_1:memcached  daocloud.io/hmilyfyj/php7_nginx:master-4e74f55
     
     
+    
+
 # 配置 Laravel 环境
 
 1. 安装 Composer
+
+sudo composer config -l -g
 
 ```shell
 curl -sS https://getcomposer.org/installer \
@@ -77,5 +92,10 @@ cd memcache-3.0.8 #进入到解压的目录
 ./configure –enable-memcache –with-php-config=/opt/lampp/bin/php-config –with-zlib-dir #php-config请根据自己环境情况填写
 make; make install #编译+安装
 
-cd /tmp && tar zxvf memcache-3.0.8.tgz && cd memcache-3.0.8 && /usr/local/php/bin/phpize && ./configure –enable-memcache  –with-php-config=/usr/local/php/bin/php-config –with-zlib-dir && make && make install
+cd /tmp && tar zxvf memcache-3.0.8.tgz && cd memcache-3.0.8 && /usr/local/php/bin/phpize && ./configure -enable-memcache -with-php-config=/usr/local/php/bin/php-config -with-zlib-dir && make && make install
+
+
+./configure -enable-memcache -with-php-config=/usr/local/php/bin/php-config -with-zlib-dir
 ```
+
+http://pkg.phpcomposer.com/

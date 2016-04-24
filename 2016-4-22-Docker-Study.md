@@ -28,3 +28,9 @@ categories: Docker
       docker kill \$(docker ps -q); docker rm \$(docker ps -a -q)
       docker rmi \$(docker images -q -a) 
       
+交互
+
+1. 获取PID
+
+    PID=\$(docker inspect --format "\{\{ .State.Pid \}\}" <container-id>)
+

@@ -10,3 +10,6 @@ categories: Docker
 
 ---
 
+# 总结下需要的环境：
+
+1. mysql

@@ -26,10 +26,11 @@ categories: Nginx
 ```
 
 [SSL配置参考][1]
+[参考网址2][2]
 
 ## 强制跳转 https
 
-[参考地址][2]
+[参考地址][3]
 
 ## SSL 重启 nginx 免输密码
 
@@ -53,7 +54,7 @@ server {
 ```
 
     
-[参考地址][3]
+[参考地址][4]
 
 ## 重启 Nginx 脚本
 
@@ -340,10 +341,11 @@ fi
     
 > 注：如果已经存在，需要加大后面的数值，注意：该数值是32的倍数为宜。
 
-[参考地址][4]
+[参考地址][5]
 
 
   [1]: http://www.cnblogs.com/dasn/articles/4042506.html
-  [2]: http://www.07net01.com/program/61139.html
-  [3]: http://blog.526net.com/?p=2702
-  [4]: http://www.cnblogs.com/yun007/p/3739182.html
+  [2]: https://s.how/nginx-ssl/
+  [3]: http://www.07net01.com/program/61139.html
+  [4]: http://blog.526net.com/?p=2702
+  [5]: http://www.cnblogs.com/yun007/p/3739182.html

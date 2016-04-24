@@ -30,7 +30,7 @@ categories: Docker
       
 交互
 
-1. 获取PID
+1.获取PID
 
     PID=\$(docker inspect --format "\{\{ \.State\.Pid \}\}" \<container-id\>)
 

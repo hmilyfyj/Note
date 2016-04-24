@@ -28,3 +28,17 @@ categories: Docker
       docker kill $(docker ps -q); docker rm $(docker ps -a -q)
       docker rmi $(docker images -q -a) 
       
+交互
+
+1. 获取PID
+
+    PID=$(docker inspect --format "{{ .State.Pid }}" <container-id>)
+
+2.
+
+    nsenter --target $PID --mount --uts --ipc --net --pid
+    
+组合起来：
+
+    PID=$(docker inspect --format "{{ .State.Pid }}" <container-id>) && nsenter --target $PID --mount --uts --ipc --net --pid
+    

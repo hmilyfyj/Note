@@ -1,4 +1,4 @@
-title: 人生苦短，学学 Docker
+title: 人生苦短，学学 Docker (杂乱，暂未整理)
 date: 2016-04-22 18:38
 tags: [折腾,Docker]
 categories: Docker
@@ -32,7 +32,7 @@ categories: Docker
 
 1.获取PID
 
-    PID=$(docker inspect --format "\{\{ \.State\.Pid \}\}" <container-id>)
+    PID=$(docker inspect --format " { { \.State\.Pid }}" <container-id>)
 
 2.
 
@@ -40,7 +40,7 @@ categories: Docker
     
 组合起来：
 
-    PID=$(docker inspect --format "\{\{ .State.Pid \}\}" <container-id>) && nsenter --target $PID --mount --uts --ipc --net --pid
+    PID=$(docker inspect --format " { { .State.Pid }}" <container-id>) && nsenter --target $PID --mount --uts --ipc --net --pid
     
 3.
 

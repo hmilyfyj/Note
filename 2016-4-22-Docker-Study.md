@@ -13,3 +13,18 @@ categories: Docker
 # 总结下需要的环境：
 
 1. mysql
+2. php7
+3. nginx
+4. composer/laravel
+
+# 常用命令
+
+交互命令：
+
+    docker run -i -t  daocloud.io/hmilyfyj/memcached:master-a9a55bf  /bin/bash
+    
+大扫除（清除所有容器 && 镜像）：
+
+      docker kill $(docker ps -q); docker rm $(docker ps -a -q)
+      docker rmi $(docker images -q -a) 
+      

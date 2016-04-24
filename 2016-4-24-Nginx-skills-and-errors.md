@@ -11,7 +11,23 @@ categories: Nginx
 
 # 技巧
 
-## 1. SSL 重启 nginx 免输密码
+## SSL 配置
+
+可以申请 `StratSSL` 家的免费证书。
+
+需要新增的配置：
+
+```php
+ listen       443;
+ ssl    on;
+ ssl_certificate    /usr/local/nginx/conf/Startssl.crt;   #你从StartSSL下载证书放的路径
+ ssl_certificate_key     /usr/local/nginx/conf/nicky1605.key;  #openssl生成key路径
+ ssl_session_timeout 5m;
+```
+
+[SSL配置参考][1]
+
+## SSL 重启 nginx 免输密码
 
 配置 SSL 后，重启 nginx 时将弹出 `Enter PEM pass phrase:` 的提示并等待。
 
@@ -33,9 +49,9 @@ server {
 ```
 
     
-[参考地址][1]
+[参考地址][2]
 
-## 2. 重启 Nginx 脚本
+## 重启 Nginx 脚本
 
 ### 方法1：
 
@@ -112,7 +128,7 @@ exit 0
 ```
 
 
-## 3. vhost 配置脚本
+## vhost 配置脚本
 
 创建 `vhost.sh` 文件，并放入 `/usr/local/bin` ，并 `chmod +x vhost.sh`。
 使用方法: `vhsot.sh create | delete domain`
@@ -320,8 +336,9 @@ fi
     
 > 注：如果已经存在，需要加大后面的数值，注意：该数值是32的倍数为宜。
 
-[参考地址][2]
+[参考地址][3]
 
 
-  [1]: http://blog.526net.com/?p=2702
-  [2]: http://www.111cn.net/sys/nginx/81196.htm
+  [1]: http://www.cnblogs.com/dasn/articles/4042506.html
+  [2]: http://blog.526net.com/?p=2702
+  [3]: http://www.111cn.net/sys/nginx/81196.htm

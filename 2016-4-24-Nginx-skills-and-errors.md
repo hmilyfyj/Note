@@ -27,6 +27,10 @@ categories: Nginx
 
 [SSL配置参考][1]
 
+## 强制跳转 https
+
+[参考地址][2]
+
 ## SSL 重启 nginx 免输密码
 
 配置 SSL 后，重启 nginx 时将弹出 `Enter PEM pass phrase:` 的提示并等待。
@@ -49,7 +53,7 @@ server {
 ```
 
     
-[参考地址][2]
+[参考地址][3]
 
 ## 重启 Nginx 脚本
 
@@ -336,9 +340,10 @@ fi
     
 > 注：如果已经存在，需要加大后面的数值，注意：该数值是32的倍数为宜。
 
-[参考地址][3]
+[参考地址][4]
 
 
   [1]: http://www.cnblogs.com/dasn/articles/4042506.html
-  [2]: http://blog.526net.com/?p=2702
-  [3]: http://www.111cn.net/sys/nginx/81196.htm
+  [2]: http://www.07net01.com/program/61139.html
+  [3]: http://blog.526net.com/?p=2702
+  [4]: http://www.cnblogs.com/yun007/p/3739182.html

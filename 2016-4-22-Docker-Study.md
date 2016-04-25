@@ -42,7 +42,7 @@ categories: Docker
     
 创建别名
 
-    alias c='docker ps && read c_id && PID=$(docker inspect --format "{{ .State.Pid }}" $c_id) && nsenter --target $PID --mount --uts --ipc --net --pid'
+    alias c='docker ps && read c_id && PID=$(docker inspect --format "{ { .State.Pid }}" $c_id) && nsenter --target $PID --mount --uts --ipc --net --pid'
 
 ## 大扫除（清除所有容器 && 镜像）：
 

@@ -72,6 +72,11 @@ sudo composer config -l -g
     
 [国内源介绍][1]
 
+expect
+```
+cd /tmp && wget http://nchc.dl.sourceforge.net/sourceforge/tcl/tcl8.4.11-src.tar.gz && tar xfvz tcl8.4.11-src.tar.gz && cd tcl8.4.11/unix && ./configure --prefix=/usr/tcl --enable-shared
+```
+
 
 2.Laravel
 

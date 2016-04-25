@@ -57,6 +57,10 @@ cd /tmp && cp tcl8.4.20/unix/tclUnixPort.h tcl8.4.20/generic/
     
     make install
     
+做下连接
+
+    ln -s /usr/local/tcl/bin/expect /usr/bin/expect
+    
 组合成一条命令：
 
 ```

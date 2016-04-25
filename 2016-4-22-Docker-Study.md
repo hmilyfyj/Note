@@ -74,9 +74,15 @@ sudo composer config -l -g
 
 expect
 ```
-cd /tmp && wget http://nchc.dl.sourceforge.net/sourceforge/tcl/tcl8.4.11-src.tar.gz && tar xfvz tcl8.4.11-src.tar.gz && cd tcl8.4.11/unix && ./configure --prefix=/usr/tcl --enable-shared
+cd /tmp && wget http://120.52.73.45/jaist.dl.sourceforge.net/project/tcl/Tcl/8.4.20/tcl8.4.20-src.tar.gz && tar xfvz tcl8.4.20-src.tar.gz && cd tcl8.4.20/unix && ./configure --prefix=/usr/local/tcl --enable-shared && make && make install
+
+cd /tmp && cp tcl8.4.20/unix/tclUnixPort.h tcl8.4.20/generic/
+
+cd /tmp && wget http://120.52.73.45/nchc.dl.sourceforge.net/project/expect/Expect/5.45/expect5.45.tar.gz && tar xzvf expect5.45.tar.gz && cd expect5.45 && ./configure --prefix=/usr/local/expect --with-tcl=/usr/local/tcl/lib --with-tclinclude=../tcl8.4.20/generic && make && make install && ln -s /usr/local/tcl/bin/expect /usr/local/expect/bin/expect
+
 ```
 
+[使用][2]
 
 2.Laravel
 
@@ -107,3 +113,4 @@ cd php-memcached && phpize && \
 
 
   [1]: http://pkg.phpcomposer.com/
+  [2]: http://bbs.csdn.net/topics/390250412

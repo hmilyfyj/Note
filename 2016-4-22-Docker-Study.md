@@ -40,14 +40,18 @@ categories: Docker
 
     PID=$(docker inspect --format " { { .State.Pid }}" <container-id>) && nsenter --target $PID --mount --uts --ipc --net --pid
     
+创建别名
+
+    alias c='docker ps && read c_id && PID=$(docker inspect --format "{{ .State.Pid }}" $c_id) && nsenter --target $PID --mount --uts --ipc --net --pid'
+
 ## 大扫除（清除所有容器 && 镜像）：
 
       docker kill $(docker ps -q); docker rm $(docker ps -a -q)
       docker rmi $(docker images -q -a) 
     
-    
-    
 
+# Supervisor
+    
 # 配置 Laravel 环境
 
 ## 安装 Composer

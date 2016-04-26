@@ -46,6 +46,10 @@ curl -sS https://getcomposer.org/installer \
 ```
 
 
+# CI
+
+    composer create-project codeigniter/framework
+
 
 [官网地址][1]
 [相关介绍][2]

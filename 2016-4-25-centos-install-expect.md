@@ -140,6 +140,7 @@ cd /tmp && wget http://120.52.73.45/nchc.dl.sourceforge.net/project/expect/Expec
 
 
 传参：
+
     set password [lrange $argv 0 0]
     
 切换工作目录：

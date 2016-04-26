@@ -1,6 +1,6 @@
 title: Expect -- Shell 交互工具
 date: 2016-04-25 18:41
-tags: [centos,expect]
+tags: [Centos,Expect]
 categories: Centos
 ---
 

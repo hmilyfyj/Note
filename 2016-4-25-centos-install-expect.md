@@ -10,7 +10,7 @@ categories: Centos
 
 # 安装
 
-## Tcl
+## 一、Tcl
 
 主页: http://www.tcl.tk
 
@@ -40,7 +40,7 @@ cd /tmp && wget http://120.52.73.45/jaist.dl.sourceforge.net/project/tcl/Tcl/8.4
 cd /tmp && cp tcl8.4.20/unix/tclUnixPort.h tcl8.4.20/generic/
 ```
     
-## Expect
+## 二、Expect
 
 下载
 

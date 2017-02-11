@@ -10,7 +10,7 @@ script:
 - mkdir build
 - cd build
 - git clone git@github.com:hmilyfyj/hmilyfyj.github.io.git -b source .
-- git clone git@github.com:hmilyfyj/Note.git source\_posts
+- git clone git@github.com:hmilyfyj/Note.git source/_posts
 - rm -rf _posts/.travis
 - rm -rf _posts/.travis.yml
 - rm -rf _posts/.git

@@ -1,0 +1,30 @@
+language: node_js
+node_js: 5.9.1
+install:
+#- npm install
+#- npm install hexo-cli -g
+- rm . -rf
+script:
+- rm . -rf
+- git clone git@git.coding.net:AIW/hexo_blog.git .
+- git clone git@github.com:hmilyfyj/Note.git _posts
+- rm -rf _posts/.travis
+- rm -rf _posts/.travis.yml
+- npm install
+- npm install hexo-cli -g
+- hexo g
+- hexo d
+- rm -rf ~/.ssh
+branches:
+  only:
+  - source
+before_install:
+    - openssl aes-256-cbc -K $encrypted_dc923eee55df_key -iv $encrypted_dc923eee55df_iv
+      -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+    - chmod 600 ~/.ssh/id_rsa
+    - sudo cp .travis/ssh_config /etc/ssh/ssh_config
+    - sudo chmod 755 /etc/ssh/ssh_config
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - git config --global user.name "fengit"
+    - git config --global user.email "fengit@outlook.com"

@@ -9,7 +9,7 @@ install:
 script:
 - mkdir build
 - cd build
-- git clone git@git.coding.net:AIW/hexo_blog.git .
+- git clone git@github.com:hmilyfyj/hmilyfyj.github.io.git -b source .
 - git clone git@github.com:hmilyfyj/Note.git _posts
 - rm -rf _posts/.travis
 - rm -rf _posts/.travis.yml

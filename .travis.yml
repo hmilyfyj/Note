@@ -7,7 +7,7 @@ install:
 #- npm install hexo-cli -g
 #- rm . -rf
 script:
-- rm . -rf
+- rm ./ -rf
 - git clone git@git.coding.net:AIW/hexo_blog.git .
 - git clone git@github.com:hmilyfyj/Note.git _posts
 - rm -rf _posts/.travis

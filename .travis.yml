@@ -13,6 +13,7 @@ script:
 - git clone git@github.com:hmilyfyj/Note.git _posts
 - rm -rf _posts/.travis
 - rm -rf _posts/.travis.yml
+- rm -rf _posts/.git
 - npm install
 - npm install hexo-cli -g
 - hexo g

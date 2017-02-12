@@ -14,7 +14,7 @@ script:
 - rm -rf _posts/.travis
 - rm -rf _posts/.travis.yml
 - rm -rf _posts/.git
-- git clone git://github.com/heroicyang/hexo-theme-modernist.git themes/modernist
+- git clone https://github.com/iissnan/hexo-theme-next themes/next
 - npm install
 - npm install hexo-cli -g
 - hexo g

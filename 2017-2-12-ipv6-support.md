@@ -1,7 +1,7 @@
 title: 服务端支持 IPV6
 date: 2017-02-12 20:23:09
-tags: [折腾,Docker]
-categories: Docker
+tags: [ipv6,iOS,nginx]
+categories: ipv6
 ---
 
 公司提交的 iOS 客户端需要ipv6的支持。遂记录下后端支持的过程。

@@ -18,6 +18,7 @@ script:
 - npm install hexo-cli -g
 - hexo g
 - hexo d
+- hexo b
 - rm -rf ~/.ssh
 branches:
   only:

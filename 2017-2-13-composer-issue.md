@@ -1,5 +1,5 @@
 ---
-title: 2017-2-13-composer-issue
+title: Composer 踩坑
 grammar_cjkRuby: true
 date: 2017-02-13 09:12:22
 tags: [Composer,issue]

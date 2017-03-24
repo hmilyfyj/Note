@@ -1,5 +1,5 @@
 language: node_js
-node_js: 5.9.1
+node_js: 6.10.1
 install:
 - ls -l
 - pwd
@@ -14,7 +14,7 @@ script:
 - rm -rf _posts/.travis
 - rm -rf _posts/.travis.yml
 - rm -rf _posts/.git
-- git clone https://github.com/viosey/hexo-theme-material.git themes/material
+#- git clone https://github.com/viosey/hexo-theme-material.git themes/material
 - npm install
 - npm install hexo-cli -g
 - hexo g

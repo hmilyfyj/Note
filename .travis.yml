@@ -14,7 +14,7 @@ script:
 - rm -rf _posts/.travis
 - rm -rf _posts/.travis.yml
 - rm -rf _posts/.git
-#- git clone https://github.com/viosey/hexo-theme-material.git themes/material
+- git clone git@github.com:yscoder/hexo-theme-indigo.git themes/indigo
 - npm install
 - npm install hexo-cli -g
 - hexo g

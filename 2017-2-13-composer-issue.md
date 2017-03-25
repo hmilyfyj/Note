@@ -1,10 +1,12 @@
 ---
-title: Composer 踩坑
+title: 2017-2-13-composer-issue
 grammar_cjkRuby: true
 date: 2017-02-13 09:12:22
 tags: [Composer,issue]
 categories: Composer
 ---
+
+<!-- more -->
 
 
 ## 无法安装

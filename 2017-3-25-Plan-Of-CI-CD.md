@@ -28,3 +28,61 @@ categories: 运维
 ### 构建思路
 
 代码推送到`Gitlab`后触发构建事件，部署在服务器的Gitlab-Runner（Docker 镜像）开始运转：安装依赖、执行单元测试。测试通过后部署到生产服务器上。
+
+
+## 详细步骤
+
+### Gitlab 控制整体流程
+
+项目根部放入 `.gitlab-ci.yml` 文件：
+
+````
+image: daocloud.io/hmilyfyj/php-fpm70:latest
+
+variables:
+  BASE_CONF_DIR: "/external_file"
+  ENV_CONF_PATH: ${BASE_CONF_DIR}/config/web/${CI_PROJECT_PATH}/production.env
+  ANSIBLE_DIR: ${BASE_CONF_DIR}/ansible/${CI_PROJECT_PATH}
+  ANSIBLE_CONFIG: ${BASE_CONF_DIR}/ansible/common/ansible.cfg
+  DEFAULT: "/external_file"
+
+before_script:
+  - pwd
+  - ls -l
+  - cat ~/.bashrc
+  - source ~/.bashrc
+
+### 代码构建
+buid_script:
+  only:
+    - master
+  stage: build
+  script:
+    - pwd
+    - composer install
+    - composer dump-autoload -o
+  artifacts:
+    untracked: true
+
+### 测试
+test_script:
+  only:
+    - master
+  stage: test
+  script:
+    - phpunit
+  artifacts:
+    untracked: true
+
+### 部署到测试环境
+
+### 部署（构造生产环境、分发文件、重启 nginx） ansible 是一款部署工具
+deploy_script:
+  only:
+    - master
+  stage: deploy
+  script:
+    - rm .git -rf
+    - cp ${ENV_CONF_PATH} .env
+    - ansible-playbook -i ${ANSIBLE_DIR}/hosts ${ANSIBLE_DIR}/deploy.yml
+````

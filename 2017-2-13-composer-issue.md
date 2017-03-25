@@ -6,6 +6,8 @@ categories: Composer
 
 <!-- more -->
 
+---
+
 
 ## 无法安装
 

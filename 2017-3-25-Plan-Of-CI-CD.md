@@ -104,3 +104,37 @@ deploy_script:
 
 
 ````
+
+## 遇到的问题
+
+### Couldn't resolve host 'gitlab'
+
+**成因**：Dns 解析的问题，尤其是从国内访问 Gitlab.com 时。（并且还是从`Docker`容器内）
+
+#### 解决
+
+**方法1**：
+修改`Container`的Dns
+
+**方法2**：
+指定 gitlab.com 的 host，修改`Gitlab-Runner`的配置文件（`/etc/gitlab-runner
+/config.toml
+`），添加` extra_hosts = ["gitlab.com:52.167.219.168"]
+`条目，配置文件整体如下：
+````ini
+[[runners]]
+  name = "test php"
+  url = "https://gitlab.com/ci"
+  token = "9b9293a2eda9da1caf8fd80e916bef"
+  executor = "docker"
+  [runners.docker]
+    tls_verify = false
+    image = "daocloud.io/hmilyfyj/php-fpm70"
+    privileged = false
+    disable_cache = false
+    volumes = ["/cache", "/var/build_and_deploy:/external_file", "/root/.acme.sh:/var/sslcert"]
+    pull_policy = "if-not-present"
+    extra_hosts = ["gitlab.com:52.167.219.168"]
+  [runners.cache]
+
+````

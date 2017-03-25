@@ -4,11 +4,12 @@ tags: [Composer]
 categories: Composer
 ---
 
-<!-- more -->
-
-
 
 >所有配置都在 Centos7 下通过运行。
+
+<!-- more -->
+
+```
 
 # 安装
 

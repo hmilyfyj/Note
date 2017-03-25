@@ -1,6 +1,4 @@
----
-title: 2017-2-13-composer-issue
-grammar_cjkRuby: true
+title: Composer 踩坑集锦
 date: 2017-02-13 09:12:22
 tags: [Composer,issue]
 categories: Composer

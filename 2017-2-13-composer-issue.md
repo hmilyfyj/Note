@@ -4,11 +4,9 @@ tags: [Composer,issue]
 categories: Composer
 ---
 
-test
+记录一些使用 Composer 过中的问题。
 
 <!-- more -->
-
----
 
 
 

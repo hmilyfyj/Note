@@ -4,10 +4,10 @@ tags: [CI,CD,运维]
 categories: 运维
 ---
 
+<!-- more -->
+
 ## 阶段一
 大学时部署、传递代码的工具是 Haozip、FTP
-
-<!-- more -->
 
 
 ## 阶段二

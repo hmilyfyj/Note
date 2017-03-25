@@ -36,7 +36,7 @@ categories: 运维
 
 项目根部放入 `.gitlab-ci.yml` 文件：
 
-````
+````Ini
 image: daocloud.io/hmilyfyj/php-fpm70:latest
 
 variables:
@@ -89,7 +89,7 @@ deploy_script:
 
 #### ansistrano 部署代码
 
-````
+````Ini
 ---
 - name: Deploy
   hosts: docker_machine

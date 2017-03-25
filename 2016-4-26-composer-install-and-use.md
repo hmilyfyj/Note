@@ -9,7 +9,7 @@ categories: Composer
 
 <!-- more -->
 
-```
+---
 
 # 安装
 

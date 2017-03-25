@@ -18,11 +18,13 @@ categories: 运维
 
 因此，制订了新的构建、部署流程。
 
-### 用到的工具
+## 用到的工具
 
 `Gitlab`：存放源码
 `Gitlab-Runner`: 用于构建代码
 `Ansible`: 运维工具
 `ansistrano`: 基于 `Ansible` 的部署工具
 
-## 流程
+### 构建思路
+
+代码推送到`Gitlab`后触发构建事件，部署在服务器的Gitlab-Runner（Docker 镜像）开始运转：安装依赖、执行单元测试。测试通过后部署到生产服务器上。

@@ -22,6 +22,7 @@ script:
 - rm -rf .git
 - hexo b
 - rm -rf ~/.ssh
+- curl -i http://sc.ftqq.com/SCU685Tdb64d17f62e1152b9f534ad8927f6eee56b7e67ee59fc.send?text=%E8%80%81%E5%A4%A7%EF%BC%8CBlog%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%AF%95%E3%80%82
 branches:
   only:
   - master

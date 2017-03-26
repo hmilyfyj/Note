@@ -23,7 +23,7 @@ categories: 运维
 `Gitlab`：存放源码
 `Gitlab-Runner`: 用于构建代码
 `Ansible`: 运维工具
-`ansistrano`: 基于 `Ansible` 的部署工具
+`Ansistrano`: 基于 `Ansible` 的部署工具
 
 ### 构建思路
 
@@ -87,20 +87,20 @@ deploy_script:
     - ansible-playbook -i ${ANSIBLE_DIR}/hosts ${ANSIBLE_DIR}/deploy.yml
 ````
 
-#### ansistrano 部署代码
+#### Ansistrano 部署代码
 
 ````Ini
 ---
 - name: Deploy
   hosts: docker_machine
   vars:
-    ansistrano_deploy_from: "/builds/huigou/admin_v3"
-    ansistrano_deploy_to: "/usr/local/docker_share/home/wwwroot/huigou/admin_v3"
-    ansistrano_keep_releases: 3
+    Ansistrano_deploy_from: "/builds/huigou/admin_v3"
+    Ansistrano_deploy_to: "/usr/local/docker_share/home/wwwroot/huigou/admin_v3"
+    Ansistrano_keep_releases: 3
     # There seems to be an issue with rsync in vagrant
-    ansistrano_deploy_via: rsync
+    Ansistrano_deploy_via: rsync
   roles:
-    - { role: carlosbuenosvinos.ansistrano-deploy }
+    - { role: carlosbuenosvinos.Ansistrano-deploy }
 
 
 ````

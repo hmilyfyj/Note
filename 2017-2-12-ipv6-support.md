@@ -1,7 +1,7 @@
 title: 服务端支持 IPV6
 date: 2017-02-12 20:23:09
-tags: [ipv6,iOS,nginx]
-categories: ipv6
+tags: [折腾,Docker]
+categories: Docker
 ---
 
 公司提交的 iOS 客户端需要ipv6的支持。遂记录下后端支持的过程。
@@ -26,7 +26,7 @@ server{
 	listen    443 ssl;
 	listen 	  [::]:443 ssl;
 	#listen   2607:8700:101:6522::1:443 ssl;
-	server_name api.tbxzs.com m.v3.tbxzs.com ipv6.tbxzs.com static.tbxzs.com;
+	server_name xxx.com;
 	ssl_certificate /usr/develop/nginx/sslkey/XX.crt;  #(证书公钥）
 	ssl_certificate_key /usr/develop/nginx/sslkey/XX.key;  #(证书私钥）
 	ssl_session_timeout 5m;

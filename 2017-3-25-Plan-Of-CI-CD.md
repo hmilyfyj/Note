@@ -94,13 +94,13 @@ deploy_script:
 - name: Deploy
   hosts: docker_machine
   vars:
-    Ansistrano_deploy_from: "/builds/huigou/admin_v3"
-    Ansistrano_deploy_to: "/usr/local/docker_share/home/wwwroot/huigou/admin_v3"
-    Ansistrano_keep_releases: 3
+    ansistrano_deploy_from: "/builds/huigou/admin_v3"
+    ansistrano_deploy_to: "/usr/local/docker_share/home/wwwroot/huigou/admin_v3"
+    ansistrano_keep_releases: 3
     # There seems to be an issue with rsync in vagrant
-    Ansistrano_deploy_via: rsync
+    ansistrano_deploy_via: rsync
   roles:
-    - { role: carlosbuenosvinos.Ansistrano-deploy }
+    - { role: carlosbuenosvinos.ansistrano-deploy }
 
 
 ````

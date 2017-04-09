@@ -1,4 +1,4 @@
-title: 2017-4-9-CORS-NOT-WORKING
+title: cors 部分情况下失效
 date:  2017-04-09 7:52:41
 tags: Laravel,踩坑
 categories: Laravel

@@ -6,7 +6,9 @@ categories: Note
 grammar_cjkRuby: true
 ---
 
-占用位置汇总：
+## 占用
+执行 ` df -h 和 du -h --max-depth=1 ` 汇总后得到资源主要由以下内容占用：
+>
 1.devicemapper
 2.logs
 3.容器内日志

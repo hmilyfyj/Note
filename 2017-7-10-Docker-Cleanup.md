@@ -164,5 +164,4 @@ IFS=$SAVEIFS
 
 delete_volumes "${volumesdir}"
 delete_volumes "${vfsdir}"
-
 ````

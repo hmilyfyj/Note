@@ -17,6 +17,21 @@ grammar_cjkRuby: true
 ### 针对 容器日志
 
 ### 针对 容器内日志
+````
+#!/bin/bash
+
+for container_id in $(docker ps -a --filter="name=$name" -q);
+
+    do file=$(docker inspect $container_id | grep -G '"LogPath": "*"' | sed -e 's/.*"LogPath": "//g' | sed -e 's/",//g');
+
+    if [ -f $file ]
+      then
+	 echo $file;
+    fi
+
+done
+
+````
 
 ### 无用的 volumes
 ````bash

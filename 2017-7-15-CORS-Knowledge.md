@@ -6,7 +6,7 @@ categories: Note
 grammar_cjkRuby: true
 ---
 
-### 普通跨域
+### 一、普通跨域
 #### 服务端配置
 ````php
 $host   = $referer['host'];
@@ -16,7 +16,7 @@ $response->header('Access-Control-Allow-Origin', "$scheme://{$host}")
 	->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
 ````
 
-### 带 Cookie 跨域
+### 二、带 Cookie 跨域
 #### 服务端额外配置
 
 注意：`Access-Control-Allow-Origin` 不能为 `*"`

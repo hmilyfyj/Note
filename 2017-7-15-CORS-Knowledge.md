@@ -10,6 +10,8 @@ grammar_cjkRuby: true
 
 <!-- more -->
 
+---
+
 ### 一、普通跨域
 #### 服务端配置
 ````php

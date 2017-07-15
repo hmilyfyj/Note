@@ -53,7 +53,7 @@ $.ajax({
 });
 ````
 
-zepto 无解，因为 Zepto 会在`open`之前设置`withCredentials`
+`Zepto`  有 Bug 暂时无解，因为 Zepto 会在`open`之前设置`withCredentials` ，除非修改 ajax 源代码。
 
 
 ### 参考文献

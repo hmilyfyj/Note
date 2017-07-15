@@ -36,7 +36,7 @@ xhr.open("POST", "url", true);
 xhr.send();
 ````
 
-jquey 中添加 `xhrFields` 参数
+jquey 中添加 `xhrFields` 参数：
 
 ````
 $.ajax({

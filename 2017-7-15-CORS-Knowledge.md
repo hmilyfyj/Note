@@ -14,7 +14,13 @@ $scheme = $referer['scheme'];
 					
 $response->header('Access-Control-Allow-Origin', "$scheme://{$host}")
 	->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-	->header("Access-Control-Allow-Credentials", "true");
 ````
 
 ### 带 Cookie 跨域
+#### 服务端额外配置
+
+注意：`Access-Control-Allow-Origin` 不能为 `*"`
+
+````
+	->header("Access-Control-Allow-Credentials", "true");
+````

@@ -1,7 +1,7 @@
 ---
 title: Laravel 队列问题
 date:  2017-07-13 9:45:18
-tags: Note
+tags: [shell]
 categories: Note
 grammar_cjkRuby: true
 ---

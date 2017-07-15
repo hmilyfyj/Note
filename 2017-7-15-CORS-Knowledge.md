@@ -19,7 +19,7 @@ $response->header('Access-Control-Allow-Origin', "$scheme://{$host}")
 ### 二、带 Cookie 跨域
 #### 服务端额外配置
 
-注意：`Access-Control-Allow-Origin` 不能为 `"*"`
+**注意**：`Access-Control-Allow-Origin` 不能为 `"*"`，否则 cookie 传递失效
 
 ````php
 	->header("Access-Control-Allow-Credentials", "true");
@@ -47,4 +47,4 @@ $.ajax({
 });
 ````
 
-zepto 无解。
+zepto 无解，因为 Zepto 会在`open`之前设置`withCredentials`

@@ -1,8 +1,8 @@
 ---
 title: CORS 知识点汇总
 date:  2017-07-15 10:19:30
-tags: Note
-categories: Note
+tags: [http,html,js,服务端,踩坑]
+categories: 踩坑
 grammar_cjkRuby: true
 ---
 

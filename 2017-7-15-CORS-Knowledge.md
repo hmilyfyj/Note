@@ -19,7 +19,7 @@ $response->header('Access-Control-Allow-Origin', "$scheme://{$host}")
 ### 二、带 Cookie 跨域
 #### 服务端额外配置
 
-注意：`Access-Control-Allow-Origin` 不能为 `*"`
+注意：`Access-Control-Allow-Origin` 不能为 `"*"`
 
 ````php
 	->header("Access-Control-Allow-Credentials", "true");

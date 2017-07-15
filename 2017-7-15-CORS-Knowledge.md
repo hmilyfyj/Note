@@ -48,3 +48,10 @@ $.ajax({
 ````
 
 zepto 无解，因为 Zepto 会在`open`之前设置`withCredentials`
+
+
+### 参考文献
+[WHATWG 的 XHR 标准](https://xhr.spec.whatwg.org/#the-withcredentials-attribute)
+[CORS 跨域发送 Cookie](http://harttle.com/2016/12/28/cors-with-cookie.html)
+[webview的CORS跨域](http://www.iamaddy.net/2014/04/webview%E7%9A%84cors%E8%B7%A8%E5%9F%9F/)
+[前方有坑，请绕道——Zepto 中使用 CORS](https://aotu.io/notes/2015/10/26/zepto-cors/index.html)

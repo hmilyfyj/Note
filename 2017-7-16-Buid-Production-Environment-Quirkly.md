@@ -39,6 +39,30 @@ https://www.jevin.org/centos7-change-ssh-port/
 踩坑：realod 会重置 iptables，直接影响容器运行。需要重启 docker 或机器
 [issues](https://github.com/moby/moby/issues/16137)
 
+修改 firewalld
+
+````
+systemctl enable firewalld
+systemctl start firewalld
+systemctl status firewalld
+firewall-cmd --set-default-zone=public
+firewall-cmd --zone=public --add-interface=eth0
+firewall-cmd --zone=public --add-interface=eth1
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=22/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=28941/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=80/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=443/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=9000/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=3002/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=8901/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=32809/tcp
+firewall-cmd --reload
+firewall-cmd --permanent --list-port
+firewall-cmd --zone=public --list-all
+````
+
+//添加端口 28941 22 80 443 9000 3002
+
 ## 安装 Docker
 
 ### 安装
@@ -69,7 +93,7 @@ chmod +x /usr/local/bin/docker-compose
 [参考资料](https://get.daocloud.io/#install-compose)
 
 ### pull 必要的镜像
-````
+````shell
 docker pull daocloud.io/hmilyfyj/php-fpm56:latest
 docker pull daocloud.io/hmilyfyj/php-fpm70:latest
 docker pull nginx

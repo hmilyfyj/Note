@@ -22,15 +22,19 @@ grammar_cjkRuby: true
 上次服务器崩溃时，以上东西都要在新服务器上从头开始安装，也不熟练安装了好久...
 痛定思痛后，决定 **上 Docker** !
 
+## 升级
+````
+yum update -y
+````
 
-1.安装 Docker
+## 安装 Docker
+
 ````shell
 //get.docker.com
 curl -sSL https://get.daocloud.io/docker | sh 
 systemctl start docker
 ````
-
-https://yeasy.gitbooks.io/docker_practice/content/install/centos.html#使用脚本自动安装
+[参考资料](https://yeasy.gitbooks.io/docker_practice/content/install/centos.html#使用脚本自动安装)
 
 登陆 daocloud.io 或者其他平台
 
@@ -113,6 +117,10 @@ systemctl start firewalld \
 & firewall-cmd --zone=public --list-all
 ````
 
+修改 gitlab-runner config
+
+4. 修改防火墙
+cp /usr/lib/firewalld/services/ssh.xml /etc/firewalld/services/
 https://sebastianblade.com/how-to-modify-ssh-port-in-centos7/
 https://linux.cn/article-8098-1.html
 https://www.jevin.org/centos7-change-ssh-port/
@@ -122,4 +130,7 @@ https://www.jevin.org/centos7-change-ssh-port/
 
 //添加端口 28941 22 80 443 9000 3002
 
-//
+
+### 布置部署环境
+
+### 布置生产环境

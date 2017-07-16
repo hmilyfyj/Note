@@ -15,7 +15,7 @@ grammar_cjkRuby: true
 
 [持续集成、部署方案](https://b.fengbl.cn/2017/03/25/2017-3-25-Plan-Of-CI-CD/)
 
-### 一、生产环境
+# 一、生产环境
 
 `PHP`(5.6 + 7.0)、`Laravel`、`Memcached`（SASL）、`Redis`、`Mysql`、`Nginx`、`Centos`、`Gitlab`（CI、CD）、`Ansible`（快速部署）
 
@@ -26,6 +26,9 @@ grammar_cjkRuby: true
 ````
 yum update -y
 ````
+
+## 安全配置
+### 修改 ssh 端口
 
 ## 安装 Docker
 
@@ -62,9 +65,6 @@ docker pull daocloud.io/hmilyfyj/php-fpm70:latest
 docker pull nginx
 ````
 
-
-2.pull 镜像（nginx、php-fpm70、56）
-3.2.安全加固
 3.安装 gitlab runner 相关
 ````
 # For Debian/Ubuntu

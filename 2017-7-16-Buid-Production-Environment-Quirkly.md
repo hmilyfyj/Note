@@ -17,4 +17,4 @@ grammar_cjkRuby: true
 
 ### 一、生产环境
 
-`PHP`、`Laravel`、`Memcached`、`Redis`、`Mysql`、`Nginx`、`Centos`
+`PHP`、`Laravel`、`Memcached`（SASL）、`Redis`、`Mysql`、`Nginx`、`Centos`

@@ -158,3 +158,6 @@ check_interval = 0
 
 ssh-copy-id user@server
 ssh-copy-id -i ~/.ssh/id_rsa.pub user@server
+
+
+V

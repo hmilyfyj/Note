@@ -18,3 +18,6 @@ grammar_cjkRuby: true
 ### 一、生产环境
 
 `PHP`(5.6 + 7.0)、`Laravel`、`Memcached`（SASL）、`Redis`、`Mysql`、`Nginx`、`Centos`、`Gitlab`（CI、CD）、`Ansible`（快速部署）
+
+上次服务器崩溃时，以上东西都要在新服务器上从头开始安装，也不熟练安装了好久...
+痛定思痛后，决定 **上 Docker** !

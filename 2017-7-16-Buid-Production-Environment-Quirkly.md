@@ -34,7 +34,7 @@ yum update -y
 curl -sSL https://get.daocloud.io/docker | sh 
 systemctl start docker
 ````
-[参考资料](https://yeasy.gitbooks.io/docker_practice/content/install/centos.html#使用脚本自动安装)
+[相关资料](https://yeasy.gitbooks.io/docker_practice/content/install/centos.html#使用脚本自动安装)
 
 配置 Docker
 

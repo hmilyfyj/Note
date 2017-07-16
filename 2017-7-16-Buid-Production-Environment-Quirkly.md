@@ -72,7 +72,6 @@ firewall-cmd --zone=public --list-all
 ````shell
 #get.docker.com 太慢
 curl -sSL https://get.daocloud.io/docker | sh 
-systemctl start docker
 ````
 [相关资料](https://yeasy.gitbooks.io/docker_practice/content/install/centos.html#使用脚本自动安装)
 
@@ -81,6 +80,7 @@ systemctl start docker
 ``` shell
 #开机启动
 systemctl enable docker
+systemctl start docker
 
 #登陆daocloud 私有云
 docker login daocloud.io

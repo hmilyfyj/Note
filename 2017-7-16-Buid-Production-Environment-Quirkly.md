@@ -41,6 +41,7 @@ https://www.jevin.org/centos7-change-ssh-port/
 
 ## 安装 Docker
 
+### 安装
 ````shell
 #get.docker.com 太慢
 curl -sSL https://get.daocloud.io/docker | sh 
@@ -48,7 +49,7 @@ systemctl start docker
 ````
 [相关资料](https://yeasy.gitbooks.io/docker_practice/content/install/centos.html#使用脚本自动安装)
 
-配置 Docker
+### 配置 Docker
 
 ``` shell
 #开机启动
@@ -58,7 +59,7 @@ systemctl enable docker
 docker login daocloud.io
 ```
 
-安装 compose
+### 安装 compose
 
 ``` shell	
 curl -L https://get.daocloud.io/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose

@@ -36,7 +36,7 @@ https://sebastianblade.com/how-to-modify-ssh-port-in-centos7/
 https://linux.cn/article-8098-1.html
 https://www.jevin.org/centos7-change-ssh-port/
 
-踩坑：realod 会重置 iptables，直接影响容器运行。重启 docker 或机器
+踩坑：realod 会重置 iptables，直接影响容器运行。需要重启 docker 或机器
 [issues](https://github.com/moby/moby/issues/16137)
 
 ## 安装 Docker

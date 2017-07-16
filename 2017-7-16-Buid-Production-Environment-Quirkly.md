@@ -20,7 +20,7 @@ grammar_cjkRuby: true
 `PHP`(5.6 + 7.0)、`Laravel`、`Memcached`（SASL）、`Redis`、`Mysql`、`Nginx`、`Centos`、`Gitlab`（CI、CD）、`Ansible`（快速部署）
 
 上次服务器崩溃时，以上东西都要在新服务器上从头开始安装，也不熟练安装了好久...
-痛定思痛后，决定 **上 Docker** !
+痛定思痛后，决定 **上 Docker** ! 争取在服务器挂掉的情况下能在最多半小时内恢复服务！
 
 ## 升级
 ````

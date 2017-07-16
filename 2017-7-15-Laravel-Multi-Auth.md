@@ -13,5 +13,6 @@ grammar_cjkRuby: true
 ---
 
 ### 一、Jwt 多用户认证
-框架：[Dingo/Api](https://github.com/dingo/api)
+[Dingo/Api](https://github.com/dingo/api)
+[Jwt-Auth](https://github.com/tymondesigns/jwt-auth)
 

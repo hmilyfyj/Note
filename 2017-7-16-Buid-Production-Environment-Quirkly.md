@@ -75,6 +75,8 @@ docker pull daocloud.io/hmilyfyj/php-fpm70:latest
 docker pull nginx
 ````
 
+## 配置部署环境
+
 3.安装 gitlab runner 相关
 ````
 # For Debian/Ubuntu

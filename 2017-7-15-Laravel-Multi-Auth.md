@@ -16,3 +16,14 @@ grammar_cjkRuby: true
 [Dingo/Api](https://github.com/dingo/api)
 [Jwt-Auth](https://github.com/tymondesigns/jwt-auth)
 
+单用户认证的主要配置是：
+
+`auth.php` 配置：
+````
+'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\HuigouMembers::class,
+        ],
+    ],
+````

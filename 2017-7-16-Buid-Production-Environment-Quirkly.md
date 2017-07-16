@@ -36,11 +36,15 @@ systemctl start docker
 ````
 [参考资料](https://yeasy.gitbooks.io/docker_practice/content/install/centos.html#使用脚本自动安装)
 
-登陆 daocloud.io 或者其他平台
+配置 Docker
 
 ``` shell
-docker login daocloud.io
+#开机启动
 systemctl enable docker
+
+#登陆daocloud 私有云
+docker login daocloud.io
+
 
 ```
 

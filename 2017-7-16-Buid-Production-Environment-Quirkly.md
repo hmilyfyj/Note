@@ -77,7 +77,8 @@ docker pull nginx
 
 ## 配置部署环境
 
-3.安装 gitlab runner 相关
+
+### 安装 gitlab runner 相关
 ````
 # For Debian/Ubuntu
 curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.deb.sh | sudo bash
@@ -97,7 +98,42 @@ gitlab-runner register
 https://docs.gitlab.com/runner/register/index.html
 https://docs.gitlab.com/runner/install/linux-repository.html
 
-修改 gitlab 配置（pull 政策）
+修改 gitlab 配置（pull 政策），修改文件 `/etc/gitlab-runner/config.toml` :
+
+````xml
+concurrent = 1
+check_interval = 0
+
+[[runners]]
+  name = "shared-runner"
+  url = "http://121.40.40.157:10080/"
+  token = "6a18968a433ae3163f26897ed41d36"
+  executor = "docker"
+  [runners.docker]
+    tls_verify = false
+    image = "daocloud.io/hmilyfyj/php-fpm:latest"
+    privileged = false
+    disable_cache = false
+    volumes = ["/cache", "/var/build_and_deploy:/external_file", "/root/.acme.sh:/var/sslcert"]
+    pull_policy = "if-not-present"
+  [runners.cache]
+
+[[runners]]
+  name = "test php"
+  url = "https://gitlab.com/ci"
+  token = "9b9293a2eda9da1caf8fd80e916bef"
+  executor = "docker"
+  [runners.docker]
+    tls_verify = false
+    image = "daocloud.io/hmilyfyj/php-fpm70"
+    privileged = false
+    disable_cache = false
+    volumes = ["/cache", "/var/build_and_deploy:/external_file", "/root/.acme.sh:/var/sslcert"]
+    pull_policy = "if-not-present"
+    extra_hosts = ["gitlab.com:52.167.219.168"]
+  [runners.cache]
+
+````
 
 
 修改端口

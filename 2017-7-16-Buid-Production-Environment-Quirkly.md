@@ -135,47 +135,6 @@ check_interval = 0
 
 ````
 
-
-修改端口
-
-````
-systemctl enable firewalld
-systemctl start firewalld
-systemctl status firewalld
-firewall-cmd --set-default-zone=public
-firewall-cmd --zone=public --add-interface=eth0
-firewall-cmd --zone=public --add-interface=eth1
-systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=22/tcp
-systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=28941/tcp
-systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=80/tcp
-systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=443/tcp
-systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=9000/tcp
-systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=3002/tcp
-systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=8901/tcp
-systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=32809/tcp
-firewall-cmd --reload
-firewall-cmd --permanent --list-port
-firewall-cmd --zone=public --list-all
-
-systemctl start firewalld \
-& firewall-cmd --set-default-zone=public \
-& firewall-cmd --zone=public --add-interface=eth0 \
-& firewall-cmd --zone=public --add-interface=eth1 \
-& systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=22/tcp \
-& systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=28941/tcp \
-& systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=80/tcp \
-& systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=443/tcp \ 
-& systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=9000/tcp \
-& firewall-cmd --reload \
-& firewall-cmd --permanent --list-port \
-& firewall-cmd --zone=public --list-all
-````
-
-修改 gitlab-runner config
-
-//添加端口 28941 22 80 443 9000 3002
-
-
 ### 布置部署环境
 
 ### 布置生产环境

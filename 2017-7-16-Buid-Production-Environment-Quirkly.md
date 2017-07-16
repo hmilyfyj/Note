@@ -46,7 +46,7 @@ systemctl enable docker
 docker login daocloud.io
 ```
 
-docker-compose 
+安装 compose
 
 ``` shell	
 curl -L https://get.daocloud.io/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose

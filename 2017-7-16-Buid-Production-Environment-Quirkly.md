@@ -83,6 +83,7 @@ systemctl start firewalld \
 ````
 
 踩坑：realod 会重置 iptables，直接影响容器运行。重启 docker 或机器
+[issues](https://github.com/moby/moby/issues/16137)
 
 //添加端口 28941 22 80 443 9000 3002
 

@@ -127,6 +127,8 @@ https://docs.gitlab.com/runner/install/linux-repository.html
 
 修改 gitlab 配置（pull 政策），修改文件 `/etc/gitlab-runner/config.toml` :
 
+主要配置 `extra_hosts` 、`pull_policy`、`volumes`
+
 ````xml
 concurrent = 1
 check_interval = 0

@@ -12,3 +12,9 @@ grammar_cjkRuby: true
 <!-- more -->
 
 ---
+
+[持续集成、部署方案](https://b.fengbl.cn/2017/03/25/2017-3-25-Plan-Of-CI-CD/)
+
+### 一、生产环境
+
+`PHP`、`Laravel`、`Memcached`、`Redis`、`Mysql`、`Nginx`

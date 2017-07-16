@@ -21,3 +21,23 @@ grammar_cjkRuby: true
 
 上次服务器崩溃时，以上东西都要在新服务器上从头开始安装，也不熟练安装了好久...
 痛定思痛后，决定 **上 Docker** !
+
+
+1.安装 Docker
+````shell
+//get.docker.com
+curl -sSL https://get.daocloud.io/docker | sh 
+systemctl start docker
+````
+
+https://yeasy.gitbooks.io/docker_practice/content/install/centos.html#使用脚本自动安装
+
+登陆 daocloud.io 或者其他平台
+
+``` shell
+docker login daocloud.io
+```
+
+
+2.pull 镜像（nginx、php-fpm70、56）
+3.

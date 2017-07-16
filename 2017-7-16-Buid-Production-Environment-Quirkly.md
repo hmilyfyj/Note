@@ -38,6 +38,52 @@ https://yeasy.gitbooks.io/docker_practice/content/install/centos.html#使用脚�
 docker login daocloud.io
 ```
 
+pull 必要的镜像
+
 
 2.pull 镜像（nginx、php-fpm70、56）
-3.
+3.2.安全加固
+3.安装 gitlab runner 相关
+修改 gitlab 配置（pull 政策）
+
+
+修改端口
+
+````
+systemctl enable firewalld
+systemctl start firewalld
+systemctl status firewalld
+firewall-cmd --set-default-zone=public
+firewall-cmd --zone=public --add-interface=eth0
+firewall-cmd --zone=public --add-interface=eth1
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=22/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=28941/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=80/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=443/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=9000/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=3002/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=8901/tcp
+systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=32809/tcp
+firewall-cmd --reload
+firewall-cmd --permanent --list-port
+firewall-cmd --zone=public --list-all
+
+systemctl start firewalld \
+& firewall-cmd --set-default-zone=public \
+& firewall-cmd --zone=public --add-interface=eth0 \
+& firewall-cmd --zone=public --add-interface=eth1 \
+& systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=22/tcp \
+& systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=28941/tcp \
+& systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=80/tcp \
+& systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=443/tcp \ 
+& systemctl start firewalld & firewall-cmd --permanent --zone=public --add-port=9000/tcp \
+& firewall-cmd --reload \
+& firewall-cmd --permanent --list-port \
+& firewall-cmd --zone=public --list-all
+````
+
+踩坑：realod 会重置 iptables，直接影响容器运行。重启 docker 或机器
+
+//添加端口 28941 22 80 443 9000 3002
+
+//

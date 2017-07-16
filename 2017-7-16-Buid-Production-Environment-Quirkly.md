@@ -68,7 +68,7 @@ chmod +x /usr/local/bin/docker-compose
 
 [参考资料](https://get.daocloud.io/#install-compose)
 
-pull 必要的镜像
+### pull 必要的镜像
 ````
 docker pull daocloud.io/hmilyfyj/php-fpm56:latest
 docker pull daocloud.io/hmilyfyj/php-fpm70:latest

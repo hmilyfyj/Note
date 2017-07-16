@@ -29,7 +29,7 @@ grammar_cjkRuby: true
 yum update -y
 ````
 
-## 安全配置
+## 安全（救急时跳过）
 
 ### 修改 ssh 端口
 ````shell

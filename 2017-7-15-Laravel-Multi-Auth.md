@@ -16,10 +16,10 @@ grammar_cjkRuby: true
 [Dingo/Api](https://github.com/dingo/api)
 [Jwt-Auth](https://github.com/tymondesigns/jwt-auth)
 
-单用户认证的主要配置是：
+单用户认证的主要配置是 Provider：
 
 `auth.php` 配置：
-````
+````php
 'providers' => [
         'users' => [
             'driver' => 'eloquent',
@@ -27,3 +27,5 @@ grammar_cjkRuby: true
         ],
     ],
 ````
+
+更多配置看这里：[Configuration](https://github.com/tymondesigns/jwt-auth/wiki/Configuration)

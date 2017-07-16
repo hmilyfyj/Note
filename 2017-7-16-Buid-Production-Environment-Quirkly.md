@@ -31,7 +31,6 @@ yum update -y
 
 ### 修改 ssh 端口
 
-4. 修改防火墙
 cp /usr/lib/firewalld/services/ssh.xml /etc/firewalld/services/
 https://sebastianblade.com/how-to-modify-ssh-port-in-centos7/
 https://linux.cn/article-8098-1.html

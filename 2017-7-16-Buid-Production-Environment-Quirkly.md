@@ -42,7 +42,7 @@ https://www.jevin.org/centos7-change-ssh-port/
 ## 安装 Docker
 
 ````shell
-//get.docker.com
+#get.docker.com
 curl -sSL https://get.daocloud.io/docker | sh 
 systemctl start docker
 ````

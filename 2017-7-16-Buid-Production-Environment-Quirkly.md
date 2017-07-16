@@ -36,6 +36,8 @@ https://yeasy.gitbooks.io/docker_practice/content/install/centos.html#使用脚�
 
 ``` shell
 docker login daocloud.io
+systemctl enable docker
+
 ```
 
 pull 必要的镜像
@@ -44,6 +46,25 @@ pull 必要的镜像
 2.pull 镜像（nginx、php-fpm70、56）
 3.2.安全加固
 3.安装 gitlab runner 相关
+````
+# For Debian/Ubuntu
+curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.deb.sh | sudo bash
+
+# For RHEL/CentOS
+curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.rpm.sh | sudo bash
+
+
+# For Debian/Ubuntu
+sudo apt-get install gitlab-ci-multi-runner
+
+# For RHEL/CentOS
+sudo yum install gitlab-ci-multi-runner
+
+gitlab-runner register
+````
+https://docs.gitlab.com/runner/register/index.html
+https://docs.gitlab.com/runner/install/linux-repository.html
+
 修改 gitlab 配置（pull 政策）
 
 

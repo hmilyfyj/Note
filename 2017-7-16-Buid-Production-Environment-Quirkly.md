@@ -53,8 +53,7 @@ curl -L https://get.daocloud.io/docker/compose/releases/download/1.14.0/docker-c
 chmod +x /usr/local/bin/docker-compose
 ```
 
-
-https://get.daocloud.io/#install-compose
+[参考资料](https://get.daocloud.io/#install-compose)
 
 pull 必要的镜像
 

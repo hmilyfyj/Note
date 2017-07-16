@@ -132,20 +132,6 @@ concurrent = 1
 check_interval = 0
 
 [[runners]]
-  name = "shared-runner"
-  url = "http://121.40.40.157:10080/"
-  token = "6a18968a433ae3163f26897ed41d36"
-  executor = "docker"
-  [runners.docker]
-    tls_verify = false
-    image = "daocloud.io/hmilyfyj/php-fpm:latest"
-    privileged = false
-    disable_cache = false
-    volumes = ["/cache", "/var/build_and_deploy:/external_file", "/root/.acme.sh:/var/sslcert"]
-    pull_policy = "if-not-present"
-  [runners.cache]
-
-[[runners]]
   name = "test php"
   url = "https://gitlab.com/ci"
   token = "9b9293a2eda9da1caf8fd80e916bef"

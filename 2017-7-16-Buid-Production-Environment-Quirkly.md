@@ -44,8 +44,6 @@ systemctl enable docker
 
 #登陆daocloud 私有云
 docker login daocloud.io
-
-
 ```
 
 docker-compose 

@@ -154,3 +154,7 @@ check_interval = 0
 ### 布置部署环境
 
 ### 布置生产环境
+
+
+ssh-copy-id user@server
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@server

@@ -34,3 +34,9 @@ acme.sh --install-cert -d www.example.com \
 echo "aaa" >> /root/.acme.sh/fengittest.conf
 docker run --rm -v /root/.acme.sh:/var/sslcert -v /var/build_and_deploy:/external_file -e "ANSIBLE_CONFIG=/external_file/ansible/common/ansible.cfg" daocloud.io/hmilyfyj/php-fpm ansible-playbook -i /external_file/ansible/common/allhosts /external_file/ansible/company/ssl-deploy/deploy.yml
 ````
+
+
+deploy.yml 脚本内容：
+
+````
+````

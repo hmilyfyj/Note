@@ -6,7 +6,7 @@ categories: Note
 grammar_cjkRuby: true
 ---
 
-
+本篇笔记记录 Gitlab-Runner 相关的知识点。
 
 <!-- more -->
 

@@ -33,9 +33,17 @@ yum update -y
 ## 安全（救急时跳过）
 
 ### 修改 ssh 端口
-````shell
-cp /usr/lib/firewalld/services/ssh.xml /etc/firewalld/services/
+
+``` shell
+$ vi /etc/ssh/sshd_config
+```
+同时加入如下内容
+
 ````
+Port 22  
+Port 2048  
+````
+
 https://sebastianblade.com/how-to-modify-ssh-port-in-centos7/
 https://linux.cn/article-8098-1.html
 https://www.jevin.org/centos7-change-ssh-port/
@@ -44,6 +52,11 @@ https://www.jevin.org/centos7-change-ssh-port/
 [issues](https://github.com/moby/moby/issues/16137)
 
 修改 firewalld
+````shell
+cp /usr/lib/firewalld/services/ssh.xml /etc/firewalld/services/
+````
+
+加入规则
 
 ````
 systemctl enable firewalld
@@ -161,3 +174,5 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub user@server
 
 
 http://guide.daocloud.io/dcs/docker-9152677.html
+
+## 

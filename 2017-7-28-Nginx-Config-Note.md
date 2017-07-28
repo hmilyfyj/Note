@@ -56,3 +56,21 @@ location ~ /images/abc/ {
 }
 location ~* /js/.*/\.js
 ```
+
+只允许
+
+``` stylus
+	location ~* (\.txt|\.html|\.htm)$ {
+		location ~ robots\.txt$ {
+		allow all;
+	}
+	
+	error_page 403 =404 /index.php;
+	deny all;
+}
+```
+
+http://seanlook.com/2015/05/17/nginx-location-rewrite/
+https://blog.skipfault.com/2013/05/09/nginx-block-all-text-files-except-robots-txt/
+
+

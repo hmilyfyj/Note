@@ -1,5 +1,5 @@
 ---
-title: 2017-7-28-Nginx-Config-Note
+title: Nginx 配置相关
 date:  2017-07-28 9:0:30
 tags: Note
 categories: Note
@@ -57,11 +57,13 @@ location ~ /images/abc/ {
 location ~* /js/.*/\.js
 ```
 
-只允许
+只允许某个文件的后缀访问
+
+#### 实现1
 
 ``` stylus
-	location ~* (\.txt|\.html|\.htm)$ {
-		location ~ robots\.txt$ {
+location ~* (\.txt|\.html|\.htm)$ {
+	location ~ robots\.txt$ {
 		allow all;
 	}
 	
@@ -69,6 +71,10 @@ location ~* /js/.*/\.js
 	deny all;
 }
 ```
+
+#### 实现2 
+
+只解析 index.php 文件
 
 http://seanlook.com/2015/05/17/nginx-location-rewrite/
 https://blog.skipfault.com/2013/05/09/nginx-block-all-text-files-except-robots-txt/

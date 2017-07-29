@@ -64,6 +64,9 @@ chown -R mysql:mysql /home/mysql/data
 mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data &
 ```
 
+``` 
+mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --skip-grant-tables --datadir=/home/mysql/data &
+```
 
 
 ``` stylus
@@ -82,15 +85,7 @@ mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadi
 注意：mysql 需要 5.6.0
 
 
-``` shell
-enter code here
-```
 
-
-
-``` 
-mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --skip-grant-tables --datadir=/home/mysql/data &
-```
 
 
 
@@ -127,7 +122,7 @@ $mysql> FLUSH PRIVILEGES;
 https://linuxconfig.org/mysql-error-1045-28000-access-denied-for-user-root-solution
 https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw
 
-//mysql
+//mysql docker
 https://dev.aliyun.com/detail.html?spm=5176.2020520152.210.d103.322c14a0ggGFgm&repoId=1239
 
 

@@ -12,6 +12,54 @@ grammar_cjkRuby: true
 
 ---
 
+## 测试环境 数据的搭建：
+
+### 安装 备份工具
+https://www.percona.com/doc/percona-xtrabackup/LATEST/installation/yum_repo.html
+
+### 下载备份数据
+
+``` shell
+wget -c '<数据备份文件外网下载地址>' -O <自定义文件名>.tar.gz
+```
+
+参数说明：
+
+- -c：启用断点续传模式。
+
+- -O：将下载的结果保存为指定的文件（建议使用URL中包含的文件名）。
+
+说明：若提示显示100%进度，则表示文件下载完成。
+
+### 解压
+
+``` shell
+bash rds_backup_extract.sh -f <数据备份文件名>.tar.gz -C /home/mysql/data
+```
+
+
+执行如下命令，解压已下载的数据备份文件。
+
+bash rds_backup_extract.sh -f <数据备份文件名>.tar.gz -C /home/mysql/data
+参数说明：
+
+-f：指定要解压的备份集文件。
+
+-C：指定文件要解压到的目录。可选参数，若不指定就解压到当前目录。
+
+### 恢复 
+
+### 注释内容必要的配置内容
+
+### 启动 mysql、phpmyadmin docker
+注意：mysql 需要 5.6.0
+
+
+``` shell
+enter code here
+```
+
+
 
 ``` 
 mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --skip-grant-tables --datadir=/home/mysql/data &
@@ -46,8 +94,7 @@ $mysql> UPDATE user SET Password=PASSWORD('my_password') where USER='root';
 $mysql> FLUSH PRIVILEGES;
 ```
 https://linuxconfig.org/mysql-error-1045-28000-access-denied-for-user-root-solution
-
-
+https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw
 //mysql
 https://dev.aliyun.com/detail.html?spm=5176.2020520152.210.d103.322c14a0ggGFgm&repoId=1239
 
@@ -66,4 +113,3 @@ mysql_upgrade
 
 https://help.aliyun.com/document_detail/26212.html?spm=5176.doc26206.6.725.Ru33Qh
 https://www.ilanni.com/?p=10861
-https://www.percona.com/doc/percona-xtrabackup/LATEST/installation/yum_repo.html

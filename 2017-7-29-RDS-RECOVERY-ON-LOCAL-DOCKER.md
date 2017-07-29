@@ -56,6 +56,21 @@ innobackupex --defaults-file=/home/mysql/data/backup-my.cnf --apply-log /home/my
 
 ### 注释内容必要的配置内容
 
+``` shell
+vi /home/mysql/data/backup-my.cnf
+chown -R mysql:mysql /home/mysql/data
+```
+
+
+
+``` stylus
+#innodb_fast_checksum
+#innodb_page_size
+#innodb_log_block_size
+```
+
+
+
 ### 启动 mysql、phpmyadmin docker
 注意：mysql 需要 5.6.0
 

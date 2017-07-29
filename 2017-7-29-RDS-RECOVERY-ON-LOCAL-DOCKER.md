@@ -89,7 +89,7 @@ mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --skip-g
 ``` shell
 docker run -d -p 3306:3306 -v /root/database:/home/mysql/data --name mysql mysql:latest  mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data --skip-grant-tables
 
-
+docker run --name myadmin -d --link mysql:db -p 8080:80 phpmyadmin/phpmyadmin
 ```
 
 踩坑：

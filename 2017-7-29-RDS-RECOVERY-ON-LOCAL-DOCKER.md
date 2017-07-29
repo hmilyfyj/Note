@@ -49,6 +49,11 @@ bash rds_backup_extract.sh -f <数据备份文件名>.tar.gz -C /home/mysql/data
 
 ### 恢复 
 
+``` stylus
+innobackupex --defaults-file=/home/mysql/data/backup-my.cnf --apply-log /home/mysql/data
+```
+
+
 ### 注释内容必要的配置内容
 
 ### 启动 mysql、phpmyadmin docker

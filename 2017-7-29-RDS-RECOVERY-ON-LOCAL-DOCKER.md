@@ -35,6 +35,7 @@ wget -c '<数据备份文件外网下载地址>' -O <自定义文件名>.tar.gz
 
 ``` shell
 wget http://oss.aliyuncs.com/aliyunecs/rds_backup_extract.sh
+mkdir -p /home/mysql/data
 tar vizxf filename.tar.gz
 bash rds_backup_extract.sh -f <数据备份文件名>.tar.gz -C /home/mysql/data
 ```
@@ -88,6 +89,8 @@ mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --skip-g
 
 ``` shell
 docker run -d -p 3306:3306 -v /root/database:/home/mysql/data --name mysql mysql:latest  mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data --skip-grant-tables
+
+docker run -d -p 3306:3306 -v /root/database:/home/mysql/data --name mysql mysql:latest  mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data
 
 docker run --name myadmin -d --link mysql:db -p 8080:80 phpmyadmin/phpmyadmin
 ```

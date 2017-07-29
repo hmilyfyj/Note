@@ -138,6 +138,7 @@ gitlab-runner register
 ````
 https://docs.gitlab.com/runner/register/index.html
 https://docs.gitlab.com/runner/install/linux-repository.html
+https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ci-multi-runner/
 
 修改 gitlab 配置（pull 政策），修改文件 `/etc/gitlab-runner/config.toml` :
 

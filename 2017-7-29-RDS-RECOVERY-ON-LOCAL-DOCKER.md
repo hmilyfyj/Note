@@ -59,6 +59,7 @@ innobackupex --defaults-file=/home/mysql/data/backup-my.cnf --apply-log /home/my
 ``` shell
 vi /home/mysql/data/backup-my.cnf
 chown -R mysql:mysql /home/mysql/data
+mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data &
 ```
 
 

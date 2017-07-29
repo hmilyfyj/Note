@@ -34,6 +34,8 @@ wget -c '<数据备份文件外网下载地址>' -O <自定义文件名>.tar.gz
 ### 解压
 
 ``` shell
+wget http://oss.aliyuncs.com/aliyunecs/rds_backup_extract.sh
+tar vizxf filename.tar.gz
 bash rds_backup_extract.sh -f <数据备份文件名>.tar.gz -C /home/mysql/data
 ```
 
@@ -68,8 +70,12 @@ mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadi
 #innodb_fast_checksum
 #innodb_page_size
 #innodb_log_block_size
-```
 
+
+#innodb_log_checksum_algorithm=innodb
+#rds_encrypt_data=false
+#innodb_encrypt_algorithm=aes_128_ecb
+```
 
 
 ### 启动 mysql、phpmyadmin docker
@@ -100,7 +106,7 @@ ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: Y
 ```
 
 1.使用了 localhost 链接
-改为： `mysql -h -u xxx -p`
+改为： `mysql -h 127.0.0.1 -u xxx -p`
 
 http://www.cnblogs.com/hyzhou/archive/2011/12/06/2278236.html
 
@@ -111,11 +117,16 @@ http://www.cnblogs.com/hyzhou/archive/2011/12/06/2278236.html
 mysqld_safe  --skip-grant-tables 
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('your_new_password');
 $ mysql -u root mysql
+select host, user from user;
 $mysql> UPDATE user SET Password=PASSWORD('my_password') where USER='root';
+update user set host = '%' where user = 'root';
 $mysql> FLUSH PRIVILEGES;
 ```
+
+## 
 https://linuxconfig.org/mysql-error-1045-28000-access-denied-for-user-root-solution
 https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw
+
 //mysql
 https://dev.aliyun.com/detail.html?spm=5176.2020520152.210.d103.322c14a0ggGFgm&repoId=1239
 
@@ -131,7 +142,7 @@ mysql_upgrade
 ```
 
 
-
+## 阿里云相关教程
 https://help.aliyun.com/document_detail/26212.html?spm=5176.doc26206.6.725.Ru33Qh
 https://www.ilanni.com/?p=10861
 
@@ -139,4 +150,6 @@ https://www.ilanni.com/?p=10861
 ## 查看系统版本
 http://www.linuxidc.com/Linux/2014-12/110748.htm
 http://www.ha97.com/2987.html
+
+## 本地 mysql 无法识别备份中参数
 http://www.cnblogs.com/jcli/p/6253254.html

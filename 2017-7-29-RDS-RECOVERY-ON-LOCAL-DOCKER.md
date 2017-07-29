@@ -90,8 +90,13 @@ mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --skip-g
 ``` shell
 docker run -d -p 3306:3306 -v /root/database:/home/mysql/data --name mysql mysql:latest  mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data --skip-grant-tables
 
-docker run -d -p 3306:3306 -v /home/mysql/data:/home/mysql/data --name mysql mysql:latest  mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data
+# 修改权限
+docker run -it --rm -v /home/mysql/data:/home/mysql/data mysql:5.6.37  chown -R mysql:mysql /home/mysql/data
 
+# 启动
+docker run -d -p 3306:3306 -v /home/mysql/data:/home/mysql/data --name mysql mysql:5.6.37  mysqld_safe --defaults-file=/home/mysql/data/backup-my.cnf --user=mysql --datadir=/home/mysql/data
+
+# phpmyadmin
 docker run --name myadmin -d --link mysql:db -p 8080:80 phpmyadmin/phpmyadmin
 ```
 
@@ -118,6 +123,7 @@ select host, user from user;
 $mysql> UPDATE user SET Password=PASSWORD('my_password') where USER='root';
 update user set host = '%' where user = 'root';
 $mysql> FLUSH PRIVILEGES;
+mysql_upgrade -u root -p
 ```
 
 ## 

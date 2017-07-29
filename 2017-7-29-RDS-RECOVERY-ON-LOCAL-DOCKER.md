@@ -134,3 +134,9 @@ mysql_upgrade
 
 https://help.aliyun.com/document_detail/26212.html?spm=5176.doc26206.6.725.Ru33Qh
 https://www.ilanni.com/?p=10861
+
+
+## 查看系统版本
+http://www.linuxidc.com/Linux/2014-12/110748.htm
+http://www.ha97.com/2987.html
+http://www.cnblogs.com/jcli/p/6253254.html

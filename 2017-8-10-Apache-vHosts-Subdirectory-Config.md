@@ -9,10 +9,10 @@ grammar_cjkRuby: true
 主要处理以下 的情况：
 
 ````
-domain.com/v1 
-domain.com/v2
+domain.com/v1  对应 /dir1/index.php
+domain.com/v2 对应 /dir2/index.php
 ````
-同一域名下对应不同的域名。
+同一域名下对应不同的目录。
 
 <!-- more -->
 

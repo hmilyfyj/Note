@@ -6,7 +6,13 @@ categories: Note
 grammar_cjkRuby: true
 ---
 
+主要处理以下 的情况：
 
+````
+domain.com/v1 
+domain.com/v2
+````
+同一域名下对应不同的域名。
 
 <!-- more -->
 

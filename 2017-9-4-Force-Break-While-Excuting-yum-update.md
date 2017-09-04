@@ -12,15 +12,19 @@ grammar_cjkRuby: true
 
 ---
 
+``` shell
 yum install yum-utils
 yum-complete-transaction --cleanup-only
-清除可能存在的重复包
+#清除可能存在的重复包
 package-cleanup --dupes
-清除可能存在的损坏包
+#清除可能存在的损坏包
 package-cleanup --problems
-清除重复包的老版本：
+#清除重复包的老版本：
 package-cleanup --cleandupes
+```
 
+
+参考资料：
 http://blog.chinaunix.net/uid-21710705-id-3039675.html
 https://superuser.com/questions/243460/what-to-do-when-ctrl-c-cant-kill-a-process
 http://blog.163.com/zhoutao_1001/blog/static/979024220122103352022/

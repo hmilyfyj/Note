@@ -1,5 +1,5 @@
 ---
-title: 2017-9-4-Force-Break-While-Excuting-yum-update
+title: 意外中断 yum update 后的处理措施。
 date:  2017-09-03 1:3:9
 tags: Note
 categories: Note

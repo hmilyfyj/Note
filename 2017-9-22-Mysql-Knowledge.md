@@ -1,12 +1,12 @@
 ---
-title: 2017-9-22-Mysql-Knowledge
+title: Mysql 相关笔记
 date:  2017-09-22 13:17:28
 tags: Note
 categories: Note
 grammar_cjkRuby: true
 ---
 
-
+未完，待补充
 
 <!-- more -->
 

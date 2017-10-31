@@ -19,3 +19,7 @@ RUN apk update && apk add ca-certificates && \
     echo "Asia/Shanghai" > /etc/timezone
 ```
 ## ubuntu
+
+
+## 参考资料
+https://www.zybuluo.com/zwh8800/note/337111

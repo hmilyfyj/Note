@@ -1,0 +1,38 @@
+language: node_js
+node_js: 6.10.1
+install:
+- ls -l
+- pwd
+#- npm install
+#- npm install hexo-cli -g
+#- rm . -rf
+script:
+- mkdir build
+- cd build
+- git clone git@git.coding.net:AIW/hexo_blog.git -b master .
+- git clone git@github.com:hmilyfyj/Note.git source/_posts
+- rm -rf _posts/.travis
+- rm -rf _posts/.travis.yml
+- rm -rf _posts/.git
+#- git clone git@github.com:yscoder/hexo-theme-indigo.git themes/indigo
+- npm install
+- npm install hexo-cli -g
+- hexo g
+- hexo d
+- rm -rf .git
+- hexo b
+- rm -rf ~/.ssh
+- curl -i http://sc.ftqq.com/SCU685Tdb64d17f62e1152b9f534ad8927f6eee56b7e67ee59fc.send?text=%E8%80%81%E5%A4%A7%EF%BC%8CBlog%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%AF%95%E3%80%82
+branches:
+  only:
+  - master
+before_install:
+    - openssl aes-256-cbc -K $encrypted_dc923eee55df_key -iv $encrypted_dc923eee55df_iv
+      -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+    - chmod 600 ~/.ssh/id_rsa
+    - sudo cp .travis/ssh_config /etc/ssh/ssh_config
+    - sudo chmod 755 /etc/ssh/ssh_config
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - git config --global user.name "fengit"
+    - git config --global user.email "fengit@outlook.com"

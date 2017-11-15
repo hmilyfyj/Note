@@ -4,8 +4,9 @@ tags: 新建,模板,小书匠
 grammar_cjkRuby: true
 ---
 
+一切为了一键部署
 
-----more----
+<!-- more -->
 
 ## IDE
 Sublime

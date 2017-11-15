@@ -19,6 +19,13 @@ Docker CE
 ## 环境管理
 SwitchHosts
 
+## 文件管理
+OneDriver
+坚果云
+
+## 密码管理
+1Password
+
 ## 文本
 Wps
 

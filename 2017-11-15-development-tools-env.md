@@ -1,9 +1,11 @@
 ---
-title: 2017-11-15-development-tools-env
+title: 开发环境整理
 tags: 新建,模板,小书匠
 grammar_cjkRuby: true
 ---
 
+
+----more----
 
 ## IDE
 Sublime

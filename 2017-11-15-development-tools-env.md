@@ -6,8 +6,8 @@ grammar_cjkRuby: true
 
 
 ## IDE
-sublime
-notepad++
+Sublime
+Notepad++
 PhpStorm
 
 ## 其他

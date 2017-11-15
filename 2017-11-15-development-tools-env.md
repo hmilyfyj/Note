@@ -10,6 +10,8 @@ Sublime
 Notepad++
 PhpStorm
 
+## VSC
+
 ## 其他
 Docker CE
 

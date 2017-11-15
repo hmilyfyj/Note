@@ -1,5 +1,5 @@
 ---
-title: 2017-11-15-run-bat-as-admin
+title: 以管理员身份运行脚本
 tags: 新建,模板,小书匠
 grammar_cjkRuby: true
 ---

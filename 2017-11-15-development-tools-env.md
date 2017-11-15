@@ -51,4 +51,5 @@ choco install git -y
 choco install notepadplusplus.install -y
 choco install sublimetext3 -y
 choco install cmder -y
+choco install potplayer -y
 ```

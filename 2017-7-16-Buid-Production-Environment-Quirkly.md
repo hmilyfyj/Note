@@ -26,6 +26,8 @@ grammar_cjkRuby: true
 从 阿里云购买了按量付费的 `ECS` 练手，一小时 0.6 元，便宜又好用，美滋滋~  现整理安装新机后的部署步骤，方便整理成一键部署脚本。
 
 ## 升级
+换源
+
 ````
 yum update -y
 ````
@@ -178,3 +180,5 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub user@server
 http://guide.daocloud.io/dcs/docker-9152677.html
 
 ## 
+
+

@@ -11,10 +11,12 @@ Notepad++
 PhpStorm
 
 ## VSC
-git
+Git
+SourceTree
 
-## 其他
-Docker CE
+## 代码环境
+Xampp
+Docker
 
 ## 环境管理
 SwitchHosts
@@ -22,9 +24,16 @@ SwitchHosts
 ## 文件管理
 OneDriver
 坚果云
+IDM
+Listary
 
 ## 密码管理
 1Password
+
+## 远程
+Anydesk
+Teamviewer
+
 
 ## 文本
 Wps

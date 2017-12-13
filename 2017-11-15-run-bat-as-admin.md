@@ -4,7 +4,7 @@ tags: bat,windows,折腾
 grammar_cjkRuby: true
 ---
 
-
+一键安装脚本需要 root 权限。
 
 <!-- more -->
 

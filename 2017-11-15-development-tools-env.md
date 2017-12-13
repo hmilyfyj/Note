@@ -1,10 +1,10 @@
 ---
 title: 开发环境整理
-tags: 新建,模板,小书匠
+tags: windows,develop
 grammar_cjkRuby: true
 ---
 
-一切为了一键部署
+一切为了随时随地可以开工。
 
 <!-- more -->
 

@@ -1,6 +1,6 @@
 ---
 title: 在Docker中配置时区
-tags: 新建,模板,小书匠
+tags: docker
 grammar_cjkRuby: true
 ---
 

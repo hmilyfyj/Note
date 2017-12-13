@@ -4,6 +4,9 @@ tags: 新建,模板,小书匠
 grammar_cjkRuby: true
 ---
 
+统一容器时区为东八区。
+
+<!-- more -->
 
 ## debian
 ``` dockerfile

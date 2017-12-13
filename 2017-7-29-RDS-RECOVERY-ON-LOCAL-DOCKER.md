@@ -1,12 +1,12 @@
 ---
-title: 2017-7-29-RDS-RECOVERY-ON-LOCAL-DOCKER
+title: 阿里云RDS =》 本地MYSQL 的快速导入
 date:  2017-07-29 15:51:44
 tags: Note
 categories: Note
 grammar_cjkRuby: true
 ---
 
-
+将从生产环境中的数据拉下来作为测试。
 
 <!-- more -->
 

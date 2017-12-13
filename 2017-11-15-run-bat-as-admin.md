@@ -1,8 +1,12 @@
 ---
-title: 以管理员身份运行脚本
-tags: 新建,模板,小书匠
+title: Bat 脚本下获取管理员权限
+tags: bat,windows,折腾
 grammar_cjkRuby: true
 ---
+
+
+
+<!-- more -->
 
 ``` shell
 @echo off

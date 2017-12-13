@@ -1,5 +1,5 @@
 ---
-title: 2017-8-31-Nginx-Forbidden-Ip-Direct-Access
+title: Nginx 禁止IP直连
 date:  2017-08-31 11:33:52
 tags: Note
 categories: Note

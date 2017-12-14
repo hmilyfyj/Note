@@ -1,5 +1,5 @@
 ---
-title: 在Docker中配置时区
+title: 配置Docker镜像的时区
 tags: docker
 grammar_cjkRuby: true
 ---

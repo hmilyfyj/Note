@@ -1,7 +1,7 @@
 ---
-title: Nginx 禁止IP直连
+title: Nginx 下禁止IP直连
 date:  2017-08-31 11:33:52
-tags: Note
+tags: Nginx,Secure
 categories: Note
 grammar_cjkRuby: true
 ---

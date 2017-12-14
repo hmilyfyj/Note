@@ -4,7 +4,7 @@ tags: docker
 grammar_cjkRuby: true
 ---
 
-统一容器时区为东八区。
+统一镜像时区为东八区。
 
 <!-- more -->
 

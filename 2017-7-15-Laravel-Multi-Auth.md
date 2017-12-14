@@ -72,3 +72,5 @@ Laravel 配置：
 待解决：
 
 为了动态修改 `auth.php` 和 `jwt.php` 中的配置，我选择了 Hack `Providers/RouteServiceProvider.php`  文件。应该有更优雅的解决办法。
+
+

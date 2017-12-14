@@ -4,7 +4,7 @@ tags: windows,develop
 grammar_cjkRuby: true
 ---
 
-一切为了随时随地可以开工。
+一切为了节约生命。
 
 <!-- more -->
 

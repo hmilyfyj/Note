@@ -13,7 +13,7 @@ categories: PHP
 	1. var-dumper
 	2. Xdebug
 	3. Sentry（神器）
-	4. Laravel5.5 最新版报错时会显示错误栈。
+	4. Laravel5.5 最新版报错时会显示错误栈
 
 ### 技巧类
 

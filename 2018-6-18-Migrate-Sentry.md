@@ -26,3 +26,10 @@ pg_dump  -U postgres 0532Shanjing -f /backup/postgres_0532Shanjing_2018-06-16_1.
 //方法2
 sentry --config /etc/sentry export  --exclude
 ```
+
+### 恢复
+
+```
+//传递
+scp /data/postgres/postgres_0532Shanjing_2018-06-16.dump  root@10.116.204.151:/data/postgres/
+```

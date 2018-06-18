@@ -1,4 +1,4 @@
-title: Docker Bug:Stuck On df
+title: Docker Bug：系统无法执行 df 命令。
 date: 2018-06-18 09:54:39
 tags: Docker
 categories: Docker
@@ -23,5 +23,4 @@ stat("/sys/fs/cgroup/memory", {st_mode=S_IFDIR|0755, st_size=0, ...}) = 0
 stat("/sys/kernel/config", {st_mode=S_IFDIR|0755, st_size=0, ...}) = 0
 stat("/", {st_mode=S_IFDIR|0555, st_size=4096, ...}) = 0
 stat("/proc/sys/fs/binfmt_misc", 
-![enter description here](./images/1529286251211.png)
 ```

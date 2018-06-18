@@ -1,7 +1,7 @@
----
 title: 配置Docker镜像的时区
-tags: docker
-grammar_cjkRuby: true
+date: 2018-01-25 09:29:15
+tags: [Docker,运维]
+categories: Docker
 ---
 
 统一镜像时区为东八区。

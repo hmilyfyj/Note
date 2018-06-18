@@ -1,7 +1,7 @@
 ---
-title: 2018-6-18-Sentry-modify-feedback-page
+title: 自定义 Sentry 反馈页面
 date: 2018-06-18 10:34:58
-tags: [Sentry]
+tags: Sentry
 categories: Sentry
 ---
 

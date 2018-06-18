@@ -1,11 +1,11 @@
 ---
-title: 2018-6-18-xsj-template
+title: 小书匠模板兼容  Hexo
 date: 2018-06-18 10:48:51
 tags: 笔记,小书匠
 categories: 小书匠
 ---
 
-小书匠是我用来记笔记的工具。
+小书匠是我用来写笔记的工具，它可以直接同步笔记到 Github，进而触发 `travis ci` 构建文档。
 
 <!-- more -->
 

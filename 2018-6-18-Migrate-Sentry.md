@@ -1,8 +1,8 @@
 ---
-title: 2018-6-18-Migrate-Sentry
+title: Sentry 迁移
 date: 2018-06-18 10:36:58
-tags: [Nginx]
-categories: Nginx
+tags: Sentry
+categories: Sentry
 ---
 
 Sentry 在高并发期还是很占资源的。所以将其迁移出业务服务器。

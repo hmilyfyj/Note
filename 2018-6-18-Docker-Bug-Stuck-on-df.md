@@ -38,3 +38,7 @@ stat("/proc/sys/fs/binfmt_misc",
 ```
 systemctl restart proc-sys-fs-binfmt_misc.automount;
 ```
+
+## 参考资料
+
+https://arstercz.com/centos7-%E7%B3%BB%E7%BB%9F-df-hang-%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86%E8%AF%B4%E6%98%8E/![enter description here](./images/1529288614781.png)

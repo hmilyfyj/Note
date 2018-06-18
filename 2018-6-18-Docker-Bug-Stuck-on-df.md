@@ -4,11 +4,6 @@ tags: Docker
 categories: Docker
 ---
 
-
-<!-- more -->
-
----
-
 近期遇到了执行 `df`  后卡住的问题。
 
 <!-- more -->

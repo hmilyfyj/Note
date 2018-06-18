@@ -1,8 +1,11 @@
----
 title: Bat 脚本下获取管理员权限
+date: 2018-03-10 09:14:22
 tags: bat,windows,折腾
-grammar_cjkRuby: true
+categories: Docker
 ---
+
+
+
 
 一键安装脚本需要 root 权限。
 

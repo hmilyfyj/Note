@@ -10,6 +10,10 @@ categories: Docker
 
 ---
 
+
+
+## 排查
+
 ```
 # strace df
 execve("/usr/bin/df", ["df"], [/* 29 vars */]) = 0
@@ -23,4 +27,16 @@ stat("/sys/fs/cgroup/memory", {st_mode=S_IFDIR|0755, st_size=0, ...}) = 0
 stat("/sys/kernel/config", {st_mode=S_IFDIR|0755, st_size=0, ...}) = 0
 stat("/", {st_mode=S_IFDIR|0555, st_size=4096, ...}) = 0
 stat("/proc/sys/fs/binfmt_misc", 
+```
+
+```
+[root@iZbp1331s65egxhes4tlksZ config]# systemctl list-units  | grep binfmt
+  proc-sys-fs-binfmt_misc.automount                                                                    loaded active running   Arbitrary Executable File Formats File System Automount Point
+  proc-sys-fs-binfmt_misc.mount                                                                        loaded active mounted   Arbitrary Executable File Formats File System
+
+```
+
+## 解决
+```
+systemctl restart proc-sys-fs-binfmt_misc.automount;
 ```

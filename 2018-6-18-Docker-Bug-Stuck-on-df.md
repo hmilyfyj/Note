@@ -1,6 +1,6 @@
-title: 2018-6-18未命名文件 
+title: Docker Bug:Stuck On df
 date: 2018-06-18 09:54:39
-tags: [Docker]
+tags: Docker
 categories: Docker
 ---
 

@@ -1,7 +1,7 @@
----
 title: 开发环境整理
-tags: windows,develop
-grammar_cjkRuby: true
+date: 2018-06-18 09:54:39
+tags: windows,开发,运维
+categories: 运维
 ---
 
 一切为了节约生命。

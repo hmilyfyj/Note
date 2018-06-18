@@ -1,6 +1,6 @@
 title: 人生苦短，学学 Docker (杂乱，暂未整理)
 date: 2016-04-22 18:38
-tags: [折腾,Docker]
+tags: 折腾,Docker
 categories: Docker
 ---
 

@@ -29,7 +29,13 @@ sentry --config /etc/sentry export  --exclude
 
 ### 恢复
 
+#### 复制数据
+
 ```
-//传递
 scp /data/postgres/postgres_0532Shanjing_2018-06-16.dump  root@10.116.204.151:/data/postgres/
+```
+
+#### 导入数据
+```
+docker run -it --rm -e SENTRY_SECRET_KEY='' --link sentry-postgres:postgres --link sentry-redis:redis sentry upgrade
 ```

@@ -1,5 +1,5 @@
 ---
-title: 2018-6-18-Docker-Bug-Stuck-on-df
+title: Docker Bug: Stuck on df
 tags: 新建,模板,小书匠
 grammar_cjkRuby: true
 ---

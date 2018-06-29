@@ -15,6 +15,7 @@ categories: Nginx
 
 #### 参考资料
 
+https://www.v2ex.com/t/65843
 https://sikaixing.com/2016/10/15/ios_url_schemes/
 https://www.kancloud.cn/dawanjiataoke/dawanjiataoke/366652
 https://www.jianshu.com/p/85fd0436aa0b

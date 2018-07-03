@@ -17,3 +17,7 @@ https://laravel.com/api/5.1/Illuminate/Database/Eloquent/ModelNotFoundException.
 https://www.toptal.com/laravel/restful-laravel-api-tutorial
 https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 https://sofish.github.io/restcookbook/http%20methods/idempotency/
+
+争论：
+https://developer.mozilla.org/zh-CN/docs/Glossary/%E5%B9%82%E7%AD%89
+http://leedavis81.github.io/is-a-http-delete-requests-idempotent/

@@ -11,7 +11,17 @@ categories: Nginx
 
 ---
 
-待补充。
+## 登录相关
+
+## 验证码相关
+
+### 滑动验证码
+http://alisec.alimama.com/checkcodev3.php?v=4&app=union-pub&how=创建推广位&http_referer=http://pub.alimama.com/promo/search/index.htm?q=http%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D525071951795?
+### 图片验证码
+
+```
+```
+
 
 #### 参考资料
 

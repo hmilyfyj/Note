@@ -5,6 +5,7 @@ tags: Docker
 categories: Docker
 ---
 
+最近需要给 PHP 镜像添加扩展。
 
 <!-- more -->
 

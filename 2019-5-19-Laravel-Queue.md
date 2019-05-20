@@ -1,5 +1,5 @@
 ---
-title: 2019-5-19-Laravel-Queue
+title: 2019-5-19-Laravel 队列与软连接的兼容问题
 grammar_cjkRuby: true
 tags: Laravel,PHP
 categories: Laravel

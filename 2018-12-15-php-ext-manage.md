@@ -1,5 +1,5 @@
 ---
-title: 2018-12-15-为 PHP Docker 镜像添加扩展
+title: 为 PHP Docker 镜像添加扩展
 date: 2018-12-15 12:22:42
 tags: Docker
 categories: Docker

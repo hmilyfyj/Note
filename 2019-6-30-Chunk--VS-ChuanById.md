@@ -1,5 +1,5 @@
 ---
-title: 2019-6-30-Chunk--VS-ChuanById
+title: Chunk、ChunkById
 date: 2019-06-30 18:38
 tags: 折腾,Docker
 categories: Docker
@@ -10,3 +10,5 @@ categories: Docker
 <!-- more -->
 
 ---
+
+先说结论：最好使用`ChunkById`

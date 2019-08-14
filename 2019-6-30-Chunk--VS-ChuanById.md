@@ -12,3 +12,5 @@ categories: Docker
 ---
 
 先说结论：最好使用`ChunkById`
+
+踩坑：使用`ChunkById`时不要用 OrderBy，否则当数据超过分页时，会导致数据重复。

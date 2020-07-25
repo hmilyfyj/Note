@@ -1,5 +1,6 @@
 ---
 title: Laravel 队列与软连接的兼容问题
+date: 2016-02-10 15:30
 grammar_cjkRuby: true
 tags: Laravel,PHP
 categories: Laravel

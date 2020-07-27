@@ -1,5 +1,5 @@
 language: node_js
-node_js: 6.10.1
+node_js: 10
 install:
 - ls -l
 - pwd
@@ -9,15 +9,27 @@ install:
 script:
 - mkdir build
 - cd build
-- git clone git@e.coding.net:AIW/hexo_blog.git -b master .
+#- git clone git@e.coding.net:AIW/hexo_blog.git -b master .
+- git clone git@e.coding.net:AIW/hexo_blog.git -b hexo-theme-matery .
 - git clone git@github.com:hmilyfyj/Note.git source/_posts
+- mkdir source/media && mkdir source/images && cp ./source/_posts/images/* ./source/images && cp ./source/_posts/media/* ./source/media
 - rm -rf _posts/.travis
 - rm -rf _posts/.travis.yml
 - rm -rf _posts/.git
 #- git clone git@github.com:yscoder/hexo-theme-indigo.git themes/indigo
 - npm install
-- npm install hexo-cli -g
-- hexo g
+#- npm install npm-check-updates -g
+#- ncu -a
+#- npm install
+#- npm update
+#- npm install hexo-cli -g
+#- npm update -g hexo
+- npm install hexo-generator-search --save
+- npm i -S hexo-prism-plugin
+- npm i hexo-permalink-pinyin --save
+- npm i --save hexo-wordcount
+- npm install hexo-generator-feed --save
+- hexo clean && hexo g
 - hexo d
 - rm -rf .git
 - hexo b

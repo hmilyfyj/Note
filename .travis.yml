@@ -20,9 +20,9 @@ script:
 #- npm install npm-check-updates -g
 #- ncu -a
 #- npm install
-- npm update
+#- npm update
 #- npm install hexo-cli -g
-- npm update -g hexo
+#- npm update -g hexo
 - npm install hexo-generator-search --save
 - npm i -S hexo-prism-plugin
 - npm i hexo-permalink-pinyin --save

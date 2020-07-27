@@ -9,7 +9,8 @@ install:
 script:
 - mkdir build
 - cd build
-- git clone git@e.coding.net:AIW/hexo_blog.git -b master .
+#- git clone git@e.coding.net:AIW/hexo_blog.git -b master .
+- git clone git@e.coding.net:AIW/hexo_blog.git -b hexo-theme-matery .
 - git clone git@github.com:hmilyfyj/Note.git source/_posts
 - rm -rf _posts/.travis
 - rm -rf _posts/.travis.yml

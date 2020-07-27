@@ -12,7 +12,7 @@ script:
 #- git clone git@e.coding.net:AIW/hexo_blog.git -b master .
 - git clone git@e.coding.net:AIW/hexo_blog.git -b hexo-theme-matery .
 - git clone git@github.com:hmilyfyj/Note.git source/_posts
-- mkdir media && mkdir images && cp ./source/_posts/images/* ./images && cp ./source/_posts/media/* ./media
+- mkdir source/media && mkdir source/images && cp ./source/_posts/images/* ./source/images && cp ./source/_posts/media/* ./source/media
 - rm -rf _posts/.travis
 - rm -rf _posts/.travis.yml
 - rm -rf _posts/.git

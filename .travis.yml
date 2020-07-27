@@ -17,6 +17,9 @@ script:
 - rm -rf _posts/.git
 #- git clone git@github.com:yscoder/hexo-theme-indigo.git themes/indigo
 - npm install
+- npm install npm-check-updates -g
+- ncu -a
+- npm install
 - npm install hexo-cli -g
 - npm install hexo-generator-search --save
 - npm i -S hexo-prism-plugin

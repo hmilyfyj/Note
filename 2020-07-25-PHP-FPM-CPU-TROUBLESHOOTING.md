@@ -36,19 +36,18 @@ categories: 安全
 - open_basedir
 - opache 未启用
 
+![](/media/15956799729004.jpg)
 
-![](media/15956799729004.jpg)
+![](/media/15956799883487.jpg)
 
-![](media/15956799883487.jpg)
+![](/media/15956799976365.jpg)
 
-![](media/15956799976365.jpg)
+![](/media/15956800122528.jpg)
 
-![](media/15956800122528.jpg)
-
-![](media/15956815529450.jpg)
+![](/media/15956815529450.jpg)
 
 ## 确认
-1. 首先关闭 open_basedir，strace 中`stat`减少，情况略有缓解，但是多次部署后还会出现这个问题。
+1. 首先关闭 open_basedir，`strace` 中`stat`减少，情况略有缓解，但是多次部署后还会出现这个问题。
 2. opache 目前是开启的。
 3. 但尽管 opache 开启了，但可能是 opache 缓存满了。
 

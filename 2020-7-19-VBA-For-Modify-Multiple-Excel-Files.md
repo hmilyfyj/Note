@@ -1,15 +1,12 @@
 ---
-title: 2020-7-19-VBA-For-Modify-Multiple-Excel-Files
+title: 通过 VBS 批量修改 Excel
 grammar_cjkRuby: true
 date: 2020-07-19 18:38
 tags: Excel,Office
 categories: 折腾
 ---
-
-最近收到了朋友的求助，需求是把批量多个 excel 文件中的同一位置的单元格改成其他内容，新的内容中包含公式和段落格式。
-
+最近收到了朋友的求助，需求是把批量多个 excel 文件中的同一位置的单元格改成其他内容，新的内容中包含公式和段落格式。11
 <!-- more -->
-
 ---
 
 待补充

@@ -80,7 +80,9 @@ foreach ($pathsToReplace as $item) {
 ![](/media/15962545599789.jpg)
 
 # 方案1：修改 admin_asset 方法。
-`admin_asset` 函数是 Laravel Admin 自建的全局函数，用于处理静态文件的 http => https，所以可以安心覆盖修改。函数所在的文件（helpers.php）的引用顺序排在绝大多数文件之前(如图 1、2)。覆盖方案较多，目的都是为了在原方法之前声明函数：
+`admin_asset` 函数是 Laravel Admin 自建的全局函数，用于处理静态文件的 http => https，所以可以安心覆盖修改。
+该函数在 `src/helpers.php` 中被声明，该文件引用顺序排在绝大多数文件之前(如图 1、2)，且引用是写死在包声明中的，无法直接通过 `composer.json` 文件修改。
+覆盖方案较多，目的都是为了在原方法之前声明函数：
 - 修改 public/index.php 文件，将新函数卸载文件中。
 - 通过 [composer-include-files](https://www.cnblogs.com/xdao/p/php_autoload_sort.html) 来优先引导外部函数，更优雅一些，但感觉没必要，因为本次改动较小。
 - 使用 [override_function](https://www.php.net/manual/en/function.override-function.php) 、[runkit_function_redefine](https://www.php.net/manual/en/function.runkit-function-remove.php) 方法覆盖原函数，已放弃，因为需要安装 PHP 扩展。

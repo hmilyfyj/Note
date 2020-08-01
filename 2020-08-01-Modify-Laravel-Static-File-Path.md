@@ -9,10 +9,71 @@ categories: 折腾
 
 修改下列变量路径
 
+```php
+\Encore\Admin\Admin.php
+
+    /**
+     * @var array
+     */
+    public static $baseCss = [
+        'vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css',
+        'vendor/laravel-admin/font-awesome/css/font-awesome.min.css',
+        'vendor/laravel-admin/laravel-admin/laravel-admin.css',
+        'vendor/laravel-admin/nprogress/nprogress.css',
+        'vendor/laravel-admin/sweetalert2/dist/sweetalert2.css',
+        'vendor/laravel-admin/nestable/nestable.css',
+        'vendor/laravel-admin/toastr/build/toastr.min.css',
+        'vendor/laravel-admin/bootstrap3-editable/css/bootstrap-editable.css',
+        'vendor/laravel-admin/google-fonts/fonts.css',
+        'vendor/laravel-admin/AdminLTE/dist/css/AdminLTE.min.css',
+    ];
+
+    /**
+     * @var array
+     */
+    public static $baseJs = [
+        'vendor/laravel-admin/AdminLTE/bootstrap/js/bootstrap.min.js',
+        'vendor/laravel-admin/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js',
+        'vendor/laravel-admin/AdminLTE/dist/js/app.min.js',
+        'vendor/laravel-admin/jquery-pjax/jquery.pjax.js',
+        'vendor/laravel-admin/nprogress/nprogress.js',
+        'vendor/laravel-admin/nestable/jquery.nestable.js',
+        'vendor/laravel-admin/toastr/build/toastr.min.js',
+        'vendor/laravel-admin/bootstrap3-editable/js/bootstrap-editable.min.js',
+        'vendor/laravel-admin/sweetalert2/dist/sweetalert2.min.js',
+        'vendor/laravel-admin/laravel-admin/laravel-admin.js',
+    ];
+
+    /**
+     * @var string
+     */
+    public static $jQuery = 'vendor/laravel-admin/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js';
 ```
-\Encore\Admin\Admin::$baseJs
-\Encore\Admin\Admin::$baseCss
-\Encore\Admin\Admin::$jQuery
+
+代码实现
+
+```php
+// 等待替换的路径
+$pathsToReplace = [
+    'baseCss',
+    'baseJs',
+    'jQuery'
+];
+
+$assetBasePath = "https://static.tbxzs.com/libs/laravel-admin/1.8.1/"; // 存放静态资源的基础目录。
+foreach ($pathsToReplace as $item) {
+    // 取出存放目录的变量。
+    $paths = &\Encore\Admin\Admin::$$item;
+
+    // 批量替换主目录。
+    if (is_array($paths)) {
+        foreach ($paths as &$path) {
+            $path = str_replace("vendor/laravel-admin/", $assetBasePath, $path);
+        };
+    } else {
+        $path = str_replace("vendor/laravel-admin/", $assetBasePath, $path);
+    }
+}
 ```
 
 替换后发现无法完全达到目的，如图。所以决定采用其他方案。

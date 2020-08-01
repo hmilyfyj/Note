@@ -7,10 +7,8 @@ categories: 折腾
 
 # 原有替换方案
 
-修改下列变量路径
-
+修改 `\Encore\Admin\Admin.php` 文件的属性。
 ```php
-\Encore\Admin\Admin.php
 
     /**
      * @var array
@@ -94,8 +92,7 @@ foreach ($pathsToReplace as $item) {
 ![](/media/15962583881855.jpg)
 
 方案 1 具体修改内容：
-
-![](/media/15962532699988.jpg)
+![](/media/15962600910658.jpg)
 
 # 方案2：迁移到  Dcat-admin
 Dcat-admin 的静态资源控制似乎更加灵活，待确认。

@@ -73,7 +73,6 @@ foreach ($pathsToReplace as $item) {
     }
 }
 ```
-
 替换后发现无法完全达到目的，如图。所以决定采用其他方案。
 ![](/media/15962545599789.jpg)
 ![](/media/15962613409578.jpg)

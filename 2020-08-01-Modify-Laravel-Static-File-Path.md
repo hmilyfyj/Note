@@ -76,6 +76,7 @@ foreach ($pathsToReplace as $item) {
 
 替换后发现无法完全达到目的，如图。所以决定采用其他方案。
 ![](/media/15962545599789.jpg)
+![](/media/15962613409578.jpg)
 
 # 方案1：修改 admin_asset 方法。
 `admin_asset` 函数是 Laravel Admin 自建的全局函数，用于处理静态文件的 http => https，所以可以安心覆盖修改。
@@ -92,6 +93,20 @@ foreach ($pathsToReplace as $item) {
 ![](/media/15962583881855.jpg)
 
 方案 1 具体修改内容：
+```
+/*
+ * 覆盖 Laravel Admin 的 admin_asset 方法，用于批量替换静态资源路径。
+ *
+ */
+
+function admin_asset($path)
+{
+    $assetBasePath = "//static.tbxzs.com/libs/laravel-admin/1.8.1/"; // 存放静态资源的基础目录。
+    $path          = preg_replace("/[\/]*vendor\/laravel-admin\//", $assetBasePath, $path); // 目录举例：vendor/laravel-admin/bootstrap3-editable/css/bootstrap-editable.css、/vendor/laravel-admin/bootstrap3-editable/css/bootstrap-editable.css
+
+    return (config('admin.https') || config('admin.secure')) ? secure_asset($path) : asset($path);
+}
+```
 ![](/media/15962600910658.jpg)
 
 # 方案2：迁移到  Dcat-admin

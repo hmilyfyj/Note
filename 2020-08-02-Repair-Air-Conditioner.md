@@ -7,7 +7,7 @@ categories: PHP
 ### 202008020455
 
 {% raw %}
-<video width="480" height="320" controls>
+<video  width="100%"  height="580" controls>
 <source src="/media/1596358378.mov">
 </video>
 {% endraw %}

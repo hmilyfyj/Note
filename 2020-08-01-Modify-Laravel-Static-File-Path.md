@@ -7,7 +7,7 @@ categories: 折腾
 
 # 原有替换方案
 
-修改 `\Encore\Admin\Admin.php` 文件的属性。
+修改 `\Encore\Admin\Admin.php` 文件的属性：
 ```php
 
     /**
@@ -107,6 +107,10 @@ function admin_asset($path)
 }
 ```
 ![](/media/15962600910658.jpg)
+
+## 效果
+![](/media/15962617735540.jpg)
+
 
 # 方案2：迁移到  Dcat-admin
 Dcat-admin 的静态资源控制似乎更加灵活，待确认。

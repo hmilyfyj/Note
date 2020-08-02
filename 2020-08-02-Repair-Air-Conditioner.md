@@ -4,7 +4,11 @@ date: 2020-08-02 12:34:09
 tags: PHP
 categories: PHP
 ---
-
+### 202008020455
+<video width="480" height="320" controls>
+<source src="/media/1596358378.mov">
+</video>
+---
 ![IMG_8285-w828](/media/IMG_8285-1.png)
 
 ## 修理
@@ -12,8 +16,7 @@ categories: PHP
 - 加氟利昂。
 - 换启动器。 (如图)
 
-![IMG_8292](/media/IMG_8292-1.heic)
-
+![IMG_8293](/media/IMG_8293.heic)
 ## 鸟窝
 故障的原因之一是启动器坏了，把空调外机拆盖后，发现里面有个鸟窝。
 

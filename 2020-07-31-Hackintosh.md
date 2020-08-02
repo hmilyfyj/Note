@@ -3,8 +3,8 @@ title: 黑苹果相关
 date: 2020-07-31 19:42:18
 tags: 折腾,黑苹果
 categories: 折腾
-img: /media/1_2F7BVRk6UVnt8fQk7gjUQQ-1.png
-coverImg: /media/1_2F7BVRk6UVnt8fQk7gjUQQ-1.png
+coverImg: /media/56214257-bd0b5a00-6087-11e9-8fd4-b06ed47d5754.png
+
 
 ---
 

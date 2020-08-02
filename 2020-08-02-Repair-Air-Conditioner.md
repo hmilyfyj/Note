@@ -10,10 +10,6 @@ categories: PHP
 <video width="480" height="320" controls>
 <source src="/media/1596358378.mov">
 </video>
-<iframe src="/media/1596358378.mov" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%"  height="580" quality="high" > </iframe>
-
-<iframe src="//player.bilibili.com/player.html?aid=26884158&cid=46285677&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%"  height="580" quality="high" > </iframe>
-
 {% endraw %}
 ---
 ![IMG_8285-w828](/media/IMG_8285-1.png)

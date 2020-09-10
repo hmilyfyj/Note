@@ -9,4 +9,5 @@ categories: PHP
 
 - 如果是命令是在普通环境执行，可以通过增加 swap 的方法。
 - 如果是在 docker 容器中被 kill，可以通过提高分配给 docker 的内存。
- 
+
+![](/media/15997374759676.jpg)

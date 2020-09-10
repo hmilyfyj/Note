@@ -5,6 +5,10 @@ tags: PHP,PHPUnit,Docker
 categories: PHP
 ---
 
+需要用 Dusk 来进行完整的功能测试，所以有了这篇探索文章。
+
+---
+
 # 初始化
 ## 接入 Dusk
 - 安装 chromedriver：`php artisan dusk:chrome-driver 83`
@@ -49,6 +53,12 @@ from tab crashed
 /Users/fengit/workspace/php/Private/vendor/php-webdriver/webdriver/lib/Remote/HttpCommandExecutor.php:370
 /Users/fengit/workspace/php/Private/vendor/php-webdriver/webd
 ```
+
+### 一些探索
+- dusk 无法使用 in-memory 的 sqlite。
+
+配置文件怎么配置？
+看命令，如果是
 ## 接入 Dusk Dashboard
 ### 安装
 安装时比较消耗 CPU，如果出现 Killed 时，考虑提高 CPU 限制。

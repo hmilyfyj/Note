@@ -79,8 +79,14 @@ from tab crashed
 ### 一些探索
 - dusk 无法使用 in-memory 的 sqlite。
 
-配置文件怎么配置？
-看命令，如果是
+- Dusk 测试用例中，要使用 use DatabaseMigrations 来构建数据，而不是 RefreshDatabase。
+
+配置文件怎么配置？当执行 `phpunit` 命令时，`dusk` 会直接读取 .env 的内容，所以跑测试时，页面会输出 500。当执行 `php atrisan dusk` 时，dusk 会优先读取 `.env.dusk` 的配置信息。至于 `.env.testing` 这类配置方法，我没有找到利用的方法，配置后不生效，所以暂不考虑处理。
+
+所以，关于执行测试的方案有两个：
+1. 只用 dusk 跑测试。
+2. 同时使用 phpunit、dusk，分别用于普通测试和浏览器测试。
+3. 只用 phpunit 跑测试，数据库使用本地的 sqlite，测试时，构建 .env 文件，这样也可以执行 dusk 测试。
 ## 接入 Dusk Dashboard
 ### 安装
 安装时比较消耗 CPU，如果出现 Killed 时，考虑提高 CPU 限制。

@@ -54,7 +54,7 @@ from tab crashed
 /Users/fengit/workspace/php/Private/vendor/php-webdriver/webd
 ```
 
-如果执行时遇到这个问题，可能需要在 chrome 的启动参数中增加这个参数 `--no-sandbox`，参考文档：https://github.com/SeleniumHQ/selenium/issues/4961
+如果执行时遇到这个问题，可能需要在 chrome 的启动参数中增加这个参数 `--no-sandbox`，参考文档：https://github.com/SeleniumHQ/selenium/issues/4961，网页中还提到了另一个参数，暂未验证：`--single-process`
 
 ```php
 [09:09:37] 1) Tests\Browser\SchoolTest::testIndex

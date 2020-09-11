@@ -54,6 +54,28 @@ from tab crashed
 /Users/fengit/workspace/php/Private/vendor/php-webdriver/webd
 ```
 
+如果执行时遇到这个问题，可能需要在 chrome 的启动参数中增加这个参数 `--no-sandbox`，参考文档：https://github.com/SeleniumHQ/selenium/issues/4961
+
+```php
+[09:09:37] 1) Tests\Browser\SchoolTest::testIndex
+[09:09:37] Facebook\WebDriver\Exception\UnknownServerException: unknown error: Chrome failed to start: exited abnormally
+[09:09:37]   (unknown error: DevToolsActivePort file doesn't exist)
+[09:09:37]   (The process started from chrome location /usr/bin/chromium is no longer running, so ChromeDriver is assuming that Chrome has crashed.)
+[09:09:37]   (Driver info: chromedriver=2.45.615279 (12b89733300bd268cff3b78fc76cb8f3a7cc44e5),platform=Linux 3.10.0-1062.18.1.el7.x86_64 x86_64)
+[09:09:37] 
+[09:09:37] /root/workspace/anyishou_private_934D/vendor/php-webdriver/webdriver/lib/Exception/WebDriverException.php:175
+[09:09:37] /root/workspace/anyishou_private_934D/vendor/php-webdriver/webdriver/lib/Remote/HttpCommandExecutor.php:376
+[09:09:37] /root/workspace/anyishou_private_934D/vendor/php-webdriver/webdriver/lib/Remote/RemoteWebDriver.php:136
+[09:09:37] /root/workspace/anyishou_private_934D/tests/DuskTestCase.php:40
+[09:09:37] /root/workspace/anyishou_private_934D/vendor/laravel/dusk/src/Concerns/ProvidesBrowser.php:200
+[09:09:37] /root/workspace/anyishou_private_934D/vendor/laravel/framework/src/Illuminate/Support/helpers.php:404
+[09:09:37] /root/workspace/anyishou_private_934D/vendor/laravel/dusk/src/Concerns/ProvidesBrowser.php:201
+[09:09:37] /root/workspace/anyishou_private_934D/vendor/laravel/dusk/src/Concerns/ProvidesBrowser.php:95
+[09:09:37] /root/workspace/anyishou_private_934D/vendor/laravel/dusk/src/Concerns/ProvidesBrowser.php:65
+[09:09:37] /root/workspace/anyishou_private_934D/tests/Browser/SchoolTest.php:23
+```
+
+数据库相关问题
 ### 一些探索
 - dusk 无法使用 in-memory 的 sqlite。
 

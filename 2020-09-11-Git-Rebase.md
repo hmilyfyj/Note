@@ -1,5 +1,5 @@
 ---
-title: git rebasae
+title: Git Rebasae
 date: 2020-09-11 19:37:02
 tags: Git
 categories: Git

@@ -4,24 +4,29 @@ date: 2020-09-10 19:46:53
 tags: PHP,PHPUnit,Docker
 categories: PHP
 ---
-
 需要用 Dusk 来进行完整的功能测试，所以有了这篇探索文章。
-
 ---
 
 # 初始化
+
+- 如果需要单独执行 dusk，没有 nginx 作为代理，需要先执行 `php artisan serve --env=dusk.testing` 可以指定变量文件为：`.env.dusk.enving`。
+- `php artisan dusk` 同样可以使用上述方法指定环境变量。
+- `phpunit` 不确定。
+- 使用 dusk 时，自动读取 phpunit.dusk.xml。
+- 使用 phpunit 时，自动读取 phpunit.xml。
+
 ## 接入 Dusk
 - 安装 dusk：https://learnku.com/docs/laravel/7.x/dusk/7512
 - 安装 chromium：`apt-get update && apt-get install -y chromium`
 - 安装 chromedriver：`php artisan dusk:chrome-driver 83`
-
-`php artisan dusk:install` 会安装最新的 driver，可能和当前系统内的 chrome 版本不匹配，导致报错。所以在安装前可以先通过 `chromium --version` 查看版本号，用于制定 driver 的版本号，目前在我在使用的版本是 83，最新版是 85，所以在安装 driver 的命令中指定版本号为 83。
+`php artisan dusk:install` 会安装最新的 driver，最新版可能和当前系统内的 Chrome 版本不匹配，进而导致报错。所以在安装前可以先通过 `chromium --version` 查看版本号，用于制定 driver 的版本号，目前在我在使用的版本是 83，最新版是 85，所以在安装 driver 的命令中指定版本号为 83。
 ### 执行
 `php artisan dusk`、`./vendor/bin/phpunit` 都可以触发 dusk 测试。
 
+#### 报错：invalid session id
 如果遇到了 `invalid session id` 的情况，一般是在 docker 的 /dev/shm 空间不足导致，默认是 64M，有两种方案可以解决：
 - 给 docker 容器分配更大的 shm-size。compose 文件中增加 `shm_size: "512M"`。
-- 只启动命令中加入 `--disable-dev-shm-usage`，这个没有验证过，后来无法复现该故障了。
+- 在启动命令中加入 `--disable-dev-shm-usage`，这个没有验证过，后来无法复现该故障了。
 
 ```PHP
 There was 1 error:
@@ -51,8 +56,8 @@ from tab crashed
 /Users/fengit/workspace/php/Private/vendor/php-webdriver/webdriver/lib/Remote/HttpCommandExecutor.php:370
 /Users/fengit/workspace/php/Private/vendor/php-webdriver/webd
 ```
-
-如果执行时遇到这个问题，可能需要在 chrome 的启动参数中增加这个参数 `--no-sandbox`，参考文档：https://github.com/SeleniumHQ/selenium/issues/4961，网页中还提到了另一个参数，暂未验证：`--single-process`
+#### 报错：Chrome has crashed
+如果执行时遇到`Chrome has crashed`的报错，可尝试在 Chrome 的启动参数中增加这个参数 `--no-sandbox`，参考文档：https://github.com/SeleniumHQ/selenium/issues/4961，网页中还提到了另一个参数，暂未验证：`--single-process`
 
 ```php
 [09:09:37] 1) Tests\Browser\SchoolTest::testIndex
@@ -72,12 +77,11 @@ from tab crashed
 [09:09:37] /root/workspace/anyishou_private_934D/vendor/laravel/dusk/src/Concerns/ProvidesBrowser.php:65
 [09:09:37] /root/workspace/anyishou_private_934D/tests/Browser/SchoolTest.php:23
 ```
-登录失败问题
+#### 报错：Authenticatable 抛异常
 ```php
 Argument 1 passed to Illuminate\Auth\SessionGuard::login() must implement interface Illuminate\Contracts\Auth\Authenticatable, null given, called in /home/wwwroot/Anyishou/vendor/laravel/dusk/src/Http/Controllers/UserController.php on line 47
 ```
-
-登录失败的原因可能是表里没数据或者根本没有建表，需要关注接口报错日志，此时接口的报错不会显示到 dusk 里，所以不要只通过 dusk 控制台排查。通过 sentry 日志可知具体报错。
+这是登录失败触发的故障，原因可能是表里没数据或者根本没有建表，需要关注接口报错日志，此时接口的报错不会显示到 dusk 里，所以不要只通过 dusk 控制台排查。通过 sentry 日志可知具体报错。
 
 ![企业微信截图_1230d378-07f0-4a82-82a5-8cb6de562869](/media/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_1230d378-07f0-4a82-82a5-8cb6de562869.png)
 数据库相关问题
@@ -91,24 +95,20 @@ Argument 1 passed to Illuminate\Auth\SessionGuard::login() must implement interf
 1. 只用 dusk 跑测试。
 2. 同时使用 phpunit、dusk，分别用于普通测试和浏览器测试。
 3. 只用 phpunit 跑测试，数据库使用本地的 sqlite，测试时，构建 .env 文件，这样也可以执行 dusk 测试。
-
 ## 接入 Dusk Dashboard
 ### 安装
 安装命令：`comoser require -dev beyondcode/dusk-dashboard`
 安装时比较消耗 CPU，如果出现 Killed 时，考虑提高 CPU 限制，如果是在 docker 内执行，提升 cpu 的方法参考另一篇文章。
 ### 运行
 执行`php artisan dusk:dashboard`时出现如下报错：
-
 ```
 stream_set_blocking() expects parameter 1 to be resource, null given
 ```
-
-是因为运行环境处于安全考虑禁用了该方法，调整 php.ini 文件的中的`disable_functions`字段即可。
+这是因为 PHP 运行环境出于安全考虑禁用了该方法，调整 php.ini 文件的中的`disable_functions`字段即可。
 ### 访问 dashborad
 ##### 直接暴露端口到宿主机
 ##### nginx 反向代理，通过 80 端口访问。
 dashboard 应该是出于安全考虑，会检测 host 是否为 env 文件中指定 APP_URL，所以在反向代理时需要指定`Host`，否则访问页面时会 404。
-
 ```nginx
 server {
     listen   80;

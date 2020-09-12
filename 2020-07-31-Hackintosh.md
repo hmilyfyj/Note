@@ -8,7 +8,7 @@ img: /media/56214257-bd0b5a00-6087-11e9-8fd4-b06ed47d5754.png
 
 # 已折腾机型
 - Ideapad 720s
-- Intel Nuc8
+- Intel Nuc8 https://github.com/Hyejeongdd/NUC8i5BEK-Hackintosh
 
 # 数据备份
 ## Mac

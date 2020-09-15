@@ -86,8 +86,10 @@ Argument 1 passed to Illuminate\Auth\SessionGuard::login() must implement interf
 ![企业微信截图_1230d378-07f0-4a82-82a5-8cb6de562869](/media/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_1230d378-07f0-4a82-82a5-8cb6de562869.png)
 数据库相关问题
 ### 一些探索
-- dusk 无法使用 in-memory sqlite，在 database 目录下新建空文件即可解决问题。
+- dusk 无法使用 in-memory sqlite，所以使用本地数据库，方法：在 database 目录下新建空文件即可解决问题。
 - Dusk 测试用例中，要使用 use DatabaseMigrations 来构建数据，而不是 RefreshDatabase。
+- 牵涉到页面跳转的，慎重使用 pressAndWaitfor，除非你很了解这个方法的作用。
+- 牵涉到多次登陆的，记得及时清理 cookie 或者全程登录一个账号。
 
 配置文件怎么配置？当执行 `phpunit` 命令时，`dusk` 会直接读取 .env 的内容，所以跑测试时，页面会输出 500。当执行 `php atrisan dusk` 时，dusk 会优先读取 `.env.dusk` 的配置信息。至于 `.env.testing` 这类配置方法，我没有找到利用的方法，配置后不生效，所以暂不考虑处理。
 

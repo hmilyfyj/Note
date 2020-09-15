@@ -5,6 +5,8 @@ tags: Dusk,PHPUnit,CodeCoverage
 categories: Dusk
 ---
 
+正常其概况下执行 phpunit，dusk 相关的测试是无法触发代码覆盖率监测的。
+
 ## 触发额外的一份覆盖率监测
 在 Dusk 中触发 Code Coverage 的方法 [issue #258](https://github.com/laravel/dusk/issues/258)，示例如下，在 build/dusk 生成 cov 文件后，再使用 [phpcov](https://github.com/sebastianbergmann/phpcov) 去合并单元测试。
 ```php
@@ -68,10 +70,9 @@ Generating code coverage report in HTML format ... done
 其他实现参考：
 - [Code coverage for laravel dusk](https://stackoverflow.com/questions/43653881/code-coverage-for-laravel-dusk)
 - [coverage_for_dusk.php](https://gist.githubusercontent.com/jleonardolemos/3599ae185ab1bc6f3901d5881f977fd6/raw/91de0098388769db035484dbf92ae6393cff8ba9/coverage_for_dusk.php)
-
-
 ## 问题
-执行`phpcov merge`时，出现了以下报错，经排查，是最近才被解决的问题，需要更新库到最新版：`composer require --dev 'phpunit/php-code-coverage:^8.0'`，升级库有些难度，待处理。相关 [issue](https://github.com/Codeception/Codeception/issues/5949)
+执行`phpcov merge`时，出现了以下报错，经排查，是最近才被解决的问题。~~需要更新库到最新版：`composer require --dev 'phpunit/php-code-coverage:^8.0'`，升级库有些难度，待处理。相关 [issue](https://github.com/Codeception/Codeception/issues/5949)~~
+上述方法过于复杂，出错的原因是 phpcov 里的代码和本地的版本不一致导致，那么直接替换 phpcov 更简单一些。所以下载新版即可：`wget https://phar.phpunit.de/phpcov-7.0.2.phar`或者`composer global require phpunit/phpcov=^7.0`。
 ```php
 PHP Fatal error: Uncaught ArgumentCountError: Too few arguments to function SebastianBergmann\CodeCoverage\CodeCoverage::__construct(), 0 passed in ./vendor/codeception/codeception/src/Codeception/Coverage/Subscriber/Printer.php on line 37 and exactly 2 expected in ./vendor/phpunit/php-code-coverage/src/CodeCoverage.php:118
 ```

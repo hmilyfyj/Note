@@ -53,3 +53,8 @@ ChromeOptions::CAPABILITY_W3C：
             )
         );
 ```
+
+相关资料：
+https://github.com/php-webdriver/php-webdriver/wiki/ChromeOptions
+https://github.com/php-webdriver/php-webdriver/blob/d01e823a2605118f41638e7d8ebcce870ff70e1d/tests/unit/Remote/DesiredCapabilitiesTest.php
+https://packagist.org/packages/php-webdriver/webdriver

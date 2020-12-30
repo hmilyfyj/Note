@@ -1,6 +1,6 @@
 ---
-title: 为 WNDR 4300 设置自动编译插件
-date: 2020-10-10 23:07:28
+title: 为 WNDR4300 设置自动编译插件
+date: 2020-12-30 22:51:30
 tags: Openwrt
 categories: 折腾
 ---

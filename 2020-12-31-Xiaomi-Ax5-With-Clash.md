@@ -4,6 +4,8 @@ date: 2020-12-31 21:06:45
 tags: Openwrt,AX5
 categories: 折腾
 ---
+# 现存问题
+偶尔会断网，不清楚啥原因。
 # 开启 ssh
 
 1. 获取 stok。

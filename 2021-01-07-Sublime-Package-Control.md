@@ -1,6 +1,6 @@
 ---
 title: Sublime 开启 Package Control 并加速
-date: 2020-12-31 21:06:45
+date: 2021-01-07 18:26:13
 tags: Sublime
 categories: 折腾
 ---

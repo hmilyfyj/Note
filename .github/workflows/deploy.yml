@@ -65,6 +65,9 @@ jobs:
           npm i
           #npm install
 
+      - name: generate
+        run: |
+          hexo clean && hexo g
       - name: Deploy hexo
         run: |
           npm run deploy

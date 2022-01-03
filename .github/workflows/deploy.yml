@@ -63,11 +63,11 @@ jobs:
         run: |
           npm i -g hexo-cli
           npm i
-          #npm install
 
       - name: generate
         run: |
-          hexo clean && hexo g
+          hexo clean
+          hexo generate
       - name: Deploy hexo
         run: |
           npm run deploy

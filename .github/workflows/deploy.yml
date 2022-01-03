@@ -58,6 +58,12 @@ jobs:
           git config --global user.name $GIT_USER
           git config --global user.email $GIT_EMAIL
           echo "$HEXO_CONFIG" > _config.yml 
+          npm install hexo-generator-search --save
+          npm i -S hexo-prism-plugin
+          hexo-permalink-pinyin --save
+          npm i --save hexo-wordcount
+          npm install hexo-generator-feed --save
+          hexo clean && hexo g
           
       - name: Install dependencies
         run: |

@@ -11,7 +11,7 @@ env:
   THEME_REPO: blinkfox/hexo-theme-matery
   THEME_BRANCH: master
   DEPLOY_REPO: hmilyfyj/hmilyfyj.github.io
-  DEPLOY_BRANCH: test
+  DEPLOY_BRANCH: master
 
 jobs:
   build:

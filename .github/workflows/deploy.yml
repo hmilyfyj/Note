@@ -80,4 +80,6 @@ jobs:
         working-directory: ./build
       - name: Deploy hexo
         run: |
+          hexo d
           #npm run deploy
+        working-directory: ./build

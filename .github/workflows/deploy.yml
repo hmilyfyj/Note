@@ -64,7 +64,12 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.name $GIT_USER
           git config --global user.email $GIT_EMAIL
-          echo "$HEXO_CONFIG" > _config.yml 
+          #echo "$HEXO_CONFIG" > _config.yml 
+          git clone git@github.com:hmilyfyj/Note.git source/_posts
+          mkdir source/media && mkdir source/images && cp ./source/_posts/images/* ./source/images && cp ./source/_posts/media/* ./source/media
+          rm -rf _posts/.travis
+          rm -rf _posts/.travis.yml
+          rm -rf _posts/.git
         working-directory: ./build
           
 

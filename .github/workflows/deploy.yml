@@ -9,7 +9,7 @@ env:
   GIT_USER: fengit
   GIT_EMAIL: fengit@outlook.com
   THEME_REPO: blinkfox/hexo-theme-matery
-  THEME_BRANCH: master
+  THEME_BRANCH: develop
   DEPLOY_REPO: hmilyfyj/hmilyfyj.github.io
   DEPLOY_BRANCH: master
   DEPLOY_REPO1: git@e.coding.net:AIW/AIW.git
@@ -82,7 +82,7 @@ jobs:
           HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
           HEXO_CONFIG: ${{secrets.HEXO_CONFIG}}
         run: |
-          #mv source/_posts/_config.theme.yml themes/hexo-theme-matery/_config.yml
+          mv source/_posts/_config.theme.yml themes/hexo-theme-matery/_config.yml
           # cp -frp source/_posts/scaffolds/* scaffolds/
           # cp -frp source/_posts/source/* source/
           #rm -rf source/_posts/scaffolds

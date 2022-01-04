@@ -3,6 +3,7 @@ title: Redmi Ax5 开启 SSH 和富强
 date: 2020-12-31 21:06:45
 tags: Openwrt,AX5
 categories: 折腾
+img: /media/16413041094452.jpg
 ---
 # 现存问题
 偶尔会断网，不清楚啥原因。

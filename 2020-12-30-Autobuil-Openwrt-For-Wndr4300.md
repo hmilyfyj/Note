@@ -14,9 +14,11 @@ https://www.izheteng.site/2019/12/24/2019-12-24-%E4%BD%BF%E7%94%A8GitHub-Actions
 http://www.5lazy.cn/post-144.html
 http://www.5lazy.cn/post-147.html
 # 注意事项
-- 期望切换 ar71xx 到 ath79。
-- 开启 120M 内存空间。
-- 切换主题到最新版。
+- 切换 ar71xx 为 ath79，因为 ar71xx [已废弃](https://forum.openwrt.org/t/ath79-vs-ar71xx-whats-the-difference/53137/11)，后者将来在修复 bug 方面更加迅速、方便。
+- 开启额外的 90M 内存空间。
+- 切换主题到最新版：luci-theme-argon。
+- 切换时区到上海。
+- 需要支持 **r-plus 插件。
 
 ```
 sed -i s/'23552k(ubi),25600k@0x6c0000(firmware)'/'120832k(ubi),122880k@0x6c0000(firmware)'/ target/linux/ar71xx/image/legacy.mk

@@ -3,6 +3,7 @@ title: 开启阿里云 ECS 的 NAT 的功能
 date: 2020-10-10 23:31:38
 tags: Aliyun,Centos
 categories: Aliyun
+img: /media/16413041801999.jpg
 ---
 
 ## Centos

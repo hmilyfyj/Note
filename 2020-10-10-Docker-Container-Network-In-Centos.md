@@ -3,6 +3,7 @@ title: Docker 容器无法访问网络的问题
 date: 2020-10-10 23:07:28
 tags: Docker,Centos
 categories: Docker
+img: /media/16413042558904.jpg
 ---
 
 最近把系统切换到了 Aliyun Linux，该系统是基于 Centos 做的改进。

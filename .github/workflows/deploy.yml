@@ -44,6 +44,8 @@ jobs:
           npm i -g hexo-cli
           hexo init
           npm install
+          npm install hexo-deployer-git --save
+
 
       - name: Configuration environment
         env:

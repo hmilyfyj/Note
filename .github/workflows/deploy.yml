@@ -76,12 +76,6 @@ jobs:
           repository: ${{ env.THEME_REPO }}
           ref: ${{ env.THEME_BRANCH }}
           path: build/themes/hexo-theme-matery
-      - name: Checkout deploy repo
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ env.DEPLOY_REPO1 }}
-          ref: ${{ env.DEPLOY_BRANCH1 }}
-          path: .deploy_git2
 
       - name: generate
         run: |

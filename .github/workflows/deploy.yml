@@ -12,7 +12,7 @@ env:
   THEME_BRANCH: master
   DEPLOY_REPO: hmilyfyj/hmilyfyj.github.io
   DEPLOY_BRANCH: master
-  DEPLOY_REPO1: e.coding.net:AIW/AIW.git
+  DEPLOY_REPO1: git@e.coding.net:AIW/AIW.git
   DEPLOY_BRANCH1: coding-pages
 
 jobs:

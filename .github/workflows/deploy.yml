@@ -65,8 +65,6 @@ jobs:
           rm -rf source/_posts
           git clone git@github.com:hmilyfyj/Note.git source/_posts
           mkdir source/media && mkdir source/images && cp ./source/_posts/images/* ./source/images && cp ./source/_posts/media/* ./source/media
-          cp source/_posts/_config.theme.yml themes/hexo-theme-matery/_config.yml
-          rm -rf _posts/_config.theme.yml
           rm -rf _posts/.travis
           rm -rf _posts/.travis.yml
           rm -rf _posts/.git
@@ -78,6 +76,14 @@ jobs:
           repository: ${{ env.THEME_REPO }}
           ref: ${{ env.THEME_BRANCH }}
           path: build/themes/hexo-theme-matery
+          
+      - name: Configuration environment
+        env:
+          HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
+          HEXO_CONFIG: ${{secrets.HEXO_CONFIG}}
+        run: |
+          mv source/_posts/_config.theme.yml themes/hexo-theme-matery/_config.yml
+        working-directory: ./build
 
       - name: generate
         run: |

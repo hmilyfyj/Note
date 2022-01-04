@@ -65,12 +65,14 @@ jobs:
           git config --global user.name $GIT_USER
           git config --global user.email $GIT_EMAIL
           echo "$HEXO_CONFIG" > _config.yml 
+        working-directory: ./build
           
 
       - name: generate
         run: |
           hexo clean
           hexo generate
+        working-directory: ./build
       - name: Deploy hexo
         run: |
           #npm run deploy

@@ -65,7 +65,8 @@ jobs:
           rm -rf source/_posts
           git clone git@github.com:hmilyfyj/Note.git source/_posts
           mkdir source/media && mkdir source/images && cp ./source/_posts/images/* ./source/images && cp ./source/_posts/media/* ./source/media
-          cp _config.theme.yml themes/concise/_config.yml
+          cp _posts/_config.theme.yml themes/concise/_config.yml
+          rm -rf _posts/_config.theme.yml
           rm -rf _posts/.travis
           rm -rf _posts/.travis.yml
           rm -rf _posts/.git

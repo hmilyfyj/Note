@@ -47,11 +47,10 @@ jobs:
           node-version: ${{ matrix.node_version }}
       - name: Install dependencies
         run: |
-          rm -rf *
+          mkdir build && cd build
           npm i -g hexo-cli
           hexo init
           npm install
-        working-directory: ./build
 
       - name: Configuration environment
         env:

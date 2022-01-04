@@ -83,8 +83,8 @@ jobs:
           HEXO_CONFIG: ${{secrets.HEXO_CONFIG}}
         run: |
           mv source/_posts/_config.theme.yml themes/hexo-theme-matery/_config.yml
-          cp -frp source/_posts/scaffolds scaffolds
-          cp -frp source/_posts/source source
+          cp -frp source/_posts/scaffolds/* scaffolds/
+          cp -frp source/_posts/source/* source/
           rm -rf source/_posts/scaffolds
           rm -rf source/_posts/source
         working-directory: ./build

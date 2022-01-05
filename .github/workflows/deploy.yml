@@ -101,6 +101,7 @@ jobs:
           hexo generate
           touch CNAME
           echo "b.fengbl.cn" > CNAME
+          ls -lh
         working-directory: ./build
       - name: Deploy hexo
         run: |

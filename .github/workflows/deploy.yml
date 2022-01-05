@@ -99,6 +99,8 @@ jobs:
         run: |
           hexo clean
           hexo generate
+          touch CNAME
+          echo "b.fengbl.cn" > CNAME
         working-directory: ./build
       - name: Deploy hexo
         run: |
